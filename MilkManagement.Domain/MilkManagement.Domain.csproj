@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Entities\Supplier\" />
+    <Folder Include="Entities\WeeklyCustomer\" />
+    <Folder Include="Entities\Customer\" />
+    <Folder Include="Mappings\" />
+    <Folder Include="Helper\" />
+    <Folder Include="Dto\" />
+    <Folder Include="Repositories\Interfaces\" />
+    <Folder Include="Repositories\Implementation\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MilkManagement.Constants\MilkManagement.Constants.csproj" />
+    <ProjectReference Include="..\MilkManagement.Utils\MilkManagement.Utils.csproj" />
+  </ItemGroup>
+
+</Project>

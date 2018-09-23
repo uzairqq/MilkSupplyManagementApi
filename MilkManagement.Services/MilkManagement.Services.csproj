@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\Implementation\" />
+    <Folder Include="Services\Interfaces\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MilkManagement.Constants\MilkManagement.Constants.csproj" />
+    <ProjectReference Include="..\MilkManagement.Domain\MilkManagement.Domain.csproj" />
+    <ProjectReference Include="..\MilkManagement.Utils\MilkManagement.Utils.csproj" />
+  </ItemGroup>
+
+</Project>
