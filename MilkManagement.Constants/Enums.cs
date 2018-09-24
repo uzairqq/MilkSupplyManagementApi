@@ -2,7 +2,8 @@
 
 namespace MilkManagement.Constants
 {
-    public class Enums
+    public enum Enums
     {
+        FailureId = 0,
     }
 }

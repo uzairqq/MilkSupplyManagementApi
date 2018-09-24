@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace MilkManagement.Constants
+namespace MilkManagement.Domain.Entities
 {
-    class ResponseMessages
+   public abstract class Dependency
     {
+     
     }
 }
