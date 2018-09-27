@@ -21,6 +21,5 @@ namespace MilkManagement.Domain.Dto.ResponseDto
         
         public int LastUpdatedById { get; set; }
         
-        public bool IsDeleted { get; set; }
     }
 }

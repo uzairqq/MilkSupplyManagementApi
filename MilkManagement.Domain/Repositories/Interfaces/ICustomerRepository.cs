@@ -8,7 +8,7 @@ namespace MilkManagement.Domain.Repositories.Interfaces
 {
    public interface ICustomerRepository
     {
-        Task<bool> IsCustomerNameAvailable(string customerName);
-        Task<bool> IsCustomerNameAvailable(int customerId,string customerName);
+        bool IsCustomerNameAvailable(string customerName);
+        bool IsCustomerNameAvailable(int customerId,string customerName);
     }
 }

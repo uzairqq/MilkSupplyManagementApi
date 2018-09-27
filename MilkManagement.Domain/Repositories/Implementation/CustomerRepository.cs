@@ -20,13 +20,14 @@ namespace MilkManagement.Domain.Repositories.Implementation
             _dbContext = dbContext;
         }
 
-        public async Task<bool> IsCustomerNameAvailable(string customerName)
+        public bool IsCustomerNameAvailable(string customerName)
         {
             try
             {
-                return await Task.FromResult(_dbContext.Customers
+                return _dbContext.Customers
                     .AsNoTracking()
-                    .Any(i => i.Name.Equals(customerName, StringComparison.OrdinalIgnoreCase) && !i.IsDeleted));
+                    .Any(i => i.Name.Equals(customerName, StringComparison.OrdinalIgnoreCase) && !i.IsDeleted);
+
             }
             catch (Exception e)
             {
@@ -35,13 +36,13 @@ namespace MilkManagement.Domain.Repositories.Implementation
             }
         }
 
-        public Task<bool> IsCustomerNameAvailable(int customerId, string customerName)
+        public  bool IsCustomerNameAvailable(int customerId, string customerName)
         {
             try
             {
-                return Task.FromResult(_dbContext.Customers.AsNoTracking().Any(i => i.Id != customerId &&
+                return _dbContext.Customers.AsNoTracking().Any(i => i.Id != customerId &&
                                                                                  i.Name.Equals(customerName,
-                                                                                     StringComparison.OrdinalIgnoreCase) && !i.IsDeleted));
+                                                                                     StringComparison.OrdinalIgnoreCase) && !i.IsDeleted);
             }
             catch (Exception e)
             {

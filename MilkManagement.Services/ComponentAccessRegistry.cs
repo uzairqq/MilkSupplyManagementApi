@@ -11,6 +11,7 @@ namespace MilkManagement.Services
         public static void RegisterServices(IServiceCollection service)
         {
             service.AddScoped<ICustomerService, CustomerServices>();
+            service.AddScoped<ICustomerRateService, CustomerRateService>();
         }
     }
 }

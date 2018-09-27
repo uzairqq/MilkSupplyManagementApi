@@ -23,6 +23,5 @@ namespace MilkManagement.Domain.Dto.RequestDto
         
         public int LastUpdatedById { get; set; }
         
-        public bool IsDeleted { get; set; }
     }
 }

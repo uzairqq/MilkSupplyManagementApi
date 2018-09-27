@@ -43,7 +43,7 @@ namespace MilkManagement.Services.Services.Implementation
         {
             try
             {
-                if (await _customerRepository.IsCustomerNameAvailable(dto.Name))
+                if (_customerRepository.IsCustomerNameAvailable(dto.Name))
                     return new ResponseMessageDto()
                     {
                         SuccessMessage = ResponseMessages.CustomerNameNotAvailable,
@@ -124,7 +124,7 @@ namespace MilkManagement.Services.Services.Implementation
         {
             try
             {
-                if (await _customerRepository.IsCustomerNameAvailable(dto.Id, dto.Name))
+                if ( _customerRepository.IsCustomerNameAvailable(dto.Id, dto.Name))
                     return new ResponseMessageDto()
                     {
                         SuccessMessage = ResponseMessages.CustomerNameNotAvailable,
@@ -156,12 +156,12 @@ namespace MilkManagement.Services.Services.Implementation
             }
         }
 
-        public async Task<ResponseMessageDto> IsCustomerNameAvailable(string customerName)
+        public ResponseMessageDto IsCustomerNameAvailable(string customerName)
         {
             try
             {
-                var result= await _customerRepository.IsCustomerNameAvailable(customerName);
-                if(result)
+                var result = _customerRepository.IsCustomerNameAvailable(customerName);
+                if (result)
                     return new ResponseMessageDto()
                     {
                         SuccessMessage = ResponseMessages.CustomerNameNotAvailable,
@@ -187,6 +187,6 @@ namespace MilkManagement.Services.Services.Implementation
             }
         }
 
-       
+
     }
 }

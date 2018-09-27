@@ -62,11 +62,11 @@ namespace MilkManagement.Api.Controllers
         /// <param name="customerName"></param>
         /// <returns></returns>
         [HttpGet("customerName/{customerName}")]
-        public async Task<IActionResult> Get([FromRoute] string customerName)
+        public IActionResult Get([FromRoute] string customerName)
         {
             try
             {
-                return Ok(await _customerService.IsCustomerNameAvailable(customerName));
+                return Ok(_customerService.IsCustomerNameAvailable(customerName));
             }
             catch (Exception e)
             {
@@ -98,7 +98,7 @@ namespace MilkManagement.Api.Controllers
         /// <param name="customerId"></param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task<IActionResult> Delete([FromRoute] CustomerRequestDto dto)
+        public async Task<IActionResult> Delete([FromBody] CustomerRequestDto dto)
         {
             try
             {

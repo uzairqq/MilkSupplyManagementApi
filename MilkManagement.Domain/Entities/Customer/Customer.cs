@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using MilkManagement.Core.Validator;
 
 namespace MilkManagement.Domain.Entities.Customer
 {
-   public class Customer:BaseEntity
+   public class Customer:BaseEntity,ISoftDeletable
     {
         public Customer()
         {
@@ -33,10 +34,9 @@ namespace MilkManagement.Domain.Entities.Customer
         public DateTime LastUpdatedOn { get; set; }
         
         public int LastUpdatedById { get; set; }
-
-       [DefaultValue(false)]
-        public bool IsDeleted { get; set; }
     
+        public bool IsDeleted { get; set; }
+
         public virtual ICollection<CustomerRates> CustomerRates { get; set; }
         public virtual ICollection<CustomerSupplied> CustomerSupplied { get; set; }
     }

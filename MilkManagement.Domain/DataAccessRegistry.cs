@@ -13,6 +13,7 @@ namespace MilkManagement.Domain
         {
             services.AddScoped(typeof(IAsyncRepository<>), typeof(EfRepository<>));
             services.AddScoped(typeof(ICustomerRepository), typeof(CustomerRepository));
+            services.AddScoped(typeof(ICustomerRateRepository), typeof(CustomerRatesRepository));
         }
     }
 }

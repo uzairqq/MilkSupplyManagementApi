@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using MilkManagement.Core.Validator;
 using MilkManagement.Domain.Entities.Customer;
 
 namespace MilkManagement.Domain
@@ -15,5 +17,34 @@ namespace MilkManagement.Domain
         public DbSet<Customer> Customers { get; set; }
         public DbSet<CustomerRates> CustomerRates { get; set; }
         public DbSet<CustomerSupplied> CustomerSupplied { get; set; }
+
+
+
+        public Task<int> SaveChangesAsync()
+        {
+            SoftDeleteEntitiesfunction();
+            return base.SaveChangesAsync();
+        }
+
+        private void SoftDeleteEntitiesfunction()
+        {
+            try
+            {
+                foreach (var deletableEntity in ChangeTracker.Entries<ISoftDeletable>())
+                {
+                    if (deletableEntity.State == EntityState.Deleted)
+                    {
+                        //Deleted - set the deleted flag
+                        deletableEntity.State = EntityState.Unchanged; //We need to set this to unchanged here, because setting it to modified seems to set ALL of its fields to modified
+                        deletableEntity.Entity.IsDeleted = true; //This will set the entity's state to modified for the next time we query the ChangeTracker
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
+        }
     }
 }

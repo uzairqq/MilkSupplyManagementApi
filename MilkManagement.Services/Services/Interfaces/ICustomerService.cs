@@ -15,6 +15,6 @@ namespace MilkManagement.Services.Services.Interfaces
         Task<CustomerResponseDto> GetCustomerById(int customerId);
         Task<ResponseMessageDto> DeleteCustomer(CustomerRequestDto dto);
         Task<ResponseMessageDto> UpdateCustomer(CustomerRequestDto dto);
-        Task<ResponseMessageDto> IsCustomerNameAvailable(string customerName);
+        ResponseMessageDto IsCustomerNameAvailable(string customerName);
     }
 }
