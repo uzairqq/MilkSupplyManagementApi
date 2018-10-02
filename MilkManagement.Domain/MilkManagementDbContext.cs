@@ -14,11 +14,10 @@ namespace MilkManagement.Domain
         {
         }
 
+        public DbSet<CustomerType> CustomerTypes { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<CustomerRates> CustomerRates { get; set; }
         public DbSet<CustomerSupplied> CustomerSupplied { get; set; }
-
-
 
         public Task<int> SaveChangesAsync()
         {
@@ -45,6 +44,11 @@ namespace MilkManagement.Domain
                 Console.WriteLine(ex);
                 throw;
             }
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

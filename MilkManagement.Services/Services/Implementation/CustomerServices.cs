@@ -9,6 +9,7 @@ using MilkManagement.Domain.Dto.RequestDto;
 using MilkManagement.Domain.Dto.ResponseDto;
 using MilkManagement.Domain.Entities.Customer;
 using MilkManagement.Domain.Repositories.Interfaces;
+using MilkManagement.Domain.Specification;
 using MilkManagement.Services.Services.Interfaces;
 
 namespace MilkManagement.Services.Services.Implementation
@@ -29,7 +30,7 @@ namespace MilkManagement.Services.Services.Implementation
         {
             try
             {
-                var customer = _asyncRepository.ListAllAsync<CustomerResponseDto>();
+                var customer = _asyncRepository.ListAsync<CustomerResponseDto>(new CustomerWithType());
                 return await customer;
             }
             catch (Exception e)
@@ -78,13 +79,7 @@ namespace MilkManagement.Services.Services.Implementation
         {
             try
             {
-                return (new List<Customer> { await _asyncRepository.GetByIdAsync(customerId) })
-                    .Select(result => new CustomerResponseDto
-                    {
-                        Name = result.Name,
-                        Address = result.Address
-                    })
-                    .Single();
+                return await _asyncRepository.GetSingleAsync<CustomerResponseDto>(new CustomerWithType(customerId));
             }
             catch (Exception ex)
             {

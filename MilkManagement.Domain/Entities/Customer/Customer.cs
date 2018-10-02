@@ -15,6 +15,8 @@ namespace MilkManagement.Domain.Entities.Customer
             CustomerSupplied = new HashSet<CustomerSupplied>();
         }
 
+      
+
         [StringLength(255)]
         [Required]
         public string Name { get; set; }
@@ -34,8 +36,12 @@ namespace MilkManagement.Domain.Entities.Customer
         public DateTime LastUpdatedOn { get; set; }
         
         public int LastUpdatedById { get; set; }
-    
+
+        public int CustomerTypeId { get; set; }
+        public virtual CustomerType CustomerType { get; set; }
+
         public bool IsDeleted { get; set; }
+
 
         public virtual ICollection<CustomerRates> CustomerRates { get; set; }
         public virtual ICollection<CustomerSupplied> CustomerSupplied { get; set; }

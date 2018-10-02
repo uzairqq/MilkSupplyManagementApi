@@ -6,11 +6,12 @@ using MilkManagement.Domain.Entities;
 
 namespace MilkManagement.Domain.Repositories.Interfaces
 {
-   public interface IAsyncRepository<T> where T : BaseEntity
+    public interface IAsyncRepository<T> where T : BaseEntity
     {
-        Task<T> GetByIdAsync(int id);
+        Task<TViewModel> GetByIdAsync<TViewModel>(int id);
+        Task<TViewModel> GetSingleAsync<TViewModel>(ISpecification<T> spec);
         Task<List<TViewModel>> ListAllAsync<TViewModel>();
-        Task<List<T>> ListAsync(ISpecification<T> spec);
+        Task<List<TViewModel>> ListAsync<TViewModel>(ISpecification<T> spec);
         Task<T> AddAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(T entity);

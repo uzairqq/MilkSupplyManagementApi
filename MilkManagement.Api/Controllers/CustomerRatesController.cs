@@ -76,12 +76,12 @@ namespace MilkManagement.Api.Controllers
         /// </summary>
         /// <param name="customerId"></param>
         /// <returns></returns>
-        [HttpGet("customerId/{customerId}")]
-        public async Task<IActionResult> GetById([FromRoute] int customerId)
+        [HttpGet("customerRatesId/{customerRatesId}")]
+        public async Task<IActionResult> GetById([FromRoute] int customerRatesId)
         {
             try
             {
-                return Ok(await _rateService.GetCustomerRatesById(customerId));
+                return Ok(await _rateService.GetCustomerRatesById(customerRatesId));
             }
             catch (Exception e)
             {
@@ -113,7 +113,7 @@ namespace MilkManagement.Api.Controllers
         /// <param name="customerRatesId"></param>
         /// <returns></returns>
         [HttpDelete]
-        public async Task<IActionResult> Delete([FromRoute] CustomerRatesResponseDto dto)
+        public async Task<IActionResult> Delete([FromBody] CustomerRatesRequestDto dto)
         {
             try
             {
@@ -130,7 +130,7 @@ namespace MilkManagement.Api.Controllers
         /// </summary>
         /// <param name="customerId"></param>
         /// <returns></returns>
-        [HttpGet("id/{id}")]
+        [HttpGet("isRateAssignedToCustomer/id/{id}")]
         public IActionResult IsRateAssignedToCustomer([FromRoute] int id)
         {
             try

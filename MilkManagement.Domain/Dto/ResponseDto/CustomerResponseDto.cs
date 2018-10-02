@@ -12,6 +12,9 @@ namespace MilkManagement.Domain.Dto.ResponseDto
 
         public string Contact { get; set; }
 
+        public int CustomerTypeId { get; set; }
+
+        public string Type { get; set; }
         
         public DateTime CreatedOn { get; set; }
 

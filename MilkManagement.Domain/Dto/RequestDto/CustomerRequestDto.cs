@@ -8,6 +8,8 @@ namespace MilkManagement.Domain.Dto.RequestDto
 {
    public class CustomerRequestDto:BaseEntity
     {
+        public int CustomerTypeId { get; set; }
+
         public string Name { get; set; }
 
         public string Address { get; set; }

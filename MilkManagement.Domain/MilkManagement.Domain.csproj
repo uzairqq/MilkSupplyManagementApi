@@ -5,6 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20180929113939_AddedCustomerTypeRelationToCustomer2.cs" />
+    <Compile Remove="Migrations\20180929120047_AddedCustomerTypeIntoCustomer.cs" />
+    <Compile Remove="Migrations\20180929120208_AddedCustomerTypeIntoCustomer.cs" />
+    <Compile Remove="Migrations\20180929120236_AddedCustomerTypeIntoCustomer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Entities\Supplier\" />
     <Folder Include="Entities\WeeklyCustomer\" />
     <Folder Include="Helper\" />

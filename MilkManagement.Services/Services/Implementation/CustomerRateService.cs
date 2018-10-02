@@ -29,7 +29,7 @@ namespace MilkManagement.Services.Services.Implementation
         {
             try
             {
-                if (_customerRateRepository.IsRateAssignedToCustomer(dto.CustomerId))
+                if (!_customerRateRepository.IsRateAssignedToCustomer(dto.CustomerId))
                     return new ResponseMessageDto()
                     {
                         SuccessMessage = ResponseMessages.RatesAssignedToCustomer,
@@ -111,24 +111,13 @@ namespace MilkManagement.Services.Services.Implementation
             }
         }
 
-        public async Task<CustomerRatesResponseDto> GetCustomerRatesById(int customerId)
+        public async Task<CustomerRatesResponseDto> GetCustomerRatesById(int customerRatesId)
         {
             try
             {
-                return (new List<CustomerRates> { await _asyncRepository.GetByIdAsync(customerId) })
-                    .Select(result => new CustomerRatesResponseDto
-                    {
-                        Id = result.Id,
-                        CurrentRate = result.CurrentRate,
-                        PreviousRate = result.PreviousRate,
-                        CustomerName = result.Customer.Name,
-                        CustomerId = result.CustomerId,
-                        CreatedOn = result.CreatedOn,
-                        CreatedById = result.CreatedById,
-                        LastUpdatedOn = result.LastUpdatedOn,
-                        LastUpdatedById = result.LastUpdatedById
-                    })
-                    .Single();
+
+                return await _asyncRepository.GetByIdAsync<CustomerRatesResponseDto>(customerRatesId);
+
             }
             catch (Exception e)
             {
@@ -154,7 +143,7 @@ namespace MilkManagement.Services.Services.Implementation
         //    //}
         //}
 
-        public async Task<ResponseMessageDto> DeleteCustomerRates(CustomerRatesResponseDto dto)
+        public async Task<ResponseMessageDto> DeleteCustomerRates(CustomerRatesRequestDto dto)
         {
             try
             {

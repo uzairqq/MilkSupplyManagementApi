@@ -11,12 +11,12 @@ using MilkManagement.Domain.Repositories.Interfaces;
 
 namespace MilkManagement.Domain.Repositories.Implementation
 {
-   public class EfRepository<T> : IRepository<T>, IAsyncRepository<T> where T : BaseEntity
+    public class EfRepository<T> : IRepository<T>, IAsyncRepository<T> where T : BaseEntity
     {
         private readonly MilkManagementDbContext _dbContext;
         private readonly IMapper _mapper;
 
-        public EfRepository(MilkManagementDbContext dbContext,IMapper mapper)
+        public EfRepository(MilkManagementDbContext dbContext, IMapper mapper)
         {
             _dbContext = dbContext;
             _mapper = mapper;
@@ -33,9 +33,29 @@ namespace MilkManagement.Domain.Repositories.Implementation
         }
 
 
-        public virtual async Task<T> GetByIdAsync(int id)
+        public virtual async Task<TViewModel> GetByIdAsync<TViewModel>(int id)
         {
-            return await _dbContext.Set<T>().FindAsync(id);
+            var model = await _dbContext.Set<T>().FindAsync(id);
+            return _mapper.Map<TViewModel>(model);
+        }
+
+        public virtual async Task<TViewModel> GetSingleAsync<TViewModel>(ISpecification<T> spec)
+        {
+            var queryable = _dbContext.Set<T>().AsQueryable();
+            if (spec.Criteria != null)
+                queryable = queryable.Where(spec.Criteria).AsQueryable();
+            
+            var queryableResultWithIncludes = spec.Includes
+                .Aggregate(queryable,
+                    (current, include) => current.Include(include));
+
+            // modify the IQueryable to include any string-based include statements
+            var secondaryResult = spec.IncludeStrings
+                .Aggregate(queryableResultWithIncludes,
+                    (current, include) => current.Include(include));
+
+            return await secondaryResult.ProjectTo<TViewModel>(_mapper.ConfigurationProvider)
+                .SingleOrDefaultAsync();
         }
 
         public IEnumerable<T> ListAll()
@@ -67,7 +87,7 @@ namespace MilkManagement.Domain.Repositories.Implementation
                             .Where(spec.Criteria)
                             .AsEnumerable();
         }
-        public async Task<List<T>> ListAsync(ISpecification<T> spec)
+        public async Task<List<TViewModel>> ListAsync<TViewModel>(ISpecification<T> spec)
         {
             // fetch a Queryable that includes all expression-based includes
             var queryableResultWithIncludes = spec.Includes
@@ -79,10 +99,15 @@ namespace MilkManagement.Domain.Repositories.Implementation
                 .Aggregate(queryableResultWithIncludes,
                     (current, include) => current.Include(include));
 
-            // return the result of the query using the specification's criteria expression
+            if (spec.Criteria != null)
+                // return the result of the query using the specification's criteria expression
+                return await secondaryResult
+                                .Where(spec.Criteria)
+                                .ProjectTo<TViewModel>(_mapper.ConfigurationProvider)
+                                .ToListAsync();
             return await secondaryResult
-                            .Where(spec.Criteria)
-                            .ToListAsync();
+                .ProjectTo<TViewModel>(_mapper.ConfigurationProvider)
+                .ToListAsync();
         }
 
         public T Add(T entity)
