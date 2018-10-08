@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace MilkManagement.Authentication
+namespace MilkManagement.OAuth
 {
     public class Program
     {
@@ -19,8 +19,6 @@ namespace MilkManagement.Authentication
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseKestrel()
-                .UseUrls("http://localhost:5003")
                 .UseStartup<Startup>();
     }
 }

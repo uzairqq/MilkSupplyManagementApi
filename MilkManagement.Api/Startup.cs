@@ -58,6 +58,14 @@ namespace MilkManagement.Api
                     License = new License { Name = "Under The Terms And Agreements Of IQBAL DAIRY FARM" }
                 });
             });
+            services.AddAuthentication("Bearer")
+                .AddIdentityServerAuthentication(options =>
+                {
+                    options.RequireHttpsMetadata = false;
+                    options.Authority = "http://localhost:5003/";
+                    options.ApiName = "milkmanagement";
+                });
+
             services.AddAutoMapper();
 
             services.AddMvc();
@@ -70,6 +78,8 @@ namespace MilkManagement.Api
                 .AddConsole()
                 .AddDebug();
 
+         
+
             if (env.IsDevelopment())
             {
                 app.UseDatabaseErrorPage();
@@ -81,6 +91,7 @@ namespace MilkManagement.Api
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
+            app.UseAuthentication();
 
             app.UseMvc();
         }

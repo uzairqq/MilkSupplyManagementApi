@@ -30,7 +30,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MilkManagement.IntegrationT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MilkManagement.FunctionalTest", "MilkManagement.FunctionalTest\MilkManagement.FunctionalTest.csproj", "{CE6C4D86-4A22-4803-8C93-01DEB34E62A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MilkManagement.Authentication", "MilkManagement.Authentication\MilkManagement.Authentication.csproj", "{5F3538A9-BD61-411E-B244-3B496FFFB449}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MilkManagement.Authentication", "MilkManagement.Authentication\MilkManagement.Authentication.csproj", "{3C9E3772-5063-4365-97E2-354C9890749B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,10 +78,10 @@ Global
 		{CE6C4D86-4A22-4803-8C93-01DEB34E62A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE6C4D86-4A22-4803-8C93-01DEB34E62A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE6C4D86-4A22-4803-8C93-01DEB34E62A2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5F3538A9-BD61-411E-B244-3B496FFFB449}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5F3538A9-BD61-411E-B244-3B496FFFB449}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5F3538A9-BD61-411E-B244-3B496FFFB449}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5F3538A9-BD61-411E-B244-3B496FFFB449}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C9E3772-5063-4365-97E2-354C9890749B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C9E3772-5063-4365-97E2-354C9890749B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3C9E3772-5063-4365-97E2-354C9890749B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3C9E3772-5063-4365-97E2-354C9890749B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -97,7 +97,7 @@ Global
 		{AD412F91-F188-47F7-82C8-4565B6A7855D} = {743D9E5C-40B8-4E7C-B5A5-7D0EA36D6C5B}
 		{43C079D3-8273-45E2-918B-4F22968CF362} = {743D9E5C-40B8-4E7C-B5A5-7D0EA36D6C5B}
 		{CE6C4D86-4A22-4803-8C93-01DEB34E62A2} = {743D9E5C-40B8-4E7C-B5A5-7D0EA36D6C5B}
-		{5F3538A9-BD61-411E-B244-3B496FFFB449} = {7EC0321B-31E1-492C-8C38-6063F2EA9410}
+		{3C9E3772-5063-4365-97E2-354C9890749B} = {7EC0321B-31E1-492C-8C38-6063F2EA9410}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E77EB315-F790-44DE-BE7E-75A636554200}
