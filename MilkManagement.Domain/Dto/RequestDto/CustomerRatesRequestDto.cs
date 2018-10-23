@@ -14,7 +14,5 @@ namespace MilkManagement.Domain.Dto.RequestDto
         public int CreatedById { get; set; }
         public DateTime? LastUpdatedOn { get; set; }
         public int? LastUpdatedById { get; set; }
-     
-        
     }
 }

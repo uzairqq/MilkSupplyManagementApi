@@ -64,7 +64,7 @@ namespace MilkManagement.Domain.Repositories.Implementation
             {
                 var result= _dbContext.CustomerRates
                     .AsNoTracking()
-                    .Any(o => o.CustomerId.Equals(customerId) && !o.IsDeleted);
+                    .Any(o => o.CustomerId==customerId && !o.IsDeleted);
                 return result;
             }
             catch (Exception e)

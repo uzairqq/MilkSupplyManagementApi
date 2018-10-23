@@ -16,5 +16,6 @@ namespace MilkManagement.Domain.Specification
             //AddInclude(o => o.CustomerType);
             AddInclude($"{nameof(Customer.CustomerType)}.{nameof(CustomerType.Type)}");
         }
+       
     }
 }

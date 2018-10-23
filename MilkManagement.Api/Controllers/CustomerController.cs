@@ -10,7 +10,7 @@ using MilkManagement.Services.Services.Interfaces;
 
 namespace MilkManagement.Api.Controllers
 {
-    [Authorize]
+   
     [Route("api/[controller]")]
     [ApiController]
     public class CustomerController : ControllerBase

@@ -7,7 +7,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MilkManagement.Constants\MilkManagement.Constants.csproj" />
     <ProjectReference Include="..\MilkManagement.Domain\MilkManagement.Domain.csproj" />
-    <ProjectReference Include="..\MilkManagement.Utils\MilkManagement.Utils.csproj" />
+    <ProjectReference Include="..\MilkManagement.Utils\MilkManagement.CommonLibrary.csproj" />
   </ItemGroup>
 
 </Project>

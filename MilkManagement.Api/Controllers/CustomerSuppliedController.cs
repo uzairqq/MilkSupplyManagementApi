@@ -13,25 +13,26 @@ namespace MilkManagement.Api.Controllers
     [ApiController]
     public class CustomerSuppliedController : ControllerBase
     {
-        private readonly ICustomerSupplied _customerSupplied;
+        private readonly ICustomerSuppliedService _customerSuppliedService;
 
-        public CustomerSuppliedController(ICustomerSupplied customerSupplied)
+        public CustomerSuppliedController(ICustomerSuppliedService customerSuppliedService)
         {
-            _customerSupplied = customerSupplied;
+            _customerSuppliedService = customerSuppliedService;
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Post(CustomerSuppliedRequestDto dto)
-        //{
-        //    try
-        //    {
-        //        return await _customerSupplied.
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e);
-        //        throw;
-        //    }
-        //}
+        [HttpPost]
+        public async Task<IActionResult> Post(CustomerSuppliedRequestDto dto)
+        {
+            try
+            {
+                if (!ModelState.IsValid) return BadRequest(ModelState);
+                return Ok(await _customerSuppliedService.Post(dto));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

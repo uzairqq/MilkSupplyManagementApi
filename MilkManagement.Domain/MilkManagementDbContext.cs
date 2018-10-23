@@ -45,10 +45,5 @@ namespace MilkManagement.Domain
                 throw;
             }
         }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-        }
     }
 }

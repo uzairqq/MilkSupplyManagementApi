@@ -9,6 +9,7 @@ using MilkManagement.Domain.Dto;
 using MilkManagement.Domain.Dto.RequestDto;
 using MilkManagement.Domain.Entities.Customer;
 using MilkManagement.Domain.Repositories.Interfaces;
+using MilkManagement.Domain.Specification;
 using MilkManagement.Services.Services.Interfaces;
 
 namespace MilkManagement.Services.Services.Implementation
@@ -29,7 +30,7 @@ namespace MilkManagement.Services.Services.Implementation
         {
             try
             {
-                if (!_customerRateRepository.IsRateAssignedToCustomer(dto.CustomerId))
+                if (_customerRateRepository.IsRateAssignedToCustomer(dto.CustomerId))
                     return new ResponseMessageDto()
                     {
                         SuccessMessage = ResponseMessages.RatesAssignedToCustomer,
@@ -38,6 +39,9 @@ namespace MilkManagement.Services.Services.Implementation
                     };
 
                 var customerRates = await _asyncRepository.AddAsync(_mapper.Map<CustomerRates>(dto));
+
+                //await _asyncRepository.CompleteAsync();
+
                 return new ResponseMessageDto()
                 {
                     Id = customerRates.Id,
@@ -102,7 +106,7 @@ namespace MilkManagement.Services.Services.Implementation
         {
             try
             {
-                return await _asyncRepository.ListAllAsync<CustomerRatesResponseDto>();
+                return await _asyncRepository.ListAsync<CustomerRatesResponseDto>(new CustomerRatesWithType());
             }
             catch (Exception ex)
             {
@@ -126,7 +130,18 @@ namespace MilkManagement.Services.Services.Implementation
             }
         }
 
-        
+        public async  Task<CustomerRatesResponseDto> GetCustomerRatesByCustomerId(int customerId)
+        {
+            try
+            {
+                return await _asyncRepository.GetByIdAsync<CustomerRatesResponseDto>(customerId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
 
 
         //public async Task<CustomerRatesDto> GetCustomerRatesByCustomerRateId(int customerRateId)

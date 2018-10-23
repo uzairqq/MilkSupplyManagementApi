@@ -120,7 +120,7 @@ namespace MilkManagement.Domain.Repositories.Implementation
 
         public async Task<T> AddAsync(T entity)
         {
-            _dbContext.Set<T>().Add(entity);
+            await _dbContext.Set<T>().AddAsync(entity);
             await _dbContext.SaveChangesAsync();
 
             return entity;
@@ -147,5 +147,15 @@ namespace MilkManagement.Domain.Repositories.Implementation
             _dbContext.Set<T>().Remove(entity);
             await _dbContext.SaveChangesAsync();
         }
+
+        //public bool Complete()
+        //{
+        //    return _dbContext.SaveChanges() > 0;
+        //}
+
+        //public async Task<bool> CompleteAsync()
+        //{
+        //    return await _dbContext.SaveChangesAsync() > 0;
+        //}
     }
 }

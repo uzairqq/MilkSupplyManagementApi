@@ -8,7 +8,12 @@ namespace MilkManagement.Domain.Entities.Customer
 {
    public class CustomerRates:BaseEntity,ISoftDeletable
     {
+        public CustomerRates()
+        {
+            
+        }
       
+        public int CustomerId { get; set; }
         public int CurrentRate { get; set; }
         public int PreviousRate { get; set; }
         public DateTime? CreatedOn { get; set; }
@@ -17,7 +22,8 @@ namespace MilkManagement.Domain.Entities.Customer
         public int? LastUpdatedById { get; set; }
 
         public bool IsDeleted { get; set; }
-        public int CustomerId { get; set; }
-        public virtual Customer Customer { get; set; }
+
+       
+        public Customer Customer { get; set; }
     }
 }

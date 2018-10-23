@@ -11,10 +11,13 @@ namespace MilkManagement.Domain.Mappings
         public DomainProfile()
         {
             CreateMap<Customer, CustomerRequestDto>().ReverseMap();
-            CreateMap<CustomerRates, CustomerRatesResponseDto>().ReverseMap();
-            CreateMap<CustomerRates, CustomerRatesRequestDto>().ReverseMap();
+            //CreateMap<CustomerRates, CustomerRatesResponseDto>().ReverseMap();
+            //CreateMap<CustomerRates, CustomerRatesRequestDto>().ReverseMap();
             CreateMap<Customer, CustomerResponseDto>()
                 .ForMember(x => x.Type, opt => { opt.MapFrom(o => o.CustomerType.Type); }).ReverseMap();
+
+            CreateMap<CustomerRates, CustomerRatesResponseDto>()
+                .ForMember(x => x.Type, opt => { opt.MapFrom(o => o.Customer.CustomerType.Type); }).ReverseMap();
         }
     }
 }

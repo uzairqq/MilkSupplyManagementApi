@@ -7,8 +7,8 @@ using MilkManagement.Domain.Dto.RequestDto;
 
 namespace MilkManagement.Services.Services.Interfaces
 {
-   public interface ICustomerSupplied
+   public interface ICustomerSuppliedService
    {
-//       Task<ResponseMessageDto> Post(CustomerSuppliedRequestDto dto);
-   }
+        Task<ResponseMessageDto> Post(CustomerSuppliedRequestDto dto);
+    }
 }

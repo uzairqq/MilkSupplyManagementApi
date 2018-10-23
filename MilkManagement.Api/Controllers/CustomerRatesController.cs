@@ -76,12 +76,12 @@ namespace MilkManagement.Api.Controllers
         /// </summary>
         /// <param name="customerId"></param>
         /// <returns></returns>
-        [HttpGet("customerRatesId/{customerRatesId}")]
-        public async Task<IActionResult> GetById([FromRoute] int customerRatesId)
+        [HttpGet("customerId/{customerId}")]
+        public async Task<IActionResult> GetById([FromRoute] int customerId)
         {
             try
             {
-                return Ok(await _rateService.GetCustomerRatesById(customerRatesId));
+                return Ok(await _rateService.GetCustomerRatesById(customerId));
             }
             catch (Exception e)
             {
@@ -92,21 +92,21 @@ namespace MilkManagement.Api.Controllers
         /// <summary>
         /// Get Customer Rates By Customer Rates Id
         /// </summary>
-        /// <param name="customerRatesId"></param>
+        /// <param name="customerId"></param>
         /// <returns></returns>
-        //[HttpGet("customerRatesId/{customerRatesId}")]
-        //public async Task<IActionResult> GetByCustomerRatesId([FromRoute] int customerRatesId)
-        //{
-        //    try
-        //    {
-        //        return Ok(await _rateService.GetCustomerRatesByCustomerRateId(customerRatesId));
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine(ex);
-        //        throw;
-        //    }
-        //}
+        [HttpGet("customerRatesId/{customerRatesId}")]
+        public async Task<IActionResult> GetByCustomerRatesId([FromRoute] int customerRatesId)
+        {
+            try
+            {
+                return Ok(await _rateService.GetCustomerRatesByCustomerId(customerRatesId));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                throw;
+            }
+        }
         /// <summary>
         /// Delete Customer Rates Id
         /// </summary>

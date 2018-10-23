@@ -15,6 +15,7 @@ namespace MilkManagement.Constants
             public const string CustomerNameAvailable = "Customer Name Not In Use";
             public const string CustomerNameNotAvailable = "Customer Name Already In Use";
             public const string RatesAssignedToCustomer = "Rates Already Assigned To Customer";
+            public const string CustomerAlreadyInsertedInThisDate = "Customer Already Inserted In This Date";
         }
     }
 

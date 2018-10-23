@@ -22,7 +22,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MilkManagement.Domain", "Mi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MilkManagement.Services", "MilkManagement.Services\MilkManagement.Services.csproj", "{B7A0F716-CDA0-49ED-B96A-E24DC1122A4B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MilkManagement.Utils", "MilkManagement.Utils\MilkManagement.Utils.csproj", "{8D0DF94A-3D27-4AD2-9D7D-86E180EA44CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MilkManagement.CommonLibrary", "MilkManagement.Utils\MilkManagement.CommonLibrary.csproj", "{8D0DF94A-3D27-4AD2-9D7D-86E180EA44CF}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MilkManagement.UnitTest", "MilkManagement.UnitTest\MilkManagement.UnitTest.csproj", "{AD412F91-F188-47F7-82C8-4565B6A7855D}"
 EndProject
@@ -30,7 +30,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MilkManagement.IntegrationT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MilkManagement.FunctionalTest", "MilkManagement.FunctionalTest\MilkManagement.FunctionalTest.csproj", "{CE6C4D86-4A22-4803-8C93-01DEB34E62A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MilkManagement.Authentication", "MilkManagement.Authentication\MilkManagement.Authentication.csproj", "{3C9E3772-5063-4365-97E2-354C9890749B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MilkManagement.Authentication", "MilkManagement.Authentication\MilkManagement.Authentication.csproj", "{3C9E3772-5063-4365-97E2-354C9890749B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
