@@ -119,5 +119,49 @@ namespace MilkManagement.Api.Controllers
                 throw;
             }
         }
+
+        [HttpGet("customerId/{customerId}/date/{date}")]
+        public async Task<IActionResult> GetCustomerSuppliedByCustomerIdAndDate([FromRoute] int customerId,
+       [FromRoute] DateTime date)
+        {
+            try
+            {
+                return Ok(await _customerSuppliedService.GetCustomerSuppliedByCustomerIdAndParticularDate(customerId, date));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        [HttpGet("customerId/{customerId}/startDate/{startDate}/endDate/{endDate}")]
+        public async Task<IActionResult> GetCustomerSuppliedByCustomerIdStartDateAndEndDate([FromRoute] int customerId,
+        DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                return Ok(await _customerSuppliedService.GetCustomerSuppliedByCustomerIdStartDateAndEndDate(customerId,
+                    startDate, endDate));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+        [HttpDelete]
+        public async Task<IActionResult> DeleteCustomerSupplied([FromBody] CustomerSuppliedRequestDto dto)
+        {
+            try
+            {
+                return Ok(await _customerSuppliedService.Delete(dto));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

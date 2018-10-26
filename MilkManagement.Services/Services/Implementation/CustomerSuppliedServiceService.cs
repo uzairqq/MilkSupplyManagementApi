@@ -204,6 +204,59 @@ namespace MilkManagement.Services.Services.Implementation
                 throw;
             }
         }
+        public async Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByCustomerIdAndParticularDate(int customerId, DateTime date)
+        {
+            try
+            {
+                return await _customerSuppliedRepository.GetCustomerSuppliedByCustomerIdAndParticularDate(customerId, date);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+        public async Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByCustomerIdStartDateAndEndDate(int customerId, DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                return await _customerSuppliedRepository.GetCustomerSuppliedByCustomerIdStartDateAndEndDate(customerId, startDate, endDate);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+        public async Task<ResponseMessageDto> Delete(CustomerSuppliedRequestDto dto)
+        {
+            try
+            {
+
+                await _asyncRepository.DeleteAsync(_mapper.Map<CustomerSupplied>(dto));
+                return new ResponseMessageDto()
+                {
+                    Id = dto.Id,
+                    SuccessMessage = ResponseMessages.DeleteSuccessMessage,
+                    Success = true,
+                    Error = false
+                };
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return new ResponseMessageDto()
+                {
+                    Id = Convert.ToInt16(Enums.FailureId),
+                    FailureMessage = ResponseMessages.InsertionFailureMessage,
+                    Success = false,
+                    Error = true,
+                    ExceptionMessage = e.InnerException != null ? e.InnerException.Message : e.Message
+                };
+            }
+        }
+
+
 
 
     }

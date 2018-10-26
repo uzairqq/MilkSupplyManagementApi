@@ -19,7 +19,9 @@ namespace MilkManagement.Services.Services.Interfaces
 
         Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByStartAndEndDate(DateTime startDate,
           DateTime endDate);
-
-
+        Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByCustomerIdAndParticularDate(int customerId, DateTime date);
+        Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByCustomerIdStartDateAndEndDate(
+            int customerId, DateTime startDate, DateTime endDate);
+        Task<ResponseMessageDto> Delete(CustomerSuppliedRequestDto dto);
     }
 }
