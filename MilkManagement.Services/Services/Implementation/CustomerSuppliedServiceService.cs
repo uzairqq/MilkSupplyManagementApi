@@ -9,6 +9,7 @@ using MilkManagement.Domain.Dto.RequestDto;
 using MilkManagement.Domain.Dto.ResponseDto;
 using MilkManagement.Domain.Entities.Customer;
 using MilkManagement.Domain.Repositories.Interfaces;
+using MilkManagement.Domain.Specification;
 using MilkManagement.Services.Services.Interfaces;
 
 namespace MilkManagement.Services.Services.Implementation
@@ -142,6 +143,20 @@ namespace MilkManagement.Services.Services.Implementation
                 var customerSupplied = await _asyncRepository.ListAsync<CustomerSuppliedResponseDto>(new CustomerSuppliedWithType());
                 return customerSupplied;
 
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public async Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByDate(DateTime date)
+        {
+            try
+            {
+                var customerSupplied = await _customerSuppliedRepository.GetCustomerSuppliedByDate(date);
+                return customerSupplied;
             }
             catch (Exception e)
             {

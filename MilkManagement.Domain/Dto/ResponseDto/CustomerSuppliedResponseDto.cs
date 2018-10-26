@@ -7,6 +7,8 @@ namespace MilkManagement.Domain.Dto.ResponseDto
 {
    public class CustomerSuppliedResponseDto:BaseEntity
     {
+        public string CustomerType { get; set; }
+        public int CustomerTypeId { get; set; }
         public int CustomerId { get; set; }
         public string CustomerName { get; set; }
         public string MorningSupply { get; set; }

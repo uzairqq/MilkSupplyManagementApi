@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MilkManagement.Domain.Dto.RequestDto;
+using MilkManagement.Domain.Dto.ResponseDto;
 using MilkManagement.Services.Services.Interfaces;
 
 namespace MilkManagement.Api.Controllers
@@ -57,6 +58,20 @@ namespace MilkManagement.Api.Controllers
             try
             {
                 return Ok(await _customerSuppliedService.Get());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+        [HttpGet("allCustomerSuppliedByDate")]
+        public async Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByDate(DateTime date)
+        {
+            try
+            {
+                var customerSupplied = await _customerSuppliedService.GetCustomerSuppliedByDate(date);
+                return customerSupplied;
             }
             catch (Exception e)
             {
