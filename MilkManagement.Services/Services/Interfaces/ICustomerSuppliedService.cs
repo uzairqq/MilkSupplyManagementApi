@@ -14,6 +14,11 @@ namespace MilkManagement.Services.Services.Interfaces
         Task<ResponseMessageDto> Put(CustomerSuppliedRequestDto dto);
         Task<IEnumerable<CustomerSuppliedResponseDto>> Get();
         Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByDate(DateTime date);
+        Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByCustomerId(int customerId);
+        Task<CustomerSuppliedResponseDto> GetCustomerSuppliedByCustomerSuppliedId(int customerSuppliedId);
+
+        Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByStartAndEndDate(DateTime startDate,
+          DateTime endDate);
 
 
     }

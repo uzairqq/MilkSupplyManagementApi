@@ -89,5 +89,77 @@ namespace MilkManagement.Domain.Repositories.Implementation
                 throw;
             }
         }
+        public async Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByCustomerId(int customerId)
+        {
+            try
+            {
+                var customerSupplied = _dbContext.CustomerSupplied
+                    .AsNoTracking()
+                    .Where(i => i.CustomerId == customerId && !i.IsDeleted)
+                    .Select(i => new CustomerSuppliedResponseDto()
+                    {
+                        CustomerType=i.Customer.CustomerType.Type,
+                        CustomerTypeId=i.Customer.CustomerTypeId,
+                        Id = i.Id,
+                        CustomerId = i.CustomerId,
+                        CustomerName = i.Customer.Name,
+                        Rate = i.Rate,
+                        MorningSupply = i.MorningSupply,
+                        AfternoonSupply = i.AfternoonSupply,
+                        MorningAmount = i.MorningAmount,
+                        AfternoonAmount = i.AfternoonAmount,
+                        Debit = i.Debit,
+                        Credit = i.Credit,
+                        Total = i.Total,
+                        CreatedOn = i.CreatedOn.Date,
+                        CreatedById = i.CreatedById,
+                        LastUpdatedById = i.LastUpdatedById,
+                        LastUpdatedOn = i.LastUpdatedOn
+                    })
+                    .ToList();
+                return await Task.FromResult(customerSupplied);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public async Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByStartAndEndDate(DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                var customerSupplied = _dbContext.CustomerSupplied
+                    .AsNoTracking()
+                    .Where(i => i.CreatedOn.Date >= startDate.Date && i.CreatedOn.Date <= endDate.Date && !i.IsDeleted)
+                    .Select(i => new CustomerSuppliedResponseDto()
+                    {
+                        CustomerType=i.Customer.CustomerType.Type,
+                        CustomerTypeId=i.Customer.CustomerTypeId,
+                        Id = i.Id,
+                        CustomerId = i.CustomerId,
+                        CustomerName = i.Customer.Name,
+                        Rate = i.Rate,
+                        MorningSupply = i.MorningSupply,
+                        AfternoonSupply = i.AfternoonSupply,
+                        MorningAmount = i.MorningAmount,
+                        AfternoonAmount = i.AfternoonAmount,
+                        Debit = i.Debit,
+                        Credit = i.Credit,
+                        Total = i.Total,
+                        CreatedOn = i.CreatedOn.Date,
+                        CreatedById = i.CreatedById,
+                        LastUpdatedById = i.LastUpdatedById,
+                        LastUpdatedOn = i.LastUpdatedOn
+                    }).ToList();
+                return await Task.FromResult(customerSupplied);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

@@ -164,5 +164,47 @@ namespace MilkManagement.Services.Services.Implementation
                 throw;
             }
         }
+
+        public async Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByCustomerId(int customerId)
+        {
+            try
+            {
+                return await _customerSuppliedRepository.GetCustomerSuppliedByCustomerId(customerId);
+               
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+        public async Task<CustomerSuppliedResponseDto> GetCustomerSuppliedByCustomerSuppliedId(int customerSuppliedId)
+        {
+            try
+            {
+                return await _asyncRepository.GetByIdAsync<CustomerSuppliedResponseDto>(customerSuppliedId);
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+        public async Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByStartAndEndDate(DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                var customerSupplied = await _customerSuppliedRepository.GetCustomerSuppliedByStartAndEndDate(startDate, endDate);
+                return customerSupplied;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+
     }
 }

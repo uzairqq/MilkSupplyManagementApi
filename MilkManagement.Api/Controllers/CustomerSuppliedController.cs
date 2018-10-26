@@ -65,13 +65,53 @@ namespace MilkManagement.Api.Controllers
                 throw;
             }
         }
-        [HttpGet("allCustomerSuppliedByDate")]
+        [HttpGet("all/currentDate/{date}")]
         public async Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByDate(DateTime date)
         {
             try
             {
                 var customerSupplied = await _customerSuppliedService.GetCustomerSuppliedByDate(date);
                 return customerSupplied;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+        [HttpGet("customerId/{customerId}")]
+        public async Task<IActionResult> GetByCustomerId([FromRoute] int customerId)
+        {
+            try
+            {
+                return Ok(await _customerSuppliedService.GetCustomerSuppliedByCustomerId(customerId));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+        [HttpGet("customerSuppliedId/{customerSuppliedId}")]
+        public async Task<IActionResult> GetByCustomerSuppliedId([FromRoute] int customerSuppliedId)
+        {
+            try
+            {
+                return Ok(await _customerSuppliedService.GetCustomerSuppliedByCustomerSuppliedId(customerSuppliedId));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+        [HttpGet("all/startDate/{startDate}/endDate/{endDate}")]
+        public async Task<IActionResult> GetCustomerByStartEndDate([FromRoute] DateTime startDate,
+           [FromRoute] DateTime endDate)
+        {
+            try
+            {
+                return Ok(await _customerSuppliedService.GetCustomerSuppliedByStartAndEndDate(startDate, endDate));
             }
             catch (Exception e)
             {
