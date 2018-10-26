@@ -13,6 +13,8 @@ namespace MilkManagement.Domain.Mappings
             CreateMap<Customer, CustomerRequestDto>().ReverseMap();
             //CreateMap<CustomerRates, CustomerRatesResponseDto>().ReverseMap();
             //CreateMap<CustomerRates, CustomerRatesRequestDto>().ReverseMap();
+            CreateMap<CustomerSupplied, CustomerSuppliedRequestDto>().ReverseMap();
+
             CreateMap<Customer, CustomerResponseDto>()
                 .ForMember(x => x.Type, opt => { opt.MapFrom(o => o.CustomerType.Type); }).ReverseMap();
 

@@ -34,5 +34,35 @@ namespace MilkManagement.Api.Controllers
                 throw;
             }
         }
+
+        [HttpPut]
+        public async Task<IActionResult> Put(CustomerSuppliedRequestDto dto)
+        {
+            try
+            {
+                if (!ModelState.IsValid) return BadRequest(ModelState);
+                return Ok(await _customerSuppliedService.Put(dto));
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        [HttpGet("all")]
+        public async Task<IActionResult> Get()
+        {
+            try
+            {
+                return Ok(await _customerSuppliedService.Get());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

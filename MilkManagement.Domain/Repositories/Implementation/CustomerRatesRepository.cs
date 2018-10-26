@@ -46,9 +46,9 @@ namespace MilkManagement.Domain.Repositories.Implementation
             {
                 var customerRates =  _dbContext.CustomerRates
                     .AsNoTracking()
-                    .Where(i => i.Id == customerId)
+                    .Where(i => i.CustomerId == customerId)
                     .Select(i => i.CurrentRate)
-                    .FirstOrDefault();
+                    .SingleOrDefault();
                 return  customerRates;
             }
             catch (Exception e)

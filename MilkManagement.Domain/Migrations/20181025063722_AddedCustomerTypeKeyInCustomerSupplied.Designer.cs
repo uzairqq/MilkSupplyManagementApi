@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MilkManagement.Domain;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,9 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MilkManagement.Domain.Migrations
 {
     [DbContext(typeof(MilkManagementDbContext))]
-    partial class MilkManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181025063722_AddedCustomerTypeKeyInCustomerSupplied")]
+    partial class AddedCustomerTypeKeyInCustomerSupplied
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -98,7 +100,7 @@ namespace MilkManagement.Domain.Migrations
 
                     b.Property<int>("CustomerId");
 
-                    b.Property<int?>("CustomerTypeId");
+                    b.Property<int>("CustomerTypeId");
 
                     b.Property<float?>("Debit");
 
@@ -163,7 +165,8 @@ namespace MilkManagement.Domain.Migrations
 
                     b.HasOne("MilkManagement.Domain.Entities.Customer.CustomerType", "CustomerType")
                         .WithMany()
-                        .HasForeignKey("CustomerTypeId");
+                        .HasForeignKey("CustomerTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

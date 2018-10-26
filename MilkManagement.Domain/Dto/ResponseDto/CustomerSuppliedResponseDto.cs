@@ -1,16 +1,14 @@
-﻿using System;
+﻿using MilkManagement.Domain.Entities;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Text;
-using MilkManagement.Core.Validator;
 
-namespace MilkManagement.Domain.Entities.Customer
+namespace MilkManagement.Domain.Dto.ResponseDto
 {
-    public class CustomerSupplied : BaseEntity, ISoftDeletable
+   public class CustomerSuppliedResponseDto:BaseEntity
     {
-        
         public int CustomerId { get; set; }
-        
+        public string CustomerName { get; set; }
         public string MorningSupply { get; set; }
         public string AfternoonSupply { get; set; }
         public double MorningAmount { get; set; }
@@ -23,14 +21,5 @@ namespace MilkManagement.Domain.Entities.Customer
         public DateTime CreatedOn { get; set; }
         public DateTime? LastUpdatedOn { get; set; }
         public int? LastUpdatedById { get; set; }
-
-
-     
-
-        public virtual Customer Customer { get; set; }
-
-      
-        
-        public bool IsDeleted { get; set; }
     }
 }

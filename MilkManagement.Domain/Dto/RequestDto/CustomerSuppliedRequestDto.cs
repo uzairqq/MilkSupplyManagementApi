@@ -7,7 +7,7 @@ using MilkManagement.Domain.Entities.Customer;
 
 namespace MilkManagement.Domain.Dto.RequestDto
 {
-   public class CustomerSuppliedRequestDto:BaseEntity
+    public class CustomerSuppliedRequestDto : BaseEntity
     {
         public int CustomerId { get; set; }
         public string MorningSupply { get; set; }
@@ -23,8 +23,6 @@ namespace MilkManagement.Domain.Dto.RequestDto
         public DateTime? LastUpdatedOn { get; set; }
         public int? LastUpdatedById { get; set; }
 
-        public bool IsDeleted { get; set; }
 
-        public virtual Customer Customer { get; set; }
     }
 }
