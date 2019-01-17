@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MilkManagement.Domain.Migrations
 {
     [DbContext(typeof(MilkManagementDbContext))]
-    [Migration("20181025063722_AddedCustomerTypeKeyInCustomerSupplied")]
-    partial class AddedCustomerTypeKeyInCustomerSupplied
+    [Migration("20190117010307_abc")]
+    partial class abc
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -62,7 +62,7 @@ namespace MilkManagement.Domain.Migrations
 
                     b.Property<int>("CreatedById");
 
-                    b.Property<DateTime?>("CreatedOn");
+                    b.Property<DateTime>("CreatedOn");
 
                     b.Property<int>("CurrentRate");
 
@@ -70,9 +70,9 @@ namespace MilkManagement.Domain.Migrations
 
                     b.Property<bool>("IsDeleted");
 
-                    b.Property<int?>("LastUpdatedById");
+                    b.Property<int>("LastUpdatedById");
 
-                    b.Property<DateTime?>("LastUpdatedOn");
+                    b.Property<DateTime>("LastUpdatedOn");
 
                     b.Property<int>("PreviousRate");
 
@@ -83,54 +83,18 @@ namespace MilkManagement.Domain.Migrations
                     b.ToTable("CustomerRates");
                 });
 
-            modelBuilder.Entity("MilkManagement.Domain.Entities.Customer.CustomerSupplied", b =>
+            modelBuilder.Entity("MilkManagement.Domain.Entities.Customer.CustomerType", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<double>("AfternoonAmount");
-
-                    b.Property<string>("AfternoonSupply");
 
                     b.Property<int>("CreatedById");
 
                     b.Property<DateTime>("CreatedOn");
 
-                    b.Property<float?>("Credit");
+                    b.Property<int>("LastUpdatedById");
 
-                    b.Property<int>("CustomerId");
-
-                    b.Property<int>("CustomerTypeId");
-
-                    b.Property<float?>("Debit");
-
-                    b.Property<bool>("IsDeleted");
-
-                    b.Property<int?>("LastUpdatedById");
-
-                    b.Property<DateTime?>("LastUpdatedOn");
-
-                    b.Property<double>("MorningAmount");
-
-                    b.Property<string>("MorningSupply");
-
-                    b.Property<float?>("Rate");
-
-                    b.Property<double?>("Total");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
-
-                    b.HasIndex("CustomerTypeId");
-
-                    b.ToTable("CustomerSupplied");
-                });
-
-            modelBuilder.Entity("MilkManagement.Domain.Entities.Customer.CustomerType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<DateTime>("LastUpdatedOn");
 
                     b.Property<string>("Type")
                         .HasMaxLength(10);
@@ -153,19 +117,6 @@ namespace MilkManagement.Domain.Migrations
                     b.HasOne("MilkManagement.Domain.Entities.Customer.Customer", "Customer")
                         .WithMany("CustomerRates")
                         .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("MilkManagement.Domain.Entities.Customer.CustomerSupplied", b =>
-                {
-                    b.HasOne("MilkManagement.Domain.Entities.Customer.Customer", "Customer")
-                        .WithMany("CustomerSupplied")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("MilkManagement.Domain.Entities.Customer.CustomerType", "CustomerType")
-                        .WithMany()
-                        .HasForeignKey("CustomerTypeId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

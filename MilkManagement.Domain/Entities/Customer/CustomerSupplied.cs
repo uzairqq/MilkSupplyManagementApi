@@ -19,8 +19,8 @@ namespace MilkManagement.Domain.Entities.Customer
         public float? Credit { get; set; }
         public double? Total { get; set; }
 
-        public virtual Customer Customer { get; set; }
-        
+        //public virtual Customer Customer { get; set; }
+
         public bool IsDeleted { get; set; }
     }
 }

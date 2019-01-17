@@ -81,46 +81,6 @@ namespace MilkManagement.Domain.Migrations
                     b.ToTable("CustomerRates");
                 });
 
-            modelBuilder.Entity("MilkManagement.Domain.Entities.Customer.CustomerSupplied", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<double>("AfternoonAmount");
-
-                    b.Property<string>("AfternoonSupply");
-
-                    b.Property<int>("CreatedById");
-
-                    b.Property<DateTime>("CreatedOn");
-
-                    b.Property<float?>("Credit");
-
-                    b.Property<int>("CustomerId");
-
-                    b.Property<float?>("Debit");
-
-                    b.Property<bool>("IsDeleted");
-
-                    b.Property<int>("LastUpdatedById");
-
-                    b.Property<DateTime>("LastUpdatedOn");
-
-                    b.Property<double>("MorningAmount");
-
-                    b.Property<string>("MorningSupply");
-
-                    b.Property<float?>("Rate");
-
-                    b.Property<double?>("Total");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CustomerId");
-
-                    b.ToTable("CustomerSupplied");
-                });
-
             modelBuilder.Entity("MilkManagement.Domain.Entities.Customer.CustomerType", b =>
                 {
                     b.Property<int>("Id")
@@ -154,14 +114,6 @@ namespace MilkManagement.Domain.Migrations
                 {
                     b.HasOne("MilkManagement.Domain.Entities.Customer.Customer", "Customer")
                         .WithMany("CustomerRates")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("MilkManagement.Domain.Entities.Customer.CustomerSupplied", b =>
-                {
-                    b.HasOne("MilkManagement.Domain.Entities.Customer.Customer", "Customer")
-                        .WithMany("CustomerSupplied")
                         .HasForeignKey("CustomerId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

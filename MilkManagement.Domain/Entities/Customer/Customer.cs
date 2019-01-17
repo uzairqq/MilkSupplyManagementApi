@@ -12,7 +12,7 @@ namespace MilkManagement.Domain.Entities.Customer
         public Customer()
         {
             CustomerRates = new HashSet<CustomerRates>();
-            CustomerSupplied = new HashSet<CustomerSupplied>();
+            //CustomerSupplied = new HashSet<CustomerSupplied>();
         }
 
       
@@ -34,6 +34,6 @@ namespace MilkManagement.Domain.Entities.Customer
 
 
         public virtual ICollection<CustomerRates> CustomerRates { get; set; }
-        public virtual ICollection<CustomerSupplied> CustomerSupplied { get; set; }
+        //public virtual ICollection<CustomerSupplied> CustomerSupplied { get; set; }
     }
 }
