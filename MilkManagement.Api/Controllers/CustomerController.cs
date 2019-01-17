@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MilkManagement.Domain.Dto.RequestDto;
@@ -13,6 +14,7 @@ namespace MilkManagement.Api.Controllers
    
     [Route("api/[controller]")]
     [ApiController]
+    //[DisableCors] ==> to disable cors
     public class CustomerController : ControllerBase
     {
         private readonly ICustomerService _customerService;

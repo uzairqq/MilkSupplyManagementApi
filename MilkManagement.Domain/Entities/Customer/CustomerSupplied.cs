@@ -10,7 +10,6 @@ namespace MilkManagement.Domain.Entities.Customer
     {
         
         public int CustomerId { get; set; }
-        
         public string MorningSupply { get; set; }
         public string AfternoonSupply { get; set; }
         public double MorningAmount { get; set; }
@@ -19,17 +18,8 @@ namespace MilkManagement.Domain.Entities.Customer
         public float? Debit { get; set; }
         public float? Credit { get; set; }
         public double? Total { get; set; }
-        public int CreatedById { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public DateTime? LastUpdatedOn { get; set; }
-        public int? LastUpdatedById { get; set; }
-
-
-     
 
         public virtual Customer Customer { get; set; }
-
-      
         
         public bool IsDeleted { get; set; }
     }

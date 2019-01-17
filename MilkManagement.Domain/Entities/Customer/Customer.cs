@@ -27,16 +27,6 @@ namespace MilkManagement.Domain.Entities.Customer
         [StringLength(20)]
         public string Contact { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString ="{0:dd-MM-yyyy}")]
-        public DateTime CreatedOn { get; set; }
-
-        public int CreatedById { get; set; }
-        
-        public DateTime LastUpdatedOn { get; set; }
-        
-        public int LastUpdatedById { get; set; }
-
         public int CustomerTypeId { get; set; }
         public virtual CustomerType CustomerType { get; set; }
 

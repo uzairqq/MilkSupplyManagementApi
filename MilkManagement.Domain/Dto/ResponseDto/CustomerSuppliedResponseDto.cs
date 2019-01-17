@@ -19,9 +19,6 @@ namespace MilkManagement.Domain.Dto.ResponseDto
         public float? Debit { get; set; }
         public float? Credit { get; set; }
         public double? Total { get; set; }
-        public int CreatedById { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public DateTime? LastUpdatedOn { get; set; }
-        public int? LastUpdatedById { get; set; }
+
     }
 }

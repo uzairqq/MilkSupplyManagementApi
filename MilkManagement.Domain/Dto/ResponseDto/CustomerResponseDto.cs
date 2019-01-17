@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using MilkManagement.Domain.Entities;
 
 namespace MilkManagement.Domain.Dto.ResponseDto
 {
-   public class CustomerResponseDto
+   public class CustomerResponseDto:BaseEntity
     {
+
         public string Name { get; set; }
 
         public string Address { get; set; }
@@ -23,6 +23,5 @@ namespace MilkManagement.Domain.Dto.ResponseDto
         public DateTime LastUpdatedOn { get; set; }
         
         public int LastUpdatedById { get; set; }
-        
     }
 }

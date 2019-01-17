@@ -26,6 +26,10 @@ namespace MilkManagement.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            // Add Cors
+            services.AddCors();
+
+
             services.AddLogging();
 
             services.AddDbContext<MilkManagementDbContext>(options =>
@@ -72,7 +76,9 @@ namespace MilkManagement.Api
                 .AddConsole()
                 .AddDebug();
 
-         
+            // Enable Cors
+            //app.UseCors("MyPolicy");
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
 
             if (env.IsDevelopment())
             {

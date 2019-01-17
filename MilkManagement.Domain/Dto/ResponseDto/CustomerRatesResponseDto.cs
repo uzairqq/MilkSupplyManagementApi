@@ -14,10 +14,7 @@ namespace MilkManagement.Domain.Dto
         public string Type { get; set; }
         public int CurrentRate { get; set; }
         public int PreviousRate { get; set; }
-        public DateTime? CreatedOn { get; set; }
-        public int CreatedById { get; set; }
-        public DateTime? LastUpdatedOn { get; set; }
-        public int? LastUpdatedById { get; set; }
+
 
 
     }

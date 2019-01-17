@@ -6,14 +6,13 @@ namespace MilkManagement.Domain.Specification
 {
     public class CustomerWithType : BaseSpecification<Customer>
     {
-        public CustomerWithType(int id): base(customer => customer.Id == id)
+        public CustomerWithType(int id): base(customer => customer.Id == id && customer.IsDeleted==false)
         {
             AddInclude($"{nameof(Customer.CustomerType)}.{nameof(CustomerType.Type)}");
         }
 
-        public CustomerWithType()
+        public CustomerWithType() : base(customer=> customer.IsDeleted == false)
         {
-            //AddInclude(o => o.CustomerType);
             AddInclude($"{nameof(Customer.CustomerType)}.{nameof(CustomerType.Type)}");
         }
        
