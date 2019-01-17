@@ -5,12 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Entities\Expense\**" />
-    <EmbeddedResource Remove="Entities\Expense\**" />
-    <None Remove="Entities\Expense\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Remove="Entities\Customer\CustomerSupplied.cs" />
     <Compile Remove="Migrations\20180929113939_AddedCustomerTypeRelationToCustomer2.cs" />
     <Compile Remove="Migrations\20180929120047_AddedCustomerTypeIntoCustomer.cs" />

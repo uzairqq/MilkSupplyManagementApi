@@ -1,18 +1,21 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Text;
-//using System.Threading.Tasks;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+using MilkManagement.Constants;
+using MilkManagement.Domain.Dto.RequestDto;
+using MilkManagement.Domain.Dto.ResponseDto;
 
-//namespace MilkManagement.Services.Services.Interfaces
-//{
-//   public interface IExpenseService
-//    {
-//        Task<ReponseMessagesDto> Post(AddExpenseRequestDto dto);
-//        Task<ReponseMessagesDto> UpdateExpense(UpdateExpenseRequestDto dto);
-//        Task<ReponseMessagesDto> DeleteExpense(int expenseId);
-//        Task<IEnumerable<GetExpenseResponseDto>> GetAll();
-//        Task<IEnumerable<GetExpenseResponseDto>> GetById(int expenseId);
-//        Task<IEnumerable<GetExpenseResponseDto>> GetByName(string expenseName);
-//        Task<bool> IsExpenseNameAvailable(string expenseName);
-//    }
-//}
+namespace MilkManagement.Services.Services.Interfaces
+{
+    public interface IExpenseService
+    {
+        Task<ResponseMessageDto> Post(ExpenseRequestDto dto);
+        Task<ResponseMessageDto> UpdateExpense(ExpenseRequestDto dto);
+        Task<ResponseMessageDto> DeleteExpense(ExpenseRequestDto dto);
+        Task<IEnumerable<ExpenseResponseDto>> GetAll();
+        //Task<ExpenseResponseDto> GetById(int expenseId);
+        //Task<IEnumerable<ExpenseResponseDto>> GetByName(string expenseName);
+        Task<bool> IsExpenseNameAvailable(string expenseName);
+    }
+}

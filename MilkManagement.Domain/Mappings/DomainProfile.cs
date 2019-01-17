@@ -3,6 +3,7 @@ using MilkManagement.Domain.Dto;
 using MilkManagement.Domain.Dto.RequestDto;
 using MilkManagement.Domain.Dto.ResponseDto;
 using MilkManagement.Domain.Entities.Customer;
+using MilkManagement.Domain.Entities.Expense;
 
 namespace MilkManagement.Domain.Mappings
 {
@@ -16,7 +17,8 @@ namespace MilkManagement.Domain.Mappings
             //CreateMap<CustomerSupplied, CustomerSuppliedRequestDto>().ReverseMap();
             //CreateMap<CustomerSupplied, CustomerSuppliedResponseDto>().ReverseMap();
 
-
+            CreateMap<Expense, ExpenseRequestDto>().ReverseMap();
+            CreateMap<Customer, CustomerResponseDto>().ReverseMap();
 
             CreateMap<Customer, CustomerResponseDto>()
                 .ForMember(x => x.Type, opt => { opt.MapFrom(o => o.CustomerType.Type); }).ReverseMap();

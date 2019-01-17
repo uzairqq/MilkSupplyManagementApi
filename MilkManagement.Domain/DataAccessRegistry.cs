@@ -15,6 +15,8 @@ namespace MilkManagement.Domain
             services.AddScoped(typeof(ICustomerRepository), typeof(CustomerRepository));
             services.AddScoped(typeof(ICustomerRateRepository), typeof(CustomerRatesRepository));
             //services.AddScoped(typeof(ICustomerSuppliedRepository), typeof(CustomerSuppliedRepository));
+            services.AddScoped(typeof(IExpenseRepository), typeof(ExpenseRepository));
+
         }
     }
 }

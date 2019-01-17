@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MilkManagement.Core.Validator;
 using MilkManagement.Domain.Entities.Customer;
+using MilkManagement.Domain.Entities.Expense;
 
 namespace MilkManagement.Domain
 {
@@ -18,6 +19,7 @@ namespace MilkManagement.Domain
         public DbSet<Customer> Customers { get; set; }
         public DbSet<CustomerRates> CustomerRates { get; set; }
         //public DbSet<CustomerSupplied> CustomerSupplied { get; set; }
+        public DbSet<Expense> Expense { get; set; }
 
         public Task<int> SaveChangesAsync()
         {
