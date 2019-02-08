@@ -41,7 +41,7 @@ namespace MilkManagement.Domain.Repositories.Implementation
                 return Task.FromResult(_dbContext.Expense
                     .AsNoTracking()
                     .Any(i => i.Id != expenseId &&
-                              i.ExpenseName.Equals(expenseName, StringComparison.OrdinalIgnoreCase) && !i.IsDeleted));
+                              i.ExpenseName.Equals(expenseName, StringComparison.OrdinalIgnoreCase) && i.IsDeleted));
             }
             catch (Exception e)
             {

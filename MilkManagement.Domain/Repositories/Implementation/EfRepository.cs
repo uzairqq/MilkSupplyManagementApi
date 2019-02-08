@@ -44,7 +44,7 @@ namespace MilkManagement.Domain.Repositories.Implementation
             var queryable = _dbContext.Set<T>().AsQueryable();
             if (spec.Criteria != null)
                 queryable = queryable.Where(spec.Criteria).AsQueryable();
-            
+
             var queryableResultWithIncludes = spec.Includes
                 .Aggregate(queryable,
                     (current, include) => current.Include(include));
@@ -66,6 +66,7 @@ namespace MilkManagement.Domain.Repositories.Implementation
         public async Task<List<TViewModel>> ListAllAsync<TViewModel>()
         {
             return await _dbContext.Set<T>()
+                .Where(i => !i.IsDeleted)
                 .ProjectTo<TViewModel>(_mapper.ConfigurationProvider)
                 .ToListAsync();
         }

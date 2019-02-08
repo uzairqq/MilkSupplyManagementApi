@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using MilkManagement.Core.Validator;
 
 namespace MilkManagement.Domain.Entities
 {
-   public class BaseEntity
+   public class BaseEntity : ISoftDeletable
     {
         public int Id { get; set; }
 
@@ -20,5 +19,7 @@ namespace MilkManagement.Domain.Entities
         public int LastUpdatedById { get; set; }
         [DefaultValue(10024)]
         public DateTime LastUpdatedOn { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

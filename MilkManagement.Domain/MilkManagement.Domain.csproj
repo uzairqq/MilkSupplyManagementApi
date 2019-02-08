@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Entities\Customer\CustomerSupplied.cs" />
     <Compile Remove="Migrations\20180929113939_AddedCustomerTypeRelationToCustomer2.cs" />
     <Compile Remove="Migrations\20180929120047_AddedCustomerTypeIntoCustomer.cs" />
     <Compile Remove="Migrations\20180929120208_AddedCustomerTypeIntoCustomer.cs" />
@@ -16,6 +15,7 @@
     <Compile Remove="Migrations\20190117003352_AddedExpenseEntity.cs" />
     <Compile Remove="Migrations\20190117004918_removed.cs" />
     <Compile Remove="Migrations\20190117005709_adad.cs" />
+    <Compile Remove="Migrations\20190203111159_AddedCustomeSupplied.cs" />
   </ItemGroup>
 
   <ItemGroup>

@@ -18,7 +18,7 @@ namespace MilkManagement.Domain
         public DbSet<CustomerType> CustomerTypes { get; set; }
         public DbSet<Customer> Customers { get; set; }
         public DbSet<CustomerRates> CustomerRates { get; set; }
-        //public DbSet<CustomerSupplied> CustomerSupplied { get; set; }
+        public DbSet<CustomerSupplied> CustomerSupplied { get; set; }
         public DbSet<Expense> Expense { get; set; }
 
         public Task<int> SaveChangesAsync()
