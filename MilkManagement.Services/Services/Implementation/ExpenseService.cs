@@ -13,14 +13,14 @@ using MilkManagement.Services.Services.Interfaces;
 
 namespace MilkManagement.Services.Services.Implementation
 {
-   public class ExpenseService:IExpenseService
+    public class ExpenseService : IExpenseService
     {
         private readonly IAsyncRepository<Expense> _asyncRepository;
         private readonly IMapper _mapper;
         private readonly IExpenseRepository _expenseRepository;
 
 
-        public ExpenseService(IAsyncRepository<Expense> asyncRepository, IMapper mapper,IExpenseRepository expenseRepository)
+        public ExpenseService(IAsyncRepository<Expense> asyncRepository, IMapper mapper, IExpenseRepository expenseRepository)
         {
             _asyncRepository = asyncRepository;
             _mapper = mapper;
@@ -33,7 +33,9 @@ namespace MilkManagement.Services.Services.Implementation
             {
                 if (!await _expenseRepository.IsExpenseNameAvailable(dto.ExpenseName))
                 {
-                    var expense = await _asyncRepository.AddAsync(_mapper.Map<Expense>(dto));
+                    var model = _mapper.Map<Expense>(dto);
+                    model.CreatedOn=DateTime.Now.Date;
+                    var expense = await _asyncRepository.AddAsync(model);
 
                     return new ResponseMessageDto()
                     {
@@ -70,10 +72,12 @@ namespace MilkManagement.Services.Services.Implementation
             {
                 if (!await _expenseRepository.IsExpenseNameAvailable(dto.Id, dto.ExpenseName))
                 {
-                     await _asyncRepository.UpdateAsync(_mapper.Map<Expense>(dto));
+                    var model = _mapper.Map<Expense>(dto);
+                    model.LastUpdatedOn=DateTime.Now.Date;
+                    await _asyncRepository.UpdateAsync(model);
                     return new ResponseMessageDto()
                     {
-                        Id =dto.Id,
+                        Id = dto.Id,
                         Success = true,
                         SuccessMessage = ResponseMessages.UpdateSuccessMessage,
                         Error = false
@@ -128,7 +132,7 @@ namespace MilkManagement.Services.Services.Implementation
             try
             {
                 return await _asyncRepository.ListAllAsync<ExpenseResponseDto>();
-                
+
             }
             catch (Exception e)
             {

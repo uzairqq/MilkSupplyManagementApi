@@ -63,7 +63,7 @@ namespace MilkManagement.Api.Controllers
         /// </summary>
         /// <param name="expenseId"></param>
         /// <returns></returns>
-        [HttpDelete("expenseId/{expenseId}")]
+        [HttpDelete()]
         public async Task<IActionResult> Delete([FromBody] ExpenseRequestDto dto )
         {
             try
