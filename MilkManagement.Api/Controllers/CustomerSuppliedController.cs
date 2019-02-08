@@ -21,20 +21,20 @@ namespace MilkManagement.Api.Controllers
             _customerSuppliedService = customerSuppliedService;
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Post(CustomerSuppliedRequestDto dto)
-        //{
-        //    try
-        //    {
-        //        if (!ModelState.IsValid) return BadRequest(ModelState);
-        //        return Ok(await _customerSuppliedService.Post(dto));
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e);
-        //        throw;
-        //    }
-        //}
+        [HttpPost]
+        public async Task<IActionResult> Post(CustomerSuppliedRequestDto dto)
+        {
+            try
+            {
+                if (!ModelState.IsValid) return BadRequest(ModelState);
+                return Ok(await _customerSuppliedService.Post(dto));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
 
         //[HttpPut]
         //public async Task<IActionResult> Put(CustomerSuppliedRequestDto dto)
@@ -120,20 +120,20 @@ namespace MilkManagement.Api.Controllers
         //    }
         //}
 
-       // [HttpGet("customerId/{customerId}/date/{date}")]
-       // public async Task<IActionResult> GetCustomerSuppliedByCustomerIdAndDate([FromRoute] int customerId,
-       //[FromRoute] DateTime date)
-       // {
-       //     try
-       //     {
-       //         return Ok(await _customerSuppliedService.GetCustomerSuppliedByCustomerIdAndParticularDate(customerId, date));
-       //     }
-       //     catch (Exception e)
-       //     {
-       //         Console.WriteLine(e);
-       //         throw;
-       //     }
-       // }
+        // [HttpGet("customerId/{customerId}/date/{date}")]
+        // public async Task<IActionResult> GetCustomerSuppliedByCustomerIdAndDate([FromRoute] int customerId,
+        //[FromRoute] DateTime date)
+        // {
+        //     try
+        //     {
+        //         return Ok(await _customerSuppliedService.GetCustomerSuppliedByCustomerIdAndParticularDate(customerId, date));
+        //     }
+        //     catch (Exception e)
+        //     {
+        //         Console.WriteLine(e);
+        //         throw;
+        //     }
+        // }
 
         //[HttpGet("customerId/{customerId}/startDate/{startDate}/endDate/{endDate}")]
         //public async Task<IActionResult> GetCustomerSuppliedByCustomerIdStartDateAndEndDate([FromRoute] int customerId,

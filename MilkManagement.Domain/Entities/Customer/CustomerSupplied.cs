@@ -22,5 +22,7 @@ namespace MilkManagement.Domain.Entities.Customer
         //public virtual Customer Customer { get; set; }
 
         public bool IsDeleted { get; set; }
+
+
     }
 }
