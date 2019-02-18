@@ -34,7 +34,7 @@ namespace MilkManagement.Services.Services.Implementation
                 if (!await _expenseRepository.IsExpenseNameAvailable(dto.ExpenseName))
                 {
                     var model = _mapper.Map<Expense>(dto);
-                    model.CreatedOn=DateTime.Now.Date;
+                    model.CreatedOn = DateTime.Now.Date;
                     var expense = await _asyncRepository.AddAsync(model);
 
                     return new ResponseMessageDto()
@@ -72,10 +72,9 @@ namespace MilkManagement.Services.Services.Implementation
             {
                 if (!await _expenseRepository.IsExpenseNameAvailable(dto.Id, dto.ExpenseName))
                 {
-                    var model = _mapper.Map<Expense>(dto);
-                    model.LastUpdatedOn=DateTime.Now.Date;
-                    await _asyncRepository.UpdateAsync(model);
-                    return new ResponseMessageDto()
+                    await _asyncRepository.PartialUpdate(dto, m => { m.ExpenseName = dto.ExpenseName; });
+
+                    return new ResponseMessageDto
                     {
                         Id = dto.Id,
                         Success = true,

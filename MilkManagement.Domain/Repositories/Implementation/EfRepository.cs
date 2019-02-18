@@ -11,7 +11,7 @@ using MilkManagement.Domain.Repositories.Interfaces;
 
 namespace MilkManagement.Domain.Repositories.Implementation
 {
-    public class EfRepository<T> : IRepository<T>, IAsyncRepository<T> where T : BaseEntity
+    public class EfRepository<T> : IRepository<T>, IAsyncRepository<T> where T : BaseEntity, new()
     {
         private readonly MilkManagementDbContext _dbContext;
         private readonly IMapper _mapper;
@@ -135,6 +135,20 @@ namespace MilkManagement.Domain.Repositories.Implementation
         public async Task UpdateAsync(T entity)
         {
             _dbContext.Entry(entity).State = EntityState.Modified;
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task PartialUpdate<TModel>(TModel viewModel, Action<T> callback)
+        {
+            var model = _mapper.Map<T>(viewModel);
+            var entity = new T
+            {
+                Id = model.Id
+            };
+            _dbContext.Attach(entity);
+            entity.LastUpdatedOn = DateTime.Now;
+            entity.LastUpdatedById = entity.LastUpdatedById;
+            callback(entity);
             await _dbContext.SaveChangesAsync();
         }
 

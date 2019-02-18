@@ -6,7 +6,7 @@ using MilkManagement.Domain.Entities;
 
 namespace MilkManagement.Domain.Repositories.Interfaces
 {
-    public interface IAsyncRepository<T> where T : BaseEntity
+    public interface IAsyncRepository<T> where T : BaseEntity, new()
     {
         Task<TViewModel> GetByIdAsync<TViewModel>(int id);
         Task<TViewModel> GetSingleAsync<TViewModel>(ISpecification<T> spec);
@@ -15,6 +15,8 @@ namespace MilkManagement.Domain.Repositories.Interfaces
         Task<T> AddAsync(T entity);
         Task UpdateAsync(T entity);
         Task DeleteAsync(T entity);
+
+        Task PartialUpdate<TModel>(TModel viewModel, Action<T> callback);
         //Task<bool> CompleteAsync();
     }
 }

@@ -14,13 +14,13 @@ using MilkManagement.Services.Services.Interfaces;
 
 namespace MilkManagement.Services.Services.Implementation
 {
-   public class CustomerServices:ICustomerService
+    public class CustomerServices : ICustomerService
     {
         private readonly IAsyncRepository<Customer> _asyncRepository;
         private readonly ICustomerRepository _customerRepository;
         private readonly IMapper _mapper;
 
-        public CustomerServices(IAsyncRepository<Customer> asyncRepository,ICustomerRepository customerRepository,IMapper mapper)
+        public CustomerServices(IAsyncRepository<Customer> asyncRepository, ICustomerRepository customerRepository, IMapper mapper)
         {
             _asyncRepository = asyncRepository;
             _customerRepository = customerRepository;
@@ -51,7 +51,8 @@ namespace MilkManagement.Services.Services.Implementation
                         Success = true,
                         Error = false
                     };
-                var customer= await _asyncRepository.AddAsync(_mapper.Map<Customer>(dto));
+                dto.CreatedOn = DateTime.Now.Date;
+                var customer = await _asyncRepository.AddAsync(_mapper.Map<Customer>(dto));
                 return new ResponseMessageDto()
                 {
                     Id = customer.Id,
@@ -74,8 +75,8 @@ namespace MilkManagement.Services.Services.Implementation
                 };
             }
         }
-    
-        public async  Task<CustomerResponseDto> GetCustomerById(int customerId)
+
+        public async Task<CustomerResponseDto> GetCustomerById(int customerId)
         {
             try
             {
@@ -119,14 +120,20 @@ namespace MilkManagement.Services.Services.Implementation
         {
             try
             {
-                if ( _customerRepository.IsCustomerNameAvailable(dto.Id, dto.Name))
+                if (_customerRepository.IsCustomerNameAvailable(dto.Id, dto.Name))
                     return new ResponseMessageDto()
                     {
                         SuccessMessage = ResponseMessages.CustomerNameNotAvailable,
                         Success = true,
                         Error = false
                     };
-                await _asyncRepository.UpdateAsync(_mapper.Map<Customer>(dto));
+                await _asyncRepository.PartialUpdate(dto, m => ///yahan woh values aengi jo ke update karni hongi 
+                {
+                    m.CustomerTypeId = dto.CustomerTypeId;
+                    m.Name = dto.Name;
+                    m.Address = dto.Address;
+                    m.Contact = dto.Contact;
+                });
                 return new ResponseMessageDto()
                 {
                     Id = dto.Id,

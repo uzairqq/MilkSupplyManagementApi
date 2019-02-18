@@ -38,10 +38,11 @@ namespace MilkManagement.Domain.Repositories.Implementation
         {
             try
             {
-                return Task.FromResult(_dbContext.Expense
+                var result= Task.FromResult(_dbContext.Expense
                     .AsNoTracking()
                     .Any(i => i.Id != expenseId &&
-                              i.ExpenseName.Equals(expenseName, StringComparison.OrdinalIgnoreCase) && i.IsDeleted));
+                              i.ExpenseName==expenseName && !i.IsDeleted));
+                return result;
             }
             catch (Exception e)
             {
