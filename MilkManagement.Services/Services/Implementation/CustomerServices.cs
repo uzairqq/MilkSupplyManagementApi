@@ -47,9 +47,9 @@ namespace MilkManagement.Services.Services.Implementation
                 if (_customerRepository.IsCustomerNameAvailable(dto.Name))
                     return new ResponseMessageDto()
                     {
-                        SuccessMessage = ResponseMessages.CustomerNameNotAvailable,
-                        Success = true,
-                        Error = false
+                        FailureMessage = ResponseMessages.CustomerNameNotAvailable,
+                        Success = false,
+                        Error = true
                     };
                 dto.CreatedOn = DateTime.Now.Date;
                 var customer = await _asyncRepository.AddAsync(_mapper.Map<Customer>(dto));
