@@ -18,6 +18,8 @@ namespace MilkManagement.Constants
             public const string CustomerAlreadyInsertedInThisDate = "Customer Already Inserted In This Date";
             public const string ExpenseNameAvailable = "Expense Name Not In Use";
             public const string ExpenseNameNotAvailable = "Expense Name Already In Use";
+            public const string SupplierNameNotAvailable = "Supplier Name Already In Use";
+        
     }
     }
 

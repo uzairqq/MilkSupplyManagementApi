@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MilkManagement.Domain;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,9 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MilkManagement.Domain.Migrations
 {
     [DbContext(typeof(MilkManagementDbContext))]
-    partial class MilkManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190221093928_AddedSupplier")]
+    partial class AddedSupplier
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -164,36 +166,6 @@ namespace MilkManagement.Domain.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Expense");
-                });
-
-            modelBuilder.Entity("MilkManagement.Domain.Entities.Supplier.Supplier", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("CreatedById");
-
-                    b.Property<DateTime>("CreatedOn");
-
-                    b.Property<bool>("IsDeleted");
-
-                    b.Property<int>("LastUpdatedById");
-
-                    b.Property<DateTime>("LastUpdatedOn");
-
-                    b.Property<string>("SupplierAddress")
-                        .HasMaxLength(20);
-
-                    b.Property<string>("SupplierContact")
-                        .HasMaxLength(1025);
-
-                    b.Property<string>("SupplierName")
-                        .IsRequired()
-                        .HasMaxLength(255);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Supplier");
                 });
 
             modelBuilder.Entity("MilkManagement.Domain.Entities.Customer.Customer", b =>
