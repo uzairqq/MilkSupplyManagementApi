@@ -5,9 +5,9 @@ using System.Text;
 
 namespace MilkManagement.Core.Validator
 {
-   public interface ISoftDeletable
+    public interface ISoftDeletable
     {
-        [DefaultValue(0)]
+        [DefaultValue(false)]
         bool IsDeleted { get; set; }
     }
 }

@@ -5,14 +5,14 @@ using MilkManagement.Core.Validator;
 
 namespace MilkManagement.Domain.Entities
 {
-   public class BaseEntity : ISoftDeletable
+   public class BaseEntity
     {
         public int Id { get; set; }
 
         [DefaultValue(10023)]
         public int CreatedById { get; set; }
 
-        [DataType(DataType.Date)]
+      
         public DateTime CreatedOn { get; set; }
 
         [DefaultValue(10023)]
@@ -20,6 +20,7 @@ namespace MilkManagement.Domain.Entities
         [DefaultValue(10024)]
         public DateTime LastUpdatedOn { get; set; }
 
-        public bool IsDeleted { get; set; }
+        [DefaultValue(false)]
+        public bool IsDeleted { get; set; } 
     }
 }
