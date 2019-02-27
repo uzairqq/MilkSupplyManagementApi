@@ -144,6 +144,21 @@ namespace MilkManagement.Api.Controllers
             }
         }
 
+        [HttpGet("customersForCustomerRatesDropdown")]
+        public async Task<IActionResult> GetCustomerRatesDropDown()
+        {
+            try
+            {
+                var result=await _rateService.GetCustomerRatesDropDown();
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
         //[HttpGet("custId/{custId}")]
         //public async Task<IActionResult> GetCurrentRateByCustomerId([FromRoute] int custId)
         //{

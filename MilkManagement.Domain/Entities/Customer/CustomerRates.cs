@@ -6,7 +6,7 @@ using MilkManagement.Core.Validator;
 
 namespace MilkManagement.Domain.Entities.Customer
 {
-   public class CustomerRates:BaseEntity,ISoftDeletable
+   public class CustomerRates:BaseEntity
     {
         public CustomerRates()
         {
@@ -16,8 +16,6 @@ namespace MilkManagement.Domain.Entities.Customer
         public int CustomerId { get; set; }
         public int CurrentRate { get; set; }
         public int PreviousRate { get; set; }
-        public bool IsDeleted { get; set; }
-
        
         public Customer Customer { get; set; }
     }

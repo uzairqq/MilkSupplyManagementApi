@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using MilkManagement.Domain.Dto;
+using MilkManagement.Domain.Dto.ResponseDto;
 using MilkManagement.Domain.Entities.Customer;
 using MilkManagement.Domain.Repositories.Interfaces;
 
@@ -81,6 +82,29 @@ namespace MilkManagement.Domain.Repositories.Implementation
                 return _dbContext.CustomerRates
                     .AsNoTracking()
                     .Any(i => i.CustomerId.Equals(customerId) && i.Id != customerRatesId && !i.IsDeleted);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public async Task<IEnumerable<GetCustomerRatesDropDownDto>> GetCustomerRatesDropDown()
+        {
+            try
+            {
+                var result = await _dbContext.Customers
+                    .AsNoTracking()
+                    .Select(i => new GetCustomerRatesDropDownDto()
+                    {
+                        CustomerId = i.Id,
+                        CustomerName = i.Name,
+                        CustomerTypeId = i.CustomerTypeId,
+                        Type = i.CustomerType.Type
+
+                    }).ToListAsync();
+                return result;
             }
             catch (Exception e)
             {

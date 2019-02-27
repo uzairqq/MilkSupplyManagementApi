@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using MilkManagement.Constants;
 using MilkManagement.Domain.Dto;
 using MilkManagement.Domain.Dto.RequestDto;
+using MilkManagement.Domain.Dto.ResponseDto;
 
 namespace MilkManagement.Services.Services.Interfaces
 {
@@ -18,5 +19,6 @@ namespace MilkManagement.Services.Services.Interfaces
         Task<ResponseMessageDto> DeleteCustomerRates(CustomerRatesRequestDto dto);
         bool IsRateAssignedToCustomer(int customerId);
         //Task<GetCurrentRateByCustomerIdDto> GetCurrentRateByCustomerIdDropDown(int custId);
+        Task<IEnumerable<GetCustomerRatesDropDownDto>> GetCustomerRatesDropDown();
     }
 }

@@ -7,6 +7,7 @@ using AutoMapper;
 using MilkManagement.Constants;
 using MilkManagement.Domain.Dto;
 using MilkManagement.Domain.Dto.RequestDto;
+using MilkManagement.Domain.Dto.ResponseDto;
 using MilkManagement.Domain.Entities.Customer;
 using MilkManagement.Domain.Repositories.Interfaces;
 using MilkManagement.Domain.Specification;
@@ -192,6 +193,20 @@ namespace MilkManagement.Services.Services.Implementation
             {
                 return _customerRateRepository.IsRateAssignedToCustomer(customerId);
 
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public async Task<IEnumerable<GetCustomerRatesDropDownDto>> GetCustomerRatesDropDown()
+        {
+            try
+            {
+                var result = await _customerRateRepository.GetCustomerRatesDropDown();
+                return result;
             }
             catch (Exception e)
             {
