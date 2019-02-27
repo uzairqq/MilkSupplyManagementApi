@@ -13,8 +13,8 @@ namespace MilkManagement.Domain.Mappings
         public DomainProfile()
         {
             CreateMap<Customer, CustomerRequestDto>().ReverseMap();
-            //CreateMap<CustomerRates, CustomerRatesResponseDto>().ReverseMap();
-            //CreateMap<CustomerRates, CustomerRatesRequestDto>().ReverseMap();
+            CreateMap<CustomerRates, CustomerRatesResponseDto>().ReverseMap();
+            CreateMap<CustomerRates, CustomerRatesRequestDto>().ReverseMap();
             //CreateMap<CustomerSupplied, CustomerSuppliedRequestDto>().ReverseMap();
             //CreateMap<CustomerSupplied, CustomerSuppliedResponseDto>().ReverseMap();
 

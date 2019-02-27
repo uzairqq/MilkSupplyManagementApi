@@ -5,7 +5,7 @@ using MilkManagement.Core.Validator;
 
 namespace MilkManagement.Domain.Entities
 {
-   public class BaseEntity
+   public class BaseEntity:ISoftDeletable
     {
         public int Id { get; set; }
 
