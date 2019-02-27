@@ -62,7 +62,7 @@ namespace MilkManagement.Api.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        [HttpDelete("id/{id}")]
+        [HttpDelete()]
         public async Task<IActionResult> Delete([FromBody] AddSupplierRequestDto dto)
         {
             try
