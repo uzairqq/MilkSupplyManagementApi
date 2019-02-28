@@ -8,8 +8,8 @@ namespace MilkManagement.Domain.Dto.RequestDto
    public class CustomerRatesRequestDto:BaseEntity
     {
         public int CustomerId { get; set; }
-        public int CurrentRate { get; set; }
-        public int PreviousRate { get; set; }
+        public string CurrentRate { get; set; }
+        public string PreviousRate { get; set; }
 
     }
 }

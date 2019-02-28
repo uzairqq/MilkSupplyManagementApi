@@ -14,6 +14,6 @@ namespace MilkManagement.Domain.Repositories.Interfaces
         bool IsRateAssignedToCustomer(int customerId);
         bool IsRateAssignedToCustomer(  int customerId, int customerRatesId);
         //Task<GetCurrentRateByCustomerIdDto> GetCurrentRateByCustomerIdDropDown(int custId);
-        Task<IEnumerable<GetCustomerRatesDropDownDto>> GetCustomerRatesDropDown();
+        Task<IEnumerable<GetCustomerRatesDropDownDto>> GetCustomerRatesDropDown(int typeId);
     }
 }

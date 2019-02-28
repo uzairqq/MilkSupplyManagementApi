@@ -144,12 +144,12 @@ namespace MilkManagement.Api.Controllers
             }
         }
 
-        [HttpGet("customersForCustomerRatesDropdown")]
-        public async Task<IActionResult> GetCustomerRatesDropDown()
+        [HttpGet("customersForCustomerRatesDropdown/typeId/{typeId}")]
+        public async Task<IActionResult> GetCustomerRatesDropDown([FromRoute] int typeId)
         {
             try
             {
-                var result=await _rateService.GetCustomerRatesDropDown();
+                var result=await _rateService.GetCustomerRatesDropDown(typeId);
                 return Ok(result);
             }
             catch (Exception e)

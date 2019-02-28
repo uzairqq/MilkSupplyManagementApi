@@ -90,12 +90,13 @@ namespace MilkManagement.Domain.Repositories.Implementation
             }
         }
 
-        public async Task<IEnumerable<GetCustomerRatesDropDownDto>> GetCustomerRatesDropDown()
+        public async Task<IEnumerable<GetCustomerRatesDropDownDto>> GetCustomerRatesDropDown(int typeId)
         {
             try
             {
                 var result = await _dbContext.Customers
                     .AsNoTracking()
+                    .Where(i => typeId == 0 || i.CustomerTypeId == typeId)
                     .Select(i => new GetCustomerRatesDropDownDto()
                     {
                         CustomerId = i.Id,

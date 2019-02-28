@@ -12,7 +12,7 @@ namespace MilkManagement.Domain.Specification
         //    AddInclude($"{nameof(CustomerRates.Customer.CustomerType)}.{nameof(CustomerType.Type)}");
         //}
 
-        public CustomerRatesWithType()
+        public CustomerRatesWithType() : base(customer => customer.IsDeleted == false)
         {
             //AddInclude(o => o.CustomerType);
             AddInclude($"{nameof(Customer.CustomerType)}.{nameof(CustomerType.Type)}");

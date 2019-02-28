@@ -34,9 +34,9 @@ namespace MilkManagement.Services.Services.Implementation
                 if (_customerRateRepository.IsRateAssignedToCustomer(dto.CustomerId))
                     return new ResponseMessageDto()
                     {
-                        SuccessMessage = ResponseMessages.RatesAssignedToCustomer,
-                        Success = true,
-                        Error = false
+                        FailureMessage = ResponseMessages.RatesAssignedToCustomer,
+                        Success = false,
+                        Error = true
                     };
 
                 var customerRates = await _asyncRepository.AddAsync(_mapper.Map<CustomerRates>(dto));
@@ -201,11 +201,11 @@ namespace MilkManagement.Services.Services.Implementation
             }
         }
 
-        public async Task<IEnumerable<GetCustomerRatesDropDownDto>> GetCustomerRatesDropDown()
+        public async Task<IEnumerable<GetCustomerRatesDropDownDto>> GetCustomerRatesDropDown(int typeId)
         {
             try
             {
-                var result = await _customerRateRepository.GetCustomerRatesDropDown();
+                var result = await _customerRateRepository.GetCustomerRatesDropDown(typeId);
                 return result;
             }
             catch (Exception e)

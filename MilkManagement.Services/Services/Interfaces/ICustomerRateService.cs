@@ -19,6 +19,6 @@ namespace MilkManagement.Services.Services.Interfaces
         Task<ResponseMessageDto> DeleteCustomerRates(CustomerRatesRequestDto dto);
         bool IsRateAssignedToCustomer(int customerId);
         //Task<GetCurrentRateByCustomerIdDto> GetCurrentRateByCustomerIdDropDown(int custId);
-        Task<IEnumerable<GetCustomerRatesDropDownDto>> GetCustomerRatesDropDown();
+        Task<IEnumerable<GetCustomerRatesDropDownDto>> GetCustomerRatesDropDown(int typeId);
     }
 }
