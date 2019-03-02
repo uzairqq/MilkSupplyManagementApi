@@ -50,5 +50,24 @@ namespace MilkManagement.Domain.Repositories.Implementation
                 throw;
             }
         }
+
+        public void  SetIsCustomerRateAssigned(int customerId)
+        {
+            try
+            {
+                var model = new Customer()
+                {
+                    Id = customerId
+                };
+                 _dbContext.Customers.Attach(model);
+                model.IsRateAssignedToCustomer = true;
+               _dbContext.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

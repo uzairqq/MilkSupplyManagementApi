@@ -27,6 +27,9 @@ namespace MilkManagement.Domain.Entities.Customer
         [StringLength(20)]
         public string Contact { get; set; }
 
+        public bool IsRateAssignedToCustomer { get; set; } = false;
+
+
         public int CustomerTypeId { get; set; }
         public virtual CustomerType CustomerType { get; set; }
 

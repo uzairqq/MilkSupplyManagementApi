@@ -58,12 +58,12 @@ namespace MilkManagement.Api.Controllers
         /// Get All CustomerRates
         /// </summary>
         /// <returns></returns>
-        [HttpGet("all")]
-        public async Task<IActionResult> Get()
+        [HttpGet("all/typeId/{typeId}")]
+        public async Task<IActionResult> Get([FromRoute] int typeId)
         {
             try
             {
-                return Ok(await _rateService.GetAllCustomerRates());
+                return Ok(await _rateService.GetAllCustomerRates(typeId));
             }
             catch (Exception e)
             {

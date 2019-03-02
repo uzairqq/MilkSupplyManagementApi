@@ -96,7 +96,8 @@ namespace MilkManagement.Domain.Repositories.Implementation
             {
                 var result = await _dbContext.Customers
                     .AsNoTracking()
-                    .Where(i => typeId == 0 || i.CustomerTypeId == typeId)
+                    .Where(i => typeId == 0 &&  !i.IsDeleted && !i.IsRateAssignedToCustomer || 
+                                i.CustomerTypeId == typeId && !i.IsDeleted && !i.IsRateAssignedToCustomer)
                     .Select(i => new GetCustomerRatesDropDownDto()
                     {
                         CustomerId = i.Id,

@@ -10,5 +10,6 @@ namespace MilkManagement.Domain.Repositories.Interfaces
     {
         bool IsCustomerNameAvailable(string customerName);
         bool IsCustomerNameAvailable(int customerId,string customerName);
+        void SetIsCustomerRateAssigned(int customerId);
     }
 }

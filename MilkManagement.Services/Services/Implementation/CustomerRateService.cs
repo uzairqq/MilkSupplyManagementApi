@@ -15,19 +15,24 @@ using MilkManagement.Services.Services.Interfaces;
 
 namespace MilkManagement.Services.Services.Implementation
 {
-   public class CustomerRateService:ICustomerRateService
+    public class CustomerRateService : ICustomerRateService
     {
         private readonly IAsyncRepository<CustomerRates> _asyncRepository;
         private readonly ICustomerRateRepository _customerRateRepository;
+        private readonly ICustomerRepository _customerRepository;
         private readonly IMapper _mapper;
 
-        public CustomerRateService(IAsyncRepository<CustomerRates> asyncRepository,ICustomerRateRepository customerRateRepository,IMapper mapper)
+        public CustomerRateService(IAsyncRepository<CustomerRates> asyncRepository,
+            ICustomerRateRepository customerRateRepository,
+            IMapper mapper,
+            ICustomerRepository customerRepository)
         {
             _asyncRepository = asyncRepository;
             _customerRateRepository = customerRateRepository;
             _mapper = mapper;
+            _customerRepository = customerRepository;
         }
-           public async Task<ResponseMessageDto> AddCustomerRates(CustomerRatesRequestDto dto)
+        public async Task<ResponseMessageDto> AddCustomerRates(CustomerRatesRequestDto dto)
         {
             try
             {
@@ -40,8 +45,8 @@ namespace MilkManagement.Services.Services.Implementation
                     };
 
                 var customerRates = await _asyncRepository.AddAsync(_mapper.Map<CustomerRates>(dto));
+                _customerRepository.SetIsCustomerRateAssigned(dto.CustomerId);
 
-                //await _asyncRepository.CompleteAsync();
 
                 return new ResponseMessageDto()
                 {
@@ -79,7 +84,7 @@ namespace MilkManagement.Services.Services.Implementation
                     };
 
                 await _asyncRepository.UpdateAsync(_mapper.Map<CustomerRates>(dto));
-                 
+
                 return new ResponseMessageDto()
                 {
                     Id = dto.Id,
@@ -103,11 +108,12 @@ namespace MilkManagement.Services.Services.Implementation
             }
         }
 
-        public async Task<IEnumerable<CustomerRatesResponseDto>> GetAllCustomerRates()
+        public async Task<IEnumerable<CustomerRatesResponseDto>> GetAllCustomerRates(int typeId)
         {
             try
             {
-                return await _asyncRepository.ListAsync<CustomerRatesResponseDto>(new CustomerRatesWithType());
+                var result = await _asyncRepository.ListAsync<CustomerRatesResponseDto>(new CustomerRatesWithType(typeId));
+                return result;
             }
             catch (Exception ex)
             {
@@ -131,7 +137,7 @@ namespace MilkManagement.Services.Services.Implementation
             }
         }
 
-        public async  Task<CustomerRatesResponseDto> GetCustomerRatesByCustomerId(int customerId)
+        public async Task<CustomerRatesResponseDto> GetCustomerRatesByCustomerId(int customerId)
         {
             try
             {
@@ -163,7 +169,7 @@ namespace MilkManagement.Services.Services.Implementation
         {
             try
             {
-              
+
                 await _asyncRepository.DeleteAsync(_mapper.Map<CustomerRates>(dto));
                 return new ResponseMessageDto()
                 {
