@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -163,5 +164,20 @@ namespace MilkManagement.Api.Controllers
         //        throw;
         //    }
         //}
+
+        [HttpGet("customerSuppliedDropDown")]
+        public async Task<IActionResult> GeCustomerSuppliedtDropDownValues()
+        {
+            try
+            {
+                var result = await _customerSuppliedService.GeCustomerSuppliedtDropDownValues();
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

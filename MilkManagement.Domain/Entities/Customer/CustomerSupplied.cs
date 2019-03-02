@@ -14,14 +14,12 @@ namespace MilkManagement.Domain.Entities.Customer
         public string AfternoonSupply { get; set; }
         public double MorningAmount { get; set; }
         public double AfternoonAmount { get; set; }
-        public float? Rate { get; set; }
         public float? Debit { get; set; }
         public float? Credit { get; set; }
         public double? Total { get; set; }
 
-        //public virtual Customer Customer { get; set; }
+        public virtual CustomerRates CustomerRates { get; set; }
 
-        public bool IsDeleted { get; set; }
 
 
     }

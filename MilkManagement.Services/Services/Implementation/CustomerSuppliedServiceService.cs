@@ -65,9 +65,9 @@ namespace MilkManagement.Services.Services.Implementation
                 return new ResponseMessageDto()
                 {
                     Id = Convert.ToInt16(Enums.FailureId),
-                    SuccessMessage = ResponseMessages.CustomerAlreadyInsertedInThisDate,
-                    Success = true,
-                    Error = false
+                    FailureMessage = ResponseMessages.CustomerAlreadyInsertedInThisDate,
+                    Success = false,
+                    Error = true
                 };
             }
             catch (Exception e)
@@ -83,6 +83,7 @@ namespace MilkManagement.Services.Services.Implementation
                 };
             }
         }
+
 
         public async Task<ResponseMessageDto> Put(CustomerSuppliedRequestDto dto)
         {
@@ -256,6 +257,19 @@ namespace MilkManagement.Services.Services.Implementation
             }
         }
 
+        public async Task<IEnumerable<GeCustomerSuppliedtDropDownValuesDto>> GeCustomerSuppliedtDropDownValues()
+        {
+            try
+            {
+                var result = await _customerSuppliedRepository.GeCustomerSuppliedtDropDownValues();
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
 
 
 

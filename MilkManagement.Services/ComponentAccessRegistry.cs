@@ -12,7 +12,7 @@ namespace MilkManagement.Services
         {
             service.AddScoped<ICustomerService, CustomerServices>();
             service.AddScoped<ICustomerRateService, CustomerRateService>();
-            //service.AddScoped<ICustomerSuppliedService, CustomerSuppliedServiceService>();
+            service.AddScoped<ICustomerSuppliedService, CustomerSuppliedServiceService>();
             service.AddScoped<IExpenseService, ExpenseService>();
             service.AddScoped<ISupplierService, SupplierService>();
         }
