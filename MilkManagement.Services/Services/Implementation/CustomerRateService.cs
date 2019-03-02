@@ -45,7 +45,7 @@ namespace MilkManagement.Services.Services.Implementation
                     };
 
                 var customerRates = await _asyncRepository.AddAsync(_mapper.Map<CustomerRates>(dto));
-                _customerRepository.SetIsCustomerRateAssigned(dto.CustomerId);
+                _customerRepository.SetIsCustomerRateAssigned(dto.CustomerId,true);
 
 
                 return new ResponseMessageDto()
@@ -171,6 +171,7 @@ namespace MilkManagement.Services.Services.Implementation
             {
 
                 await _asyncRepository.DeleteAsync(_mapper.Map<CustomerRates>(dto));
+                _customerRepository.SetIsCustomerRateAssigned(dto.CustomerId,false);
                 return new ResponseMessageDto()
                 {
                     Id = dto.Id,
