@@ -210,7 +210,7 @@ namespace MilkManagement.Domain.Migrations
                 {
                     b.HasOne("MilkManagement.Domain.Entities.Customer.Customer", "Customer")
                         .WithMany("CustomerRates")
-                        .HasForeignKey("CustomerId")
+                        .HasForeignKey("CustomerRatesId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

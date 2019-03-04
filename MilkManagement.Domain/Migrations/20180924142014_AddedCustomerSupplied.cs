@@ -43,7 +43,7 @@ namespace MilkManagement.Domain.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_CustomerSupplied_CustomerId",
                 table: "CustomerSupplied",
-                column: "CustomerId");
+                column: "CustomerRatesId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

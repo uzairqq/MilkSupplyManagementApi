@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MilkManagement.Domain.Migrations
 {
     [DbContext(typeof(MilkManagementDbContext))]
-    [Migration("20190117181312_AddedExpense")]
-    partial class AddedExpense
+    [Migration("20190303181502_ChangedCustomerIdToCustomerRatesId")]
+    partial class ChangedCustomerIdToCustomerRatesId
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -39,6 +39,8 @@ namespace MilkManagement.Domain.Migrations
                     b.Property<int>("CustomerTypeId");
 
                     b.Property<bool>("IsDeleted");
+
+                    b.Property<bool>("IsRateAssignedToCustomer");
 
                     b.Property<int>("LastUpdatedById");
 
@@ -83,6 +85,44 @@ namespace MilkManagement.Domain.Migrations
                     b.ToTable("CustomerRates");
                 });
 
+            modelBuilder.Entity("MilkManagement.Domain.Entities.Customer.CustomerSupplied", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<double>("AfternoonAmount");
+
+                    b.Property<string>("AfternoonSupply");
+
+                    b.Property<int>("CreatedById");
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<float?>("Credit");
+
+                    b.Property<int>("CustomerRatesId");
+
+                    b.Property<float?>("Debit");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<int>("LastUpdatedById");
+
+                    b.Property<DateTime>("LastUpdatedOn");
+
+                    b.Property<double>("MorningAmount");
+
+                    b.Property<string>("MorningSupply");
+
+                    b.Property<double?>("Total");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CustomerRatesId");
+
+                    b.ToTable("CustomerSupplied");
+                });
+
             modelBuilder.Entity("MilkManagement.Domain.Entities.Customer.CustomerType", b =>
                 {
                     b.Property<int>("Id")
@@ -91,6 +131,8 @@ namespace MilkManagement.Domain.Migrations
                     b.Property<int>("CreatedById");
 
                     b.Property<DateTime>("CreatedOn");
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<int>("LastUpdatedById");
 
@@ -128,6 +170,36 @@ namespace MilkManagement.Domain.Migrations
                     b.ToTable("Expense");
                 });
 
+            modelBuilder.Entity("MilkManagement.Domain.Entities.Supplier.Supplier", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CreatedById");
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<int>("LastUpdatedById");
+
+                    b.Property<DateTime>("LastUpdatedOn");
+
+                    b.Property<string>("SupplierAddress")
+                        .HasMaxLength(20);
+
+                    b.Property<string>("SupplierContact")
+                        .HasMaxLength(1025);
+
+                    b.Property<string>("SupplierName")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Supplier");
+                });
+
             modelBuilder.Entity("MilkManagement.Domain.Entities.Customer.Customer", b =>
                 {
                     b.HasOne("MilkManagement.Domain.Entities.Customer.CustomerType", "CustomerType")
@@ -140,6 +212,14 @@ namespace MilkManagement.Domain.Migrations
                 {
                     b.HasOne("MilkManagement.Domain.Entities.Customer.Customer", "Customer")
                         .WithMany("CustomerRates")
+                        .HasForeignKey("CustomerRatesId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MilkManagement.Domain.Entities.Customer.CustomerSupplied", b =>
+                {
+                    b.HasOne("MilkManagement.Domain.Entities.Customer.CustomerRates", "CustomerRates")
+                        .WithMany()
                         .HasForeignKey("CustomerRatesId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

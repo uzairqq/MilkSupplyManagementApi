@@ -100,7 +100,7 @@ namespace MilkManagement.Domain.Migrations
 
                     b.Property<int>("CustomerId");
 
-                    b.Property<int?>("CustomerRatesId");
+                    b.Property<int>("CustomerTypeId");
 
                     b.Property<float?>("Debit");
 
@@ -118,7 +118,9 @@ namespace MilkManagement.Domain.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerRatesId");
+                    b.HasIndex("CustomerId");
+
+                    b.HasIndex("CustomerTypeId");
 
                     b.ToTable("CustomerSupplied");
                 });
@@ -218,9 +220,15 @@ namespace MilkManagement.Domain.Migrations
 
             modelBuilder.Entity("MilkManagement.Domain.Entities.Customer.CustomerSupplied", b =>
                 {
-                    b.HasOne("MilkManagement.Domain.Entities.Customer.CustomerRates", "CustomerRates")
+                    b.HasOne("MilkManagement.Domain.Entities.Customer.Customer", "Customer")
                         .WithMany()
-                        .HasForeignKey("CustomerRatesId");
+                        .HasForeignKey("CustomerId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("MilkManagement.Domain.Entities.Customer.CustomerType", "CustomerType")
+                        .WithMany()
+                        .HasForeignKey("CustomerTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

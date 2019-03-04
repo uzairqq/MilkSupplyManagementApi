@@ -68,7 +68,7 @@ namespace MilkManagement.Domain.Migrations
 
                     b.Property<int>("CurrentRate");
 
-                    b.Property<int>("CustomerId");
+                    b.Property<int>("CustomerRatesId");
 
                     b.Property<bool>("IsDeleted");
 
@@ -80,7 +80,7 @@ namespace MilkManagement.Domain.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("CustomerRatesId");
 
                     b.ToTable("CustomerRates");
                 });
@@ -100,7 +100,7 @@ namespace MilkManagement.Domain.Migrations
 
                     b.Property<float?>("Credit");
 
-                    b.Property<int>("CustomerId");
+                    b.Property<int>("CustomerRatesId");
 
                     b.Property<float?>("Debit");
 
@@ -120,7 +120,7 @@ namespace MilkManagement.Domain.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("CustomerRatesId");
 
                     b.ToTable("CustomerSupplied");
                 });
@@ -149,7 +149,7 @@ namespace MilkManagement.Domain.Migrations
                 {
                     b.HasOne("MilkManagement.Domain.Entities.Customer.Customer", "Customer")
                         .WithMany("CustomerRates")
-                        .HasForeignKey("CustomerId")
+                        .HasForeignKey("CustomerRatesId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
@@ -157,7 +157,7 @@ namespace MilkManagement.Domain.Migrations
                 {
                     b.HasOne("MilkManagement.Domain.Entities.Customer.Customer", "FkCustomer")
                         .WithMany("CustomerSupplied")
-                        .HasForeignKey("CustomerId")
+                        .HasForeignKey("CustomerRatesId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
