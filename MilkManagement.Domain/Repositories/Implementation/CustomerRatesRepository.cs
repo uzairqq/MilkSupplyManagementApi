@@ -47,7 +47,7 @@ namespace MilkManagement.Domain.Repositories.Implementation
             {
                 var customerRates =  _dbContext.CustomerRates
                     .AsNoTracking()
-                    .Where(i => i.CustomerId == customerId)
+                    .Where(i => i.CustomerId == customerId && !i.IsDeleted)
                     .Select(i => i.CurrentRate)
                     .SingleOrDefault();
                 return  customerRates;

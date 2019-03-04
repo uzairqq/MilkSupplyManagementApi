@@ -6,9 +6,9 @@ using MilkManagement.Core.Validator;
 
 namespace MilkManagement.Domain.Entities.Customer
 {
-    public class CustomerSupplied : BaseEntity, ISoftDeletable
+    public class CustomerSupplied : BaseEntity
     {
-        
+        public int CustomerTypeId { get; set; }
         public int CustomerId { get; set; }
         public string MorningSupply { get; set; }
         public string AfternoonSupply { get; set; }
@@ -18,7 +18,9 @@ namespace MilkManagement.Domain.Entities.Customer
         public float? Credit { get; set; }
         public double? Total { get; set; }
 
-        public virtual CustomerRates CustomerRates { get; set; }
+        public virtual Customer Customer { get; set; }
+        public virtual CustomerType CustomerType { get; set; }
+
 
 
 

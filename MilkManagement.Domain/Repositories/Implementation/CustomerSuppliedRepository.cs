@@ -43,8 +43,8 @@ namespace MilkManagement.Domain.Repositories.Implementation
             {
                 var record = _dbContext.CustomerSupplied
                     .AsNoTracking()
-                    .Any(i => i.CreatedOn.Date == DateTime.Now.Date && i.CustomerId == customerId &&
-                              i.Id != customerSupplierId && !i.IsDeleted);
+                    .Any(i => i.CreatedOn.Date == DateTime.Now.Date && i.Id == customerId &&
+                              i.Id != customerSupplierId && !i.IsDeleted);//change
                 return record;
 
             }
@@ -87,7 +87,7 @@ namespace MilkManagement.Domain.Repositories.Implementation
         //                CustomerType=i.Customer.CustomerType.Type,
         //                CustomerTypeId=i.Customer.CustomerTypeId,
         //                Id = i.Id,
-        //                CustomerId = i.CustomerId,
+        //                CustomerRatesId = i.CustomerRatesId,
         //                CustomerName = i.Customer.Name,
         //                Rate = i.Rate,
         //                MorningSupply = i.MorningSupply,
@@ -116,13 +116,13 @@ namespace MilkManagement.Domain.Repositories.Implementation
         //    {
         //        var customerSupplied = _dbContext.CustomerSupplied
         //            .AsNoTracking()
-        //            .Where(i => i.CustomerId == customerId && !i.IsDeleted)
+        //            .Where(i => i.CustomerRatesId == customerId && !i.IsDeleted)
         //            .Select(i => new CustomerSuppliedResponseDto()
         //            {
         //                CustomerType=i.Customer.CustomerType.Type,
         //                CustomerTypeId=i.Customer.CustomerTypeId,
         //                Id = i.Id,
-        //                CustomerId = i.CustomerId,
+        //                CustomerRatesId = i.CustomerRatesId,
         //                CustomerName = i.Customer.Name,
         //                Rate = i.Rate,
         //                MorningSupply = i.MorningSupply,
@@ -159,7 +159,7 @@ namespace MilkManagement.Domain.Repositories.Implementation
         //                CustomerType=i.Customer.CustomerType.Type,
         //                CustomerTypeId=i.Customer.CustomerTypeId,
         //                Id = i.Id,
-        //                CustomerId = i.CustomerId,
+        //                CustomerRatesId = i.CustomerRatesId,
         //                CustomerName = i.Customer.Name,
         //                Rate = i.Rate,
         //                MorningSupply = i.MorningSupply,
@@ -188,13 +188,13 @@ namespace MilkManagement.Domain.Repositories.Implementation
         //    {
         //        var customerSupplied = _dbContext.CustomerSupplied
         //            .AsNoTracking()
-        //            .Where(i => i.CustomerId == customerId && i.CreatedOn.Date == date.Date && !i.IsDeleted)
+        //            .Where(i => i.CustomerRatesId == customerId && i.CreatedOn.Date == date.Date && !i.IsDeleted)
         //            .Select(i => new CustomerSuppliedResponseDto()
         //            {
         //                CustomerType=i.Customer.CustomerType.Type,
         //                CustomerTypeId=i.Customer.CustomerTypeId,
         //                Id = i.Id,
-        //                CustomerId = i.CustomerId,
+        //                CustomerRatesId = i.CustomerRatesId,
         //                CustomerName = i.Customer.Name,
         //                Rate = i.Rate,
         //                MorningSupply = i.MorningSupply,
@@ -224,14 +224,14 @@ namespace MilkManagement.Domain.Repositories.Implementation
         //    {
         //        var customerSupplied = _dbContext.CustomerSupplied
         //            .AsNoTracking()
-        //            .Where(i => i.CustomerId == customerId && i.CreatedOn.Date >= startDate.Date &&
+        //            .Where(i => i.CustomerRatesId == customerId && i.CreatedOn.Date >= startDate.Date &&
         //                        i.CreatedOn.Date <= endDate.Date && !i.IsDeleted)
         //            .Select(i => new CustomerSuppliedResponseDto()
         //            {
         //                CustomerType=i.Customer.CustomerType.Type,
         //                CustomerTypeId=i.Customer.CustomerTypeId,
         //                Id = i.Id,
-        //                CustomerId = i.CustomerId,
+        //                CustomerRatesId = i.CustomerRatesId,
         //                CustomerName = i.Customer.Name,
         //                Rate = i.Rate,
         //                MorningSupply = i.MorningSupply,

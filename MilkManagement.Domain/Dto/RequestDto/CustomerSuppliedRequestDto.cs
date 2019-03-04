@@ -9,6 +9,7 @@ namespace MilkManagement.Domain.Dto.RequestDto
 {
     public class CustomerSuppliedRequestDto : BaseEntity
     {
+        public int CustomerTypeId { get; set; }
         public int CustomerId { get; set; }
         public string MorningSupply { get; set; }
         public string AfternoonSupply { get; set; }
