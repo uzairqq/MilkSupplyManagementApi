@@ -13,7 +13,7 @@ namespace MilkManagement.Services.Services.Interfaces
         Task<ResponseMessageDto> Post(CustomerSuppliedRequestDto dto);
         //Task<ResponseMessageDto> Put(CustomerSuppliedRequestDto dto);
         //Task<IEnumerable<CustomerSuppliedResponseDto>> Get();
-        //Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByDate(DateTime date);
+        Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByDate(DateTime date);
         //Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByCustomerId(int customerId);
         //Task<CustomerSuppliedResponseDto> GetCustomerSuppliedByCustomerSuppliedId(int customerSuppliedId);
 
@@ -23,6 +23,6 @@ namespace MilkManagement.Services.Services.Interfaces
         //Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByCustomerIdStartDateAndEndDate(
         //    int customerId, DateTime startDate, DateTime endDate);
         //Task<ResponseMessageDto> Delete(CustomerSuppliedRequestDto dto);
-       Task<IEnumerable<GeCustomerSuppliedtDropDownValuesDto>> GeCustomerSuppliedtDropDownValues();
+        Task<IEnumerable<GeCustomerSuppliedtDropDownValuesDto>> GeCustomerSuppliedtDropDownValues();
    }
 }
