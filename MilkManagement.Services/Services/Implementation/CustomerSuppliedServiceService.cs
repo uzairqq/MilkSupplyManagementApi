@@ -106,6 +106,13 @@ namespace MilkManagement.Services.Services.Implementation
                     dto.MorningAmount = Convert.ToDouble(supply.morningsupply);
                     dto.AfternoonAmount = Convert.ToDouble(supply.afternoonSupply);
                     await _asyncRepository.UpdateAsync(_mapper.Map<CustomerSupplied>(dto));
+                    //await _asyncRepository.PartialUpdate(dto, m => ///yahan woh values aengi jo ke update karni hongi 
+                    //{
+                    //    m.CustomerTypeId = dto.CustomerTypeId;
+                    //    m.Name = dto.Name;
+                    //    m.Address = dto.Address;
+                    //    m.Contact = dto.Contact;
+                    //});
 
                     return new ResponseMessageDto()
                     {

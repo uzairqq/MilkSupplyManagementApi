@@ -37,21 +37,21 @@ namespace MilkManagement.Api.Controllers
             }
         }
 
-        //[HttpPut]
-        //public async Task<IActionResult> Put(CustomerSuppliedRequestDto dto)
-        //{
-        //    try
-        //    {
-        //        if (!ModelState.IsValid) return BadRequest(ModelState);
-        //        return Ok(await _customerSuppliedService.Put(dto));
+        [HttpPut]
+        public async Task<IActionResult> Put(CustomerSuppliedRequestDto dto)
+        {
+            try
+            {
+                if (!ModelState.IsValid) return BadRequest(ModelState);
+                return Ok(await _customerSuppliedService.Put(dto));
 
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e);
-        //        throw;
-        //    }
-        //}
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
 
         //[HttpGet("all")]
         //public async Task<IActionResult> Get()
@@ -68,6 +68,7 @@ namespace MilkManagement.Api.Controllers
         //}
         [HttpGet("all/selectedDate/{selectedDate}")]
         public async Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByDate([FromRoute] DateTime selectedDate)
+        
         {
             try
             {
