@@ -55,17 +55,17 @@ namespace MilkManagement.Domain.Repositories.Implementation
             }
         }
 
-        public async Task<IEnumerable<GeCustomerSuppliedtDropDownValuesDto>> GeCustomerSuppliedtDropDownValues()
+        public async Task<IEnumerable<GeCustomerSuppliedtDropDownValuesDto>> GeCustomerSuppliedtDropDownValues(int typeId)
         {
             try
             {
                 var result = await _dbContext.CustomerRates
                     .AsNoTracking()
-                    .Where(i => !i.IsDeleted)
+                    .Where(i => typeId == 0 && !i.IsDeleted || i.Customer.CustomerTypeId==typeId && !i.IsDeleted)
                     .Select(i => new GeCustomerSuppliedtDropDownValuesDto()
                     {
                         CustomerId = i.CustomerId,
-                        CustomerName= i.Customer.Name
+                        CustomerName = i.Customer.Name
                     }).ToListAsync();
                 return result;
             }

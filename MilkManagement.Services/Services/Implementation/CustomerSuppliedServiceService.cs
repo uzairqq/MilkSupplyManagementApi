@@ -264,11 +264,11 @@ namespace MilkManagement.Services.Services.Implementation
             }
         }
 
-        public async Task<IEnumerable<GeCustomerSuppliedtDropDownValuesDto>> GeCustomerSuppliedtDropDownValues()
+        public async Task<IEnumerable<GeCustomerSuppliedtDropDownValuesDto>> GeCustomerSuppliedtDropDownValues(int typeId)
         {
             try
             {
-                var result = await _customerSuppliedRepository.GeCustomerSuppliedtDropDownValues();
+                var result = await _customerSuppliedRepository.GeCustomerSuppliedtDropDownValues(typeId);
                 return result;
             }
             catch (Exception e)

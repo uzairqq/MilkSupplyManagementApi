@@ -166,12 +166,12 @@ namespace MilkManagement.Api.Controllers
         //    }
         //}
 
-        [HttpGet("customerSuppliedDropDown")]
-        public async Task<IActionResult> GeCustomerSuppliedtDropDownValues()
+        [HttpGet("customerSuppliedDropDown/typeId/{typeId}")]
+        public async Task<IActionResult> GeCustomerSuppliedtDropDownValues([FromRoute] int typeId)
         {
             try
             {
-                var result = await _customerSuppliedService.GeCustomerSuppliedtDropDownValues();
+                var result = await _customerSuppliedService.GeCustomerSuppliedtDropDownValues(typeId);
                 return Ok(result);
             }
             catch (Exception e)
