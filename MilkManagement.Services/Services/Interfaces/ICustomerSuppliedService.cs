@@ -22,7 +22,7 @@ namespace MilkManagement.Services.Services.Interfaces
         //Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByCustomerIdAndParticularDate(int customerId, DateTime date);
         //Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByCustomerIdStartDateAndEndDate(
         //    int customerId, DateTime startDate, DateTime endDate);
-        //Task<ResponseMessageDto> Delete(CustomerSuppliedRequestDto dto);
-        Task<IEnumerable<GeCustomerSuppliedtDropDownValuesDto>> GeCustomerSuppliedtDropDownValues(int typeId);
+        Task<ResponseMessageDto> Delete(CustomerSuppliedRequestDto dto);
+        Task<IEnumerable<GeCustomerSuppliedtDropDownValuesDto>> GeCustomerSuppliedtDropDownValues(int typeId,DateTime dateTime);
    }
 }

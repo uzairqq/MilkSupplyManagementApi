@@ -21,13 +21,13 @@ namespace MilkManagement.Domain.Repositories.Implementation
             _dbContext = dbContext;
         }
 
-        public bool IsCustomerRecordAvailableOnParticularDate(int customerId)
+        public bool IsCustomerRecordAvailableOnParticularDate(int customerId,DateTime date)
         {
             try
             {
                 var record = _dbContext.CustomerSupplied
                     .AsNoTracking()
-                    .Any(i => i.CreatedOn.Date == DateTime.Now.Date && i.CustomerId == customerId && !i.IsDeleted);
+                    .Any(i => i.CreatedOn.Date == date && i.CustomerId == customerId && !i.IsDeleted);
                 return record;
             }
             catch (Exception e)
@@ -37,13 +37,13 @@ namespace MilkManagement.Domain.Repositories.Implementation
             }
         }
 
-        public bool IsCustomerRecordAvailableOnParticularDate(int customerId, int customerSupplierId)
+        public bool IsCustomerRecordAvailableOnParticularDate(int customerId, int customerSupplierId,DateTime date)
         {
             try
             {
                 var record = _dbContext.CustomerSupplied
                     .AsNoTracking()
-                    .Any(i => i.CreatedOn.Date == DateTime.Now.Date && i.Id == customerId &&
+                    .Any(i => i.CreatedOn.Date == date && i.Id == customerId &&
                               i.Id != customerSupplierId && !i.IsDeleted);//change
                 return record;
 
@@ -55,13 +55,18 @@ namespace MilkManagement.Domain.Repositories.Implementation
             }
         }
 
-        public async Task<IEnumerable<GeCustomerSuppliedtDropDownValuesDto>> GeCustomerSuppliedtDropDownValues(int typeId)
+        public async Task<IEnumerable<GeCustomerSuppliedtDropDownValuesDto>> GeCustomerSuppliedtDropDownValues(int typeId, DateTime dateTime)
         {
             try
             {
                 var result = await _dbContext.CustomerRates
                     .AsNoTracking()
-                    .Where(i => typeId == 0 && !i.IsDeleted || i.Customer.CustomerTypeId==typeId && !i.IsDeleted)
+                    .Where(i => (typeId == 0 || i.Customer.CustomerTypeId == typeId) && !i.IsDeleted &&
+                                !_dbContext.CustomerSupplied
+                                .AsNoTracking()
+                                .Where(o => o.CreatedOn.Date == dateTime.Date && !o.IsDeleted)
+                                .Select(o => o.CustomerId)
+                                .Contains(i.CustomerId))
                     .Select(i => new GeCustomerSuppliedtDropDownValuesDto()
                     {
                         CustomerId = i.CustomerId,

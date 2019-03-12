@@ -37,7 +37,7 @@ namespace MilkManagement.Services.Services.Implementation
             try
             {
                 if (!_customerSuppliedRepository.IsCustomerRecordAvailableOnParticularDate(
-                    dto.CustomerId))
+                    dto.CustomerId,dto.CreatedOn.Date))
                 {
                     var customerCurrentRate = _customerRateRepository.GetCurrentRateByCustomerId(dto.CustomerId);
 
@@ -90,7 +90,7 @@ namespace MilkManagement.Services.Services.Implementation
             try
             {
                 if (!_customerSuppliedRepository.IsCustomerRecordAvailableOnParticularDate(
-                    dto.CustomerId, dto.Id))
+                    dto.CustomerId, dto.Id,dto.CreatedOn.Date))
                 {
                     var customerCurrentRate = _customerRateRepository.GetCurrentRateByCustomerId(dto.CustomerId);
 
@@ -105,14 +105,20 @@ namespace MilkManagement.Services.Services.Implementation
                     dto.Total = sumUp;
                     dto.MorningAmount = Convert.ToDouble(supply.morningsupply);
                     dto.AfternoonAmount = Convert.ToDouble(supply.afternoonSupply);
-                    await _asyncRepository.UpdateAsync(_mapper.Map<CustomerSupplied>(dto));
-                    //await _asyncRepository.PartialUpdate(dto, m => ///yahan woh values aengi jo ke update karni hongi 
-                    //{
-                    //    m.CustomerTypeId = dto.CustomerTypeId;
-                    //    m.Name = dto.Name;
-                    //    m.Address = dto.Address;
-                    //    m.Contact = dto.Contact;
-                    //});
+                    //await _asyncRepository.UpdateAsync(_mapper.Map<CustomerSupplied>(dto));
+                    await _asyncRepository.PartialUpdate(dto, m => ///yahan woh values aengi jo ke update karni hongi 
+                    {
+                        //m.CustomerTypeId = dto.CustomerTypeId;
+                        m.CustomerId = dto.CustomerId;
+                        m.MorningSupply = dto.MorningSupply;
+                        m.MorningAmount = dto.MorningAmount;
+                        m.AfternoonSupply = dto.AfternoonSupply;
+                        m.AfternoonAmount = dto.AfternoonAmount;
+                        m.Rate = Convert.ToInt32(dto.Rate);
+                        m.Debit = dto.Debit;
+                        m.Credit = dto.Credit;
+                        m.Total = dto.Total;
+                    });
 
                     return new ResponseMessageDto()
                     {
@@ -264,11 +270,11 @@ namespace MilkManagement.Services.Services.Implementation
             }
         }
 
-        public async Task<IEnumerable<GeCustomerSuppliedtDropDownValuesDto>> GeCustomerSuppliedtDropDownValues(int typeId)
+        public async Task<IEnumerable<GeCustomerSuppliedtDropDownValuesDto>> GeCustomerSuppliedtDropDownValues(int typeId,DateTime dateTime)
         {
             try
             {
-                var result = await _customerSuppliedRepository.GeCustomerSuppliedtDropDownValues(typeId);
+                var result = await _customerSuppliedRepository.GeCustomerSuppliedtDropDownValues(typeId, dateTime);
                 return result;
             }
             catch (Exception e)

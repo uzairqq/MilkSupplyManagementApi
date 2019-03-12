@@ -152,26 +152,26 @@ namespace MilkManagement.Api.Controllers
         //        throw;
         //    }
         //}
-        //[HttpDelete]
-        //public async Task<IActionResult> DeleteCustomerSupplied([FromBody] CustomerSuppliedRequestDto dto)
-        //{
-        //    try
-        //    {
-        //        return Ok(await _customerSuppliedService.Delete(dto));
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        Console.WriteLine(e);
-        //        throw;
-        //    }
-        //}
-
-        [HttpGet("customerSuppliedDropDown/typeId/{typeId}")]
-        public async Task<IActionResult> GeCustomerSuppliedtDropDownValues([FromRoute] int typeId)
+        [HttpDelete]
+        public async Task<IActionResult> DeleteCustomerSupplied([FromBody] CustomerSuppliedRequestDto dto)
         {
             try
             {
-                var result = await _customerSuppliedService.GeCustomerSuppliedtDropDownValues(typeId);
+                return Ok(await _customerSuppliedService.Delete(dto));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        [HttpGet("customerSuppliedDropDown/typeId/{typeId}/date/{date}")]
+        public async Task<IActionResult> GeCustomerSuppliedtDropDownValues([FromRoute] int typeId,[FromRoute] DateTime date)
+        {
+            try
+            {
+                var result = await _customerSuppliedService.GeCustomerSuppliedtDropDownValues(typeId,date);
                 return Ok(result);
             }
             catch (Exception e)
