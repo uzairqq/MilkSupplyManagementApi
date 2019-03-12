@@ -10,12 +10,12 @@
 
 //namespace MilkManagement.Services.Services.Implementation
 //{
-//    public  class SupplierRatesServices
+//    public class SupplierRatesServices
 //    {
 //        private readonly IAsyncRepository<SupplierRate> _asyncRepository;
 //        public SupplierRatesServices(IAsyncRepository<SupplierRates>)
 //        {
-            
+
 //        }
 //        public async Task<ResponseMessageDto> Post(SupplierRatesRequestDto dto)
 //        {
