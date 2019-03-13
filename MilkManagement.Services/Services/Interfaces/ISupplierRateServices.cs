@@ -12,10 +12,10 @@ namespace MilkManagement.Services.Services.Interfaces
     {
         Task<ResponseMessageDto> Post(SupplierRatesRequestDto dto);
         Task<ResponseMessageDto> Put(SupplierRatesRequestDto dto);
-        Task<ResponseMessageDto> Delete(int id);
+        Task<ResponseMessageDto> Delete(SupplierRatesRequestDto dto);
         Task<IEnumerable<GetSupplierRateResponseDto>> GetAll();
-        Task<IEnumerable<GetSupplierRateResponseDto>> GetBySupplierRateId(int supplierRateId);
-        Task<IEnumerable<GetSupplierRateResponseDto>> GetBySupplierId(int supplierId);
+        Task<GetSupplierRateResponseDto> GetBySupplierRateId(int supplierRateId);
+        Task<GetSupplierRateResponseDto> GetBySupplierId(int supplierId);
         Task<bool> IsRatesAssignedToSupplier(int supplierId);
         Task<GetCurrentRateBySupplierIdDto> GetCurrentRateBySupplierIdDropDown(int suppId);
     }

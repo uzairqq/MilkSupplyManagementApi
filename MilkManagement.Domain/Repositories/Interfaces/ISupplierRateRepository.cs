@@ -1,0 +1,15 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Threading.Tasks;
+using MilkManagement.Domain.Dto.ResponseDto;
+
+namespace MilkManagement.Domain.Repositories.Interfaces
+{
+    public interface ISupplierRateRepository
+    {
+        Task<bool> IsRatesAssignedToSupplier(int supplierId);
+        Task<bool> IsRatesAssignedToSupplier(int supplierRatesId, int supplierId);
+        Task<GetCurrentRateBySupplierIdDto> GetCurrentRateBySupplierIdDropDown(int suppId);
+    }
+}

@@ -61,17 +61,13 @@ namespace MilkManagement.Api.Controllers
                 throw;
             }
         }
-        /// <summary>
-        /// Delete Supplier Rate
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        [HttpDelete("id/{id}")]
-        public async Task<IActionResult> Delete([FromRoute] int id)
+        
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromBody] SupplierRatesRequestDto dto)
         {
             try
             {
-                return Ok(await _supplierRateServices.Delete(id));
+                return Ok(await _supplierRateServices.Delete(dto));
             }
             catch (Exception e)
             {
