@@ -8,11 +8,12 @@ using MilkManagement.Domain.Dto.RequestDto;
 using MilkManagement.Domain.Dto.ResponseDto;
 using MilkManagement.Domain.Entities.Customer;
 using MilkManagement.Domain.Repositories.Interfaces;
+using MilkManagement.Domain.Specification;
 using MilkManagement.Services.Services.Interfaces;
 
 namespace MilkManagement.Services.Services.Implementation
 {
-    public class SupplierRatesServices:ISupplierRateServices
+    public class SupplierRatesServices : ISupplierRateServices
     {
         private readonly IAsyncRepository<SupplierRate> _asyncRepository;
         private readonly ISupplierRateRepository _supplierRateRepository;
@@ -28,22 +29,21 @@ namespace MilkManagement.Services.Services.Implementation
         {
             try
             {
-                if (!await _supplierRateRepository.IsRatesAssignedToSupplier(dto.SupplierId))
-                {
-                    var supp = await _asyncRepository.AddAsync(_mapper.Map<SupplierRate>(dto));
+                if (await _supplierRateRepository.IsRatesAssignedToSupplier(dto.SupplierId))
                     return new ResponseMessageDto()
                     {
-                        Id = supp.Id,
-                        SuccessMessage = ResponseMessages.InsertionSuccessMessage,
-                        Success = true,
-                        Error = false
+                        FailureMessage = ResponseMessages.RatesAssignedToSupplier,
+                        Success = false,
+                        Error = true
                     };
-                }
+                var supp = await _asyncRepository.AddAsync(_mapper.Map<SupplierRate>(dto));
+                _supplierRateRepository.SetIsSupplierRateAssigned(dto.SupplierId, true);
                 return new ResponseMessageDto()
                 {
-                    FailureMessage = ResponseMessages.RatesAssignedToSupplier,
-                    Success = false,
-                    Error = true
+                    Id = supp.Id,
+                    SuccessMessage = ResponseMessages.InsertionSuccessMessage,
+                    Success = true,
+                    Error = false
                 };
             }
             catch (Exception e)
@@ -66,7 +66,12 @@ namespace MilkManagement.Services.Services.Implementation
             {
                 if (!await _supplierRateRepository.IsRatesAssignedToSupplier(dto.Id, dto.SupplierId))
                 {
-                    await _asyncRepository.UpdateAsync(_mapper.Map<SupplierRate>(dto));
+                    //await _asyncRepository.UpdateAsync(_mapper.Map<SupplierRate>(dto));
+                    await _asyncRepository.PartialUpdate(dto, m => ///yahan woh values aengi jo ke update karni hongi 
+                    {
+                        m.CurrentRate = dto.CurrentRate;
+                        m.PreviousRate = dto.PreviousRate;
+                    });
                     return new ResponseMessageDto()
                     {
                         Id = dto.Id,
@@ -101,6 +106,7 @@ namespace MilkManagement.Services.Services.Implementation
             try
             {
                 await _asyncRepository.DeleteAsync(_mapper.Map<SupplierRate>(dto));
+                _supplierRateRepository.SetIsSupplierRateAssigned(dto.SupplierId, false);
                 return new ResponseMessageDto()
                 {
                     Id = dto.Id,
@@ -127,7 +133,8 @@ namespace MilkManagement.Services.Services.Implementation
         {
             try
             {
-                return await _asyncRepository.ListAllAsync<GetSupplierRateResponseDto>();
+                var result = await _asyncRepository.ListAsync<GetSupplierRateResponseDto>(new SupplierWithName());
+                return result;
             }
             catch (Exception e)
             {
@@ -180,6 +187,19 @@ namespace MilkManagement.Services.Services.Implementation
             try
             {
                 return await _supplierRateRepository.GetCurrentRateBySupplierIdDropDown(suppId);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public async Task<IEnumerable<GetSupplierRatesDropdownDto>> GetDropDownSuppliers()
+        {
+            try
+            {
+                return await _supplierRateRepository.GetAllSupplierForDropdown();
             }
             catch (Exception e)
             {
