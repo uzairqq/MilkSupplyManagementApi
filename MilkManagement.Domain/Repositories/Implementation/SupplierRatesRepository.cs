@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MilkManagement.Domain.Dto.ResponseDto;
+using MilkManagement.Domain.Entities.Customer;
+using MilkManagement.Domain.Entities.Supplier;
 using MilkManagement.Domain.Repositories.Interfaces;
 
 namespace MilkManagement.Domain.Repositories.Implementation
@@ -59,6 +61,46 @@ namespace MilkManagement.Domain.Repositories.Implementation
                     }).SingleOrDefault());
 
 
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public async Task<IEnumerable<GetSupplierRatesDropdownDto>> GetAllSupplierForDropdown()
+        {
+            try
+            {
+                var result = await _context.Supplier
+                    .AsNoTracking()
+                    .Select(i => new GetSupplierRatesDropdownDto()
+                    {
+                        SupplierId = i.Id,
+                        SupplierName= i.SupplierName
+                    }).ToListAsync();
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public void SetIsSupplierRateAssigned(int supplierId, bool isRateAssignedOrNot)
+        {
+            try
+            {
+                var model = new Supplier()
+                {
+                    Id = supplierId,
+                    IsRateAssignedToSupplier = !isRateAssignedOrNot
+                };
+                _context.Supplier.Attach(model);
+                model.IsRateAssignedToSupplier = isRateAssignedOrNot;
+                _context.SaveChanges();
             }
             catch (Exception e)
             {

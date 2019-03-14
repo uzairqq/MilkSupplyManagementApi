@@ -160,5 +160,22 @@ namespace MilkManagement.Api.Controllers
             }
         }
 
+        [HttpGet("supplierDropDownAll")]
+        public async Task<IActionResult> GetDropDownSuppliers()
+        {
+            try
+            {
+                var result = await _supplierRateServices.GetDropDownSuppliers();
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+
+
     }
 }
