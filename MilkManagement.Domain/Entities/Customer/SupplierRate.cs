@@ -14,6 +14,6 @@ namespace MilkManagement.Domain.Entities.Customer
         public int CurrentRate { get; set; }
         [Required]
         public int PreviousRate { get; set; }
-        public virtual Supplier.Supplier Supplier { get; set; }
+        public virtual  Supplier.Supplier Supplier { get; set; }
     }
 }

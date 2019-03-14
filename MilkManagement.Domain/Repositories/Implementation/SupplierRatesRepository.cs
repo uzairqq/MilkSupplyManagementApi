@@ -75,6 +75,7 @@ namespace MilkManagement.Domain.Repositories.Implementation
             {
                 var result = await _context.Supplier
                     .AsNoTracking()
+                    .Where(i=>!i.IsRateAssignedToSupplier && !i.IsDeleted)
                     .Select(i => new GetSupplierRatesDropdownDto()
                     {
                         SupplierId = i.Id,
@@ -101,6 +102,32 @@ namespace MilkManagement.Domain.Repositories.Implementation
                 _context.Supplier.Attach(model);
                 model.IsRateAssignedToSupplier = isRateAssignedOrNot;
                 _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public async Task<IEnumerable<GetSupplierRateResponseDto>> GetAll()
+        {
+            try
+            {
+                var result = await _context.SupplierRates
+                    .AsNoTracking()
+                    .Where(i => !i.IsDeleted)
+                    .Select(i => new GetSupplierRateResponseDto
+                    {
+                        SupplierId = i.SupplierId,
+                        SupplierName = i.Supplier.SupplierName,
+                        CurrentRate = i.CurrentRate,
+                        PreviousRate = i.PreviousRate,
+                        CreatedOn = i.CreatedOn,
+                        Id = i.Id
+                    }).ToListAsync();
+                return result;
+
             }
             catch (Exception e)
             {

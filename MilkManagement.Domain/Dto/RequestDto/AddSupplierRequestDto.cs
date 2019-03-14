@@ -10,5 +10,7 @@ namespace MilkManagement.Domain.Dto.RequestDto
         public string SupplierName { get; set; }
         public string SupplierContact { get; set; }
         public string SupplierAddress { get; set; }
+        public bool IsRateAssignedToSupplier { get; set; } = false;
+
     }
 }

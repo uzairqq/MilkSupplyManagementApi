@@ -133,7 +133,7 @@ namespace MilkManagement.Services.Services.Implementation
         {
             try
             {
-                var result = await _asyncRepository.ListAsync<GetSupplierRateResponseDto>(new SupplierWithName());
+                var result = await _supplierRateRepository.GetAll();
                 return result;
             }
             catch (Exception e)
