@@ -16,12 +16,6 @@ namespace MilkManagement.Domain.Dto.ResponseDto
 
         public string Type { get; set; }
         
-        public DateTime CreatedOn { get; set; }
-
-        public int CreatedById { get; set; }
-        
-        public DateTime LastUpdatedOn { get; set; }
-        
-        public int LastUpdatedById { get; set; }
+      
     }
 }

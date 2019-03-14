@@ -22,6 +22,7 @@ namespace MilkManagement.Domain.Entities.Supplier
         [StringLength(20)]
         public string SupplierAddress { get; set; }
 
+        public bool IsRateAssignedToSupplier { get; set; } = false;
         //public virtual ICollection<SupplierRates> SupplierRates { get; set; }
         //public virtual ICollection<SupplierSupplied> SupplierSupplied { get; set; }
     }
