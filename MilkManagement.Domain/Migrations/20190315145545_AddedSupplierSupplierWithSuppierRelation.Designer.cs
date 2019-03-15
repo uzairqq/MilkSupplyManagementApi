@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MilkManagement.Domain;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,9 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MilkManagement.Domain.Migrations
 {
     [DbContext(typeof(MilkManagementDbContext))]
-    partial class MilkManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190315145545_AddedSupplierSupplierWithSuppierRelation")]
+    partial class AddedSupplierSupplierWithSuppierRelation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -234,42 +236,6 @@ namespace MilkManagement.Domain.Migrations
                     b.ToTable("SupplierRates");
                 });
 
-            modelBuilder.Entity("MilkManagement.Domain.Entities.Supplier.SupplierSupplied", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("AfternoonAmount");
-
-                    b.Property<string>("AfternoonPurchase");
-
-                    b.Property<int>("CreatedById");
-
-                    b.Property<DateTime>("CreatedOn");
-
-                    b.Property<bool>("IsDeleted");
-
-                    b.Property<int>("LastUpdatedById");
-
-                    b.Property<DateTime>("LastUpdatedOn");
-
-                    b.Property<string>("MorningAmount");
-
-                    b.Property<string>("MorningPurchase");
-
-                    b.Property<int>("Rate");
-
-                    b.Property<int>("SupplierId");
-
-                    b.Property<string>("Total");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("SupplierId");
-
-                    b.ToTable("SupplierSupplied");
-                });
-
             modelBuilder.Entity("MilkManagement.Domain.Entities.Customer.Customer", b =>
                 {
                     b.HasOne("MilkManagement.Domain.Entities.Customer.CustomerType", "CustomerType")
@@ -300,14 +266,6 @@ namespace MilkManagement.Domain.Migrations
                 });
 
             modelBuilder.Entity("MilkManagement.Domain.Entities.Supplier.SupplierRate", b =>
-                {
-                    b.HasOne("MilkManagement.Domain.Entities.Supplier.Supplier", "Supplier")
-                        .WithMany()
-                        .HasForeignKey("SupplierId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("MilkManagement.Domain.Entities.Supplier.SupplierSupplied", b =>
                 {
                     b.HasOne("MilkManagement.Domain.Entities.Supplier.Supplier", "Supplier")
                         .WithMany()

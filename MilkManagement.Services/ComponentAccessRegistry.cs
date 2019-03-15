@@ -16,6 +16,7 @@ namespace MilkManagement.Services
             service.AddScoped<IExpenseService, ExpenseService>();
             service.AddScoped<ISupplierService, SupplierService>();
             service.AddScoped<ISupplierRateServices, SupplierRatesServices>();
+            service.AddScoped<ISupplierSuppliedServices, SupplierSuppliedServices>();
         }
     }
 }

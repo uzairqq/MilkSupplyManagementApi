@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using MilkManagement.Constants;
 using MilkManagement.Domain.Dto.RequestDto;
 using MilkManagement.Domain.Dto.ResponseDto;
-using MilkManagement.Domain.Entities.Customer;
+using MilkManagement.Domain.Entities.Supplier;
 using MilkManagement.Domain.Repositories.Interfaces;
-using MilkManagement.Domain.Specification;
 using MilkManagement.Services.Services.Interfaces;
 
 namespace MilkManagement.Services.Services.Implementation
