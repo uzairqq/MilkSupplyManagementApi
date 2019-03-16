@@ -12,6 +12,9 @@ namespace MilkManagement.Services.Services.Interfaces
    {
        Task<IEnumerable<GetSuppliersForDrpDownDto>> Get();
        Task<ResponseMessageDto> Post(SupplierSuppliedRequestDto dto);
+       Task<ResponseMessageDto> Put(SupplierSuppliedRequestDto dto);
+       Task<IEnumerable<SupplierSuppliedResponseDto>> Get(DateTime date);
 
-   }
+
+    }
 }

@@ -6,10 +6,11 @@ using MilkManagement.Domain.Dto.ResponseDto;
 
 namespace MilkManagement.Domain.Repositories.Interfaces
 {
-   public interface ISupplierSuppliedRepository
-   {
-       Task<IEnumerable<GetSuppliersForDrpDownDto>> Get();
-       Task<bool> IsSupplierAvailableOnCurrentDate(int supplierId, DateTime date);
-       Task<bool> IsSupplierAvailableOnCurrentDate(int supplierId, int supplierSuppliedId);
+    public interface ISupplierSuppliedRepository
+    {
+        Task<IEnumerable<GetSuppliersForDrpDownDto>> Get();
+        Task<IEnumerable<SupplierSuppliedResponseDto>> Get(DateTime date);
+        Task<bool> IsSupplierAvailableOnCurrentDate(int supplierId, DateTime date);
+        Task<bool> IsSupplierAvailableOnCurrentDate(int supplierId, int supplierSuppliedId);
     }
 }

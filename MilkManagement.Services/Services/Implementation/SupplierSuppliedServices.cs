@@ -98,5 +98,70 @@ namespace MilkManagement.Services.Services.Implementation
                 };
             }
         }
+        public async Task<ResponseMessageDto> Put(SupplierSuppliedRequestDto dto)
+        {
+            try
+            {
+                //if (await _supplierSuppliedRepository.IsSupplierAvailableOnCurrentDate(dto.FkSupplierId,
+                //    dto.PkSupplierSuppliedId))
+                //    return new ReponseMessagesDto()
+                //    {
+                //        Success = false,
+                //        FailureMessage = "You Have Already Inserted This Supplier On This Date",
+                //        Error = true
+                //    };
+                var rate = _supplierRateRepository.GetCurrentRateBySupplierIdDropDown(dto.SupplierId);
+                var supply =
+                    SupplierSuppliedCalculationFunction.GetMorningSupplyAndAfterNoonSupply(dto.MorningPurchase,
+                        dto.AfternoonPurchase, rate.Result);
+                var sumUp = Convert.ToDouble(supply.morningPurchase) + Convert.ToDouble(supply.afternoonPurchase);
+                await _asyncRepository.UpdateAsync(new SupplierSupplied()
+                {
+                    Id = dto.Id,
+                    SupplierId = dto.SupplierId,
+                    MorningPurchase = dto.MorningPurchase,
+                    AfternoonPurchase = dto.AfternoonPurchase,
+                    MorningAmount = supply.morningPurchase,
+                    AfternoonAmount = supply.afternoonPurchase,
+                    Rate = rate.Result,
+                    Total = Convert.ToString(sumUp, CultureInfo.InvariantCulture),
+                    LastUpdatedOn = dto.LastUpdatedOn,
+                    LastUpdatedById = dto.LastUpdatedById
+                });
+                return new ResponseMessageDto()
+                {
+                    Id = dto.Id,
+                    SuccessMessage = ResponseMessages.UpdateSuccessMessage,
+                    Success = true,
+                    Error = false
+                };
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return new ResponseMessageDto()
+                {
+                    Id = Convert.ToInt16(Enums.FailureId),
+                    FailureMessage = ResponseMessages.InsertionFailureMessage,
+                    Success = false,
+                    Error = true,
+                    ExceptionMessage = e.InnerException != null ? e.InnerException.Message : e.Message
+                };
+            }
+        }
+
+        public async Task<IEnumerable<SupplierSuppliedResponseDto>> Get(DateTime date)
+        {
+            try
+            {
+               return await _supplierSuppliedRepository.Get(date);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }
