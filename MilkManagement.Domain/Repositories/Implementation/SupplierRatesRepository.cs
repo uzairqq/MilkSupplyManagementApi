@@ -48,19 +48,15 @@ namespace MilkManagement.Domain.Repositories.Implementation
                 throw;
             }
         }
-        public async Task<GetCurrentRateBySupplierIdDto> GetCurrentRateBySupplierIdDropDown(int suppId)
+        public async Task<int> GetCurrentRateBySupplierIdDropDown(int suppId)
         {
             try
             {
-                return await Task.FromResult(_context.SupplierRates
+                var result=await  _context.SupplierRates
                     .AsNoTracking()
                     .Where(i => i.SupplierId == suppId && !i.IsDeleted)
-                    .Select(i => new GetCurrentRateBySupplierIdDto
-                    {
-                        CurrentRate = i.CurrentRate
-                    }).SingleOrDefault());
-
-
+                    .Select(i =>i.CurrentRate).SingleOrDefaultAsync();
+                return result;
             }
             catch (Exception e)
             {

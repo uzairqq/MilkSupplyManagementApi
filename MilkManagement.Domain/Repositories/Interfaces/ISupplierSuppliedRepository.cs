@@ -9,5 +9,7 @@ namespace MilkManagement.Domain.Repositories.Interfaces
    public interface ISupplierSuppliedRepository
    {
        Task<IEnumerable<GetSuppliersForDrpDownDto>> Get();
-   }
+       Task<bool> IsSupplierAvailableOnCurrentDate(int supplierId, DateTime date);
+       Task<bool> IsSupplierAvailableOnCurrentDate(int supplierId, int supplierSuppliedId);
+    }
 }

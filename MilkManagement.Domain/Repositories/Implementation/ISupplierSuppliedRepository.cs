@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,5 +38,39 @@ namespace MilkManagement.Domain.Repositories.Implementation
                 throw;
             }
         }
+       public async Task<bool> IsSupplierAvailableOnCurrentDate(int supplierId, DateTime date)
+       {
+           try
+           {
+               var addDays = date.AddDays(1);
+               var convertedDate = addDays.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture);
+               var supplier = _dbContext.SupplierSupplied
+                   .AsNoTracking()
+                   .Any(i => i.SupplierId == supplierId && i.CreatedOn.Date == Convert.ToDateTime(convertedDate) && !i.IsDeleted);
+               return await Task.FromResult(supplier);
+           }
+           catch (Exception e)
+           {
+               Console.WriteLine(e);
+               throw;
+           }
+       }
+
+       public async Task<bool> IsSupplierAvailableOnCurrentDate(int supplierId, int supplierSuppliedId)
+       {
+           try
+           {
+               var supplier = _dbContext.SupplierSupplied
+                   .AsNoTracking()
+                   .Any(i => i.SupplierId == supplierId && i.Id != supplierSuppliedId &&
+                             i.CreatedOn.Date == DateTime.Now.AddDays(1) && !i.IsDeleted);
+               return await Task.FromResult(supplier);
+           }
+           catch (Exception e)
+           {
+               Console.WriteLine(e);
+               throw;
+           }
+       }
     }
 }
