@@ -1,20 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using MilkManagement.CommonLibrary.Functions;
+using MilkManagement.Constants;
+using MilkManagement.Domain.Dto.RequestDto;
 using MilkManagement.Domain.Dto.ResponseDto;
+using MilkManagement.Domain.Entities.Supplier;
 using MilkManagement.Domain.Repositories.Interfaces;
 using MilkManagement.Services.Services.Interfaces;
 
 namespace MilkManagement.Services.Services.Implementation
 {
-   public class SupplierSuppliedServices:ISupplierSuppliedServices
-   {
+    public class SupplierSuppliedServices : ISupplierSuppliedServices
+    {
 
-       private readonly ISupplierSuppliedRepository _supplierSuppliedRepository;
-        public SupplierSuppliedServices(ISupplierSuppliedRepository supplierSuppliedRepository)
+        private readonly ISupplierSuppliedRepository _supplierSuppliedRepository;
+        private readonly ISupplierRateRepository _supplierRateRepository;
+        private readonly IAsyncRepository<SupplierSupplied> _asyncRepository;
+        private readonly IMapper _mapper;
+        public SupplierSuppliedServices(ISupplierSuppliedRepository supplierSuppliedRepository, ISupplierRateRepository supplierRateRepository, IAsyncRepository<SupplierSupplied> asyncRepository, IMapper mapper)
         {
             _supplierSuppliedRepository = supplierSuppliedRepository;
+            _supplierRateRepository = supplierRateRepository;
+            _asyncRepository = asyncRepository;
+            _mapper = mapper;
         }
         public async Task<IEnumerable<GetSuppliersForDrpDownDto>> Get()
         {
@@ -27,6 +39,63 @@ namespace MilkManagement.Services.Services.Implementation
             {
                 Console.WriteLine(e);
                 throw;
+            }
+        }
+
+        public async Task<ResponseMessageDto> Post(SupplierSuppliedRequestDto dto)
+        {
+            try
+            {
+                //if (await _supplierSuppliedRepository.IsSupplierAvailableOnCurrentDate(dto.SupplierId,
+                //    dto.CreatedOn.Date))
+                //    return new ResponseMessageDto()
+                //    {
+                //        Id = Convert.ToInt16(Enums.FailureId),
+                //        FailureMessage = ResponseMessages.CustomerAlreadyInsertedInThisDate,
+                //        Success = false,
+                //        Error = true
+                //    };
+                var rate = _supplierRateRepository.GetCurrentRateBySupplierIdDropDown(dto.SupplierId);
+                var supply =
+                    SupplierSuppliedCalculationFunction.GetMorningSupplyAndAfterNoonSupply(dto.MorningPurchase,
+                        dto.AfternoonPurchase, rate.Result);
+                var sumUp = Convert.ToDouble(supply.morningPurchase) + Convert.ToDouble(supply.afternoonPurchase);
+                dto.Rate = rate.Result;
+                dto.Total = sumUp.ToString(CultureInfo.InvariantCulture);
+                dto.MorningAmount = supply.morningPurchase;
+                dto.AfternoonAmount = supply.afternoonPurchase;
+                var customerSupplied = await _asyncRepository.AddAsync(new SupplierSupplied()
+                {
+
+                    SupplierId = dto.SupplierId,
+                    MorningPurchase = dto.MorningPurchase,
+                    AfternoonPurchase = dto.AfternoonPurchase,
+                    MorningAmount = supply.morningPurchase,
+                    AfternoonAmount = supply.afternoonPurchase,
+                    Rate = rate.Result,
+                    Total = Convert.ToString(sumUp, CultureInfo.InvariantCulture),
+                    CreatedOn = dto.CreatedOn,
+                    CreatedById = dto.CreatedById
+                });
+                return new ResponseMessageDto()
+                {
+                    Id = customerSupplied.Id,
+                    SuccessMessage = ResponseMessages.InsertionSuccessMessage,
+                    Success = true,
+                    Error = false
+                };
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return new ResponseMessageDto()
+                {
+                    Id = Convert.ToInt16(Enums.FailureId),
+                    FailureMessage = ResponseMessages.InsertionFailureMessage,
+                    Success = false,
+                    Error = true,
+                    ExceptionMessage = e.InnerException != null ? e.InnerException.Message : e.Message
+                };
             }
         }
     }

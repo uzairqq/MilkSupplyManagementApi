@@ -17,7 +17,7 @@ namespace MilkManagement.Services.Services.Interfaces
         Task<GetSupplierRateResponseDto> GetBySupplierRateId(int supplierRateId);
         Task<GetSupplierRateResponseDto> GetBySupplierId(int supplierId);
         Task<bool> IsRatesAssignedToSupplier(int supplierId);
-        Task<GetCurrentRateBySupplierIdDto> GetCurrentRateBySupplierIdDropDown(int suppId);
+        Task<int> GetCurrentRateBySupplierIdDropDown(int suppId);
         Task<IEnumerable<GetSupplierRatesDropdownDto>> GetDropDownSuppliers();
     }
 }

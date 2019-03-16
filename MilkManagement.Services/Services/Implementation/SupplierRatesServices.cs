@@ -180,7 +180,7 @@ namespace MilkManagement.Services.Services.Implementation
             }
         }
 
-        public async Task<GetCurrentRateBySupplierIdDto> GetCurrentRateBySupplierIdDropDown(int suppId)
+        public async Task<int> GetCurrentRateBySupplierIdDropDown(int suppId)
         {
             try
             {
