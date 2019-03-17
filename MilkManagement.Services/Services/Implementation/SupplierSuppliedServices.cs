@@ -115,18 +115,19 @@ namespace MilkManagement.Services.Services.Implementation
                     SupplierSuppliedCalculationFunction.GetMorningSupplyAndAfterNoonSupply(dto.MorningPurchase,
                         dto.AfternoonPurchase, rate.Result);
                 var sumUp = Convert.ToDouble(supply.morningPurchase) + Convert.ToDouble(supply.afternoonPurchase);
-                await _asyncRepository.UpdateAsync(new SupplierSupplied()
+                dto.Rate = rate.Result;
+                dto.Total = sumUp.ToString(CultureInfo.InvariantCulture);
+                dto.MorningAmount = supply.morningPurchase;
+                dto.AfternoonAmount = supply.afternoonPurchase;
+                await _asyncRepository.PartialUpdate(dto, m => ///yahan woh values aengi jo ke update karni hongi 
                 {
-                    Id = dto.Id,
-                    SupplierId = dto.SupplierId,
-                    MorningPurchase = dto.MorningPurchase,
-                    AfternoonPurchase = dto.AfternoonPurchase,
-                    MorningAmount = supply.morningPurchase,
-                    AfternoonAmount = supply.afternoonPurchase,
-                    Rate = rate.Result,
-                    Total = Convert.ToString(sumUp, CultureInfo.InvariantCulture),
-                    LastUpdatedOn = dto.LastUpdatedOn,
-                    LastUpdatedById = dto.LastUpdatedById
+                    m.SupplierId = dto.SupplierId;
+                    m.MorningPurchase = dto.MorningPurchase;
+                    m.MorningAmount = dto.MorningAmount;
+                    m.AfternoonPurchase = dto.AfternoonPurchase;
+                    m.AfternoonAmount = dto.AfternoonAmount;
+                    m.Rate = Convert.ToInt32(dto.Rate);
+                    m.Total = dto.Total;
                 });
                 return new ResponseMessageDto()
                 {
