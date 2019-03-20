@@ -36,11 +36,11 @@ namespace MilkManagement.Api.Controllers
         }
 
         [HttpGet("gridWithDate/date/{date}")]
-        public async Task<IActionResult> Get([FromRoute] DateTime date)
+        public async Task<IActionResult> GetGrid([FromRoute] DateTime date)
         {
             try
             {
-                return Ok(await _supplierSuppliedServices.Get(date));
+                return Ok(await _supplierSuppliedServices.GetGrid(date));
             }
             catch (Exception e)
             {
@@ -65,13 +65,27 @@ namespace MilkManagement.Api.Controllers
             }
         }
 
-        [HttpGet("supplierSuppliedDropDown")]
-        public async Task<IActionResult> Get()
+        [HttpGet("supplierSuppliedDropDown/date/{date}")]
+        public async Task<IActionResult> GetDropDown([FromRoute] DateTime date)
         {
             try
             {
-                var result = await _supplierSuppliedServices.Get();
+                var result = await _supplierSuppliedServices.GetDropDown(date);
                 return Ok(result);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromBody] SupplierSuppliedRequestDto dto)
+        {
+            try
+            {
+                return Ok(await _supplierSuppliedServices.Delete(dto));
             }
             catch (Exception e)
             {

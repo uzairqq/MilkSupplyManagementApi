@@ -10,11 +10,12 @@ namespace MilkManagement.Services.Services.Interfaces
 {
    public interface ISupplierSuppliedServices
    {
-       Task<IEnumerable<GetSuppliersForDrpDownDto>> Get();
+       Task<IEnumerable<GetSuppliersForDrpDownDto>> GetDropDown(DateTime date);
        Task<ResponseMessageDto> Post(SupplierSuppliedRequestDto dto);
        Task<ResponseMessageDto> Put(SupplierSuppliedRequestDto dto);
-       Task<IEnumerable<SupplierSuppliedResponseDto>> Get(DateTime date);
+       Task<IEnumerable<SupplierSuppliedResponseDto>> GetGrid(DateTime date);
+       Task<ResponseMessageDto> Delete(SupplierSuppliedRequestDto dto);
 
 
-    }
+   }
 }

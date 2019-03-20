@@ -28,11 +28,11 @@ namespace MilkManagement.Services.Services.Implementation
             _asyncRepository = asyncRepository;
             _mapper = mapper;
         }
-        public async Task<IEnumerable<GetSuppliersForDrpDownDto>> Get()
+        public async Task<IEnumerable<GetSuppliersForDrpDownDto>> GetDropDown(DateTime date)
         {
             try
             {
-                var result = await _supplierSuppliedRepository.Get();
+                var result = await _supplierSuppliedRepository.GetDropDown(date);
                 return result;
             }
             catch (Exception e)
@@ -152,16 +152,43 @@ namespace MilkManagement.Services.Services.Implementation
             }
         }
 
-        public async Task<IEnumerable<SupplierSuppliedResponseDto>> Get(DateTime date)
+        public async Task<IEnumerable<SupplierSuppliedResponseDto>> GetGrid(DateTime date)
         {
             try
             {
-               return await _supplierSuppliedRepository.Get(date);
+               return await _supplierSuppliedRepository.GetGrid(date);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 throw;
+            }
+        }
+
+        public async Task<ResponseMessageDto> Delete(SupplierSuppliedRequestDto dto)
+        {
+            try
+            {
+                await _asyncRepository.DeleteAsync(_mapper.Map<SupplierSupplied>(dto));
+                return new ResponseMessageDto()
+                {
+                    Id = dto.Id,
+                    SuccessMessage = ResponseMessages.DeleteSuccessMessage,
+                    Success = true,
+                    Error = false
+                };
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return new ResponseMessageDto()
+                {
+                    Id = Convert.ToInt16(Enums.FailureId),
+                    FailureMessage = ResponseMessages.InsertionFailureMessage,
+                    Success = false,
+                    Error = true,
+                    ExceptionMessage = e.InnerException != null ? e.InnerException.Message : e.Message
+                };
             }
         }
     }

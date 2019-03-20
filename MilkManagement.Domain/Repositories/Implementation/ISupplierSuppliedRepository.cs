@@ -17,13 +17,18 @@ namespace MilkManagement.Domain.Repositories.Implementation
         {
             _dbContext = dbContext;
         }
-        public async Task<IEnumerable<GetSuppliersForDrpDownDto>> Get()
+        public async Task<IEnumerable<GetSuppliersForDrpDownDto>> GetDropDown(DateTime date)
         {
             try
             {
                 var result = await _dbContext.SupplierRates
                     .AsNoTracking()
-                    .Where(i => !i.IsDeleted)
+                    .Where(i =>!i.IsDeleted &&
+                                !_dbContext.SupplierSupplied
+                                    .AsNoTracking()
+                                    .Where(o => o.CreatedOn.Date == date.Date && !o.IsDeleted)
+                                    .Select(o => o.SupplierId)
+                                    .Contains(i.SupplierId))
                     .Select(i => new GetSuppliersForDrpDownDto()
                     {
                         SupplierId = i.SupplierId,
@@ -72,7 +77,7 @@ namespace MilkManagement.Domain.Repositories.Implementation
                 throw;
             }
         }
-        public async Task<IEnumerable<SupplierSuppliedResponseDto>> Get(DateTime date)
+        public async Task<IEnumerable<SupplierSuppliedResponseDto>> GetGrid(DateTime date)
         {
             try
             {
