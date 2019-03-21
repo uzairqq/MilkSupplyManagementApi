@@ -21,6 +21,8 @@ namespace MilkManagement.Domain.Mappings
             CreateMap<SupplierRate, GetSupplierRateResponseDto>().ReverseMap();
             CreateMap<SupplierSupplied, SupplierSuppliedRequestDto>().ReverseMap();
             CreateMap<SupplierSupplied, SupplierSuppliedResponseDto>().ReverseMap();
+            CreateMap<DailyExpense, ExpenseRateRequestDto>().ReverseMap();
+            CreateMap<DailyExpense, ExpenseRateResponseDto>().ReverseMap();
 
 
             CreateMap<Expense, ExpenseRequestDto>().ReverseMap();
