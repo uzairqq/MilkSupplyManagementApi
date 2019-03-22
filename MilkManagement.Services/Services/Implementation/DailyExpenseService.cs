@@ -206,5 +206,18 @@ namespace MilkManagement.Services.Services.Implementation
                 throw;
             }
         }
+
+        public async Task<IEnumerable<DailyExpenseDropdownDto>> GetDrpDown(DateTime date)
+        {
+            try
+            {
+                return await _expenseRateRepository.GetDrpDown(date);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

@@ -84,6 +84,9 @@ namespace MilkManagement.Api.Controllers
                 throw;
             }
         }
+
+      
+
         /// <summary>
         /// 
         /// </summary>
@@ -156,6 +159,26 @@ namespace MilkManagement.Api.Controllers
             try
             {
                 return Ok(await _expenseRatesService.GetAllByToAndFromDate(fromDate, toDate));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fromDate"></param>
+        /// <param name="toDate"></param>
+        /// <returns></returns>
+        [HttpGet("drpdown/date/{date}")]
+        public async Task<IActionResult> GetDropDown([FromRoute] DateTime date)
+        {
+            try
+            {
+                return Ok(await _expenseRatesService.GetDrpDown(date));
             }
             catch (Exception e)
             {

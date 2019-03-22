@@ -15,5 +15,6 @@ namespace MilkManagement.Domain.Repositories.Interfaces
         Task<IEnumerable<ExpenseRateResponseDto>> GetAllByToAndFromDate(DateTime fromDate, DateTime toDate);
         Task<bool> IsExpenseInsertedOnCurrentDate(int expenseId, DateTime date);
         Task<bool> IsExpenseInsertedOnCurrentDate(int expenseId, int expenseRateId, DateTime date);
+        Task<IEnumerable<DailyExpenseDropdownDto>> GetDrpDown(DateTime date);
     }
 }

@@ -66,7 +66,7 @@ namespace MilkManagement.Domain.Repositories.Implementation
                                 .AsNoTracking()
                                 .Where(o => o.CreatedOn.Date == dateTime.Date && !o.IsDeleted)
                                 .Select(o => o.CustomerId)
-                                .Contains(i.CustomerId))
+                                .Contains(i.CustomerId))    
                     .Select(i => new GeCustomerSuppliedtDropDownValuesDto()
                     {
                         CustomerId = i.CustomerId,

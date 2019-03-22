@@ -11,7 +11,7 @@ using MilkManagement.Domain.Repositories.Interfaces;
 
 namespace MilkManagement.Domain.Repositories.Implementation
 {
-    public class DailyExpenseRepository: EfRepository<DailyExpense>, IDailyExpenseRepository
+    public class DailyExpenseRepository : EfRepository<DailyExpense>, IDailyExpenseRepository
     {
         private readonly MilkManagementDbContext _dbContext;
 
@@ -185,6 +185,24 @@ namespace MilkManagement.Domain.Repositories.Implementation
                 Console.WriteLine(e);
                 throw;
             }
+        }
+
+        public async Task<IEnumerable<DailyExpenseDropdownDto>> GetDrpDown(DateTime date)
+        {
+            return await _dbContext.Expense
+                .AsNoTracking()
+                .Where(i => !i.IsDeleted &&
+                            !_dbContext.DailyExpense
+                            .AsNoTracking()
+                            .Where(o=>o.CreatedOn.Date==date && !o.IsDeleted)
+                            .Select(o=>o.ExpenseId)
+                            .Contains(i.Id)
+                            )
+                .Select(i => new DailyExpenseDropdownDto()
+                {
+                    ExpenseId = i.Id,
+                    ExpenseName = i.ExpenseName
+                }).ToListAsync();
         }
     }
 }
