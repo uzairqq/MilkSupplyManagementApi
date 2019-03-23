@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using MilkManagement.Constants;
+using MilkManagement.Domain.Dto.RequestDto;
 using MilkManagement.Domain.Dto.ResponseDto;
 using MilkManagement.Domain.Entities.Expense;
 using MilkManagement.Domain.Repositories.Interfaces;
@@ -14,10 +16,12 @@ namespace MilkManagement.Domain.Repositories.Implementation
     public class DailyExpenseRepository : EfRepository<DailyExpense>, IDailyExpenseRepository
     {
         private readonly MilkManagementDbContext _dbContext;
+        private readonly IMapper _mapper;
 
         public DailyExpenseRepository(MilkManagementDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
 
@@ -194,8 +198,8 @@ namespace MilkManagement.Domain.Repositories.Implementation
                 .Where(i => !i.IsDeleted &&
                             !_dbContext.DailyExpense
                             .AsNoTracking()
-                            .Where(o=>o.CreatedOn.Date==date && !o.IsDeleted)
-                            .Select(o=>o.ExpenseId)
+                            .Where(o => o.CreatedOn.Date == date && !o.IsDeleted)
+                            .Select(o => o.ExpenseId)
                             .Contains(i.Id)
                             )
                 .Select(i => new DailyExpenseDropdownDto()
@@ -203,6 +207,20 @@ namespace MilkManagement.Domain.Repositories.Implementation
                     ExpenseId = i.Id,
                     ExpenseName = i.ExpenseName
                 }).ToListAsync();
+        }
+
+        public async Task<int> ListPost(IEnumerable<DailyExpense> dto)
+        {
+            try
+            {
+                _dbContext.DailyExpense.AddRange(dto);
+               return await _dbContext.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }

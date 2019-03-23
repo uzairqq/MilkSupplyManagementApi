@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Abstractions;
 using MilkManagement.Domain.Dto.RequestDto;
 using MilkManagement.Services.Services.Implementation;
 
@@ -179,6 +180,22 @@ namespace MilkManagement.Api.Controllers
             try
             {
                 return Ok(await _expenseRatesService.GetDrpDown(date));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        [HttpPost("ListPost")]
+        public async Task<IActionResult> ListPost([FromBody] List<ExpenseRateRequestDto> dto)
+        {
+            try
+            {
+                if(!ModelState.IsValid) return  BadRequest(ModelState);
+                var result = await _expenseRatesService.ListPost(dto);
+                return Ok(result);
             }
             catch (Exception e)
             {

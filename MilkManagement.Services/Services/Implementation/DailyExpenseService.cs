@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -217,6 +218,38 @@ namespace MilkManagement.Services.Services.Implementation
             {
                 Console.WriteLine(e);
                 throw;
+            }
+        }
+
+        public async Task<ResponseMessageDto> ListPost(List<ExpenseRateRequestDto> dto)
+        {
+            try
+            {
+                var model = dto.Select(i => new DailyExpense()
+                {
+                    ExpenseId = i.ExpenseId,
+                    CreatedOn = DateTime.Now.Date,
+                    Rate = i.Rate
+                });
+                var result= await _expenseRateRepository.ListPost(model);
+                return new ResponseMessageDto()
+                {
+                    Id = result,
+                    SuccessMessage = ResponseMessages.ExpenseListSuccessfullyInserted,
+                    Success = true,
+                    Error = false
+                };
+            }
+            catch (Exception e)
+            {
+                return new ResponseMessageDto()
+                {
+                    Id = Convert.ToInt16(Enums.FailureId),
+                    FailureMessage = ResponseMessages.ExpenseListInsertionFailed,
+                    Success = false,
+                    Error = true,
+                    ExceptionMessage = e.InnerException != null ? e.InnerException.Message : e.Message
+                };
             }
         }
     }

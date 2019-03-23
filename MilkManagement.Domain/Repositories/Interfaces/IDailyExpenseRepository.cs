@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using MilkManagement.Constants;
+using MilkManagement.Domain.Dto.RequestDto;
 using MilkManagement.Domain.Dto.ResponseDto;
+using MilkManagement.Domain.Entities.Expense;
 
 namespace MilkManagement.Domain.Repositories.Interfaces
 {
@@ -16,5 +19,6 @@ namespace MilkManagement.Domain.Repositories.Interfaces
         Task<bool> IsExpenseInsertedOnCurrentDate(int expenseId, DateTime date);
         Task<bool> IsExpenseInsertedOnCurrentDate(int expenseId, int expenseRateId, DateTime date);
         Task<IEnumerable<DailyExpenseDropdownDto>> GetDrpDown(DateTime date);
+        Task<int> ListPost(IEnumerable<DailyExpense> dto);
     }
 }

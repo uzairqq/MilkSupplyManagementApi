@@ -8,6 +8,6 @@ namespace MilkManagement.Domain.Entities.Expense
     {
         public int ExpenseId { get; set; }
         public string Rate { get; set; }
-        public virtual Expense Expense { get; set; }
+        public  Expense Expense { get; set; }
     }
 }

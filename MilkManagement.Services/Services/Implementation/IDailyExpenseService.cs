@@ -19,5 +19,6 @@ namespace MilkManagement.Services.Services.Implementation
         Task<IEnumerable<ExpenseRateResponseDto>> GetAllExpenseByDate(DateTime date);
         Task<IEnumerable<ExpenseRateResponseDto>> GetAllByToAndFromDate(DateTime fromDate, DateTime toDate);
         Task<IEnumerable<DailyExpenseDropdownDto>> GetDrpDown(DateTime date);
+        Task<ResponseMessageDto> ListPost(List<ExpenseRateRequestDto> dto);
     }
 }

@@ -21,6 +21,10 @@ namespace MilkManagement.Constants
         public const string ExpenseNameNotAvailable = "Expense Name Already In Use";
         public const string SupplierNameNotAvailable = "Supplier Name Already In Use";
         public const string ExpenseAlreadyHaveOnThisDate = "Expense Already Have On This Date";
+        public const string ExpenseListSuccessfullyInserted = "Expense Lists Successfully Inserted";
+        public const string ExpenseListInsertionFailed = "Expense Lists Insertion Failed";
+
+
 
     }
 }
