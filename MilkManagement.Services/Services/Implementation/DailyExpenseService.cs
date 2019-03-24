@@ -221,14 +221,15 @@ namespace MilkManagement.Services.Services.Implementation
             }
         }
 
-        public async Task<ResponseMessageDto> ListPost(List<ExpenseRateRequestDto> dto)
+        public async Task<ResponseMessageDto> ListPost(IEnumerable<ExpenseRateRequestDto> dto,DateTime date)
         {
             try
             {
+                //_expenseRateRepository.IsExpensesAlreadyInsertedOnThisDate(dto, date);
                 var model = dto.Select(i => new DailyExpense()
                 {
                     ExpenseId = i.ExpenseId,
-                    CreatedOn = DateTime.Now.Date,
+                    CreatedOn = date.Date,
                     Rate = i.Rate
                 });
                 var result= await _expenseRateRepository.ListPost(model);

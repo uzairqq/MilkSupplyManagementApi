@@ -222,5 +222,27 @@ namespace MilkManagement.Domain.Repositories.Implementation
                 throw;
             }
         }
+
+        //public void IsExpensesAlreadyInsertedOnThisDate(IEnumerable<ExpenseRateRequestDto> dto, DateTime date)
+        //{
+        //    try
+        //    {
+        //        var result = _dbContext.DailyExpense
+        //            .AsNoTracking()
+        //            .Where(i => !i.IsDeleted &&
+        //                        !_dbContext.DailyExpense
+        //                            .AsNoTracking()
+        //                            .Where(o => o.CreatedOn.Date == date && !o.IsDeleted)
+        //                            .Select(o => o.ExpenseId)
+        //                            .Contains(i.Id)
+        //            );
+                    
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Console.WriteLine(e);
+        //        throw;
+        //    }
+        //}
     }
 }

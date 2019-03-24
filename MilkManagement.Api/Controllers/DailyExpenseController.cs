@@ -188,13 +188,13 @@ namespace MilkManagement.Api.Controllers
             }
         }
 
-        [HttpPost("ListPost")]
-        public async Task<IActionResult> ListPost([FromBody] List<ExpenseRateRequestDto> dto)
+        [HttpPost("ListPost/date/{date}")]
+        public async Task<IActionResult> ListPost([FromBody] List<ExpenseRateRequestDto> dto,[FromRoute] DateTime date)
         {
             try
             {
                 if(!ModelState.IsValid) return  BadRequest(ModelState);
-                var result = await _expenseRatesService.ListPost(dto);
+                var result = await _expenseRatesService.ListPost(dto,date);
                 return Ok(result);
             }
             catch (Exception e)

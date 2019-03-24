@@ -20,5 +20,6 @@ namespace MilkManagement.Domain.Repositories.Interfaces
         Task<bool> IsExpenseInsertedOnCurrentDate(int expenseId, int expenseRateId, DateTime date);
         Task<IEnumerable<DailyExpenseDropdownDto>> GetDrpDown(DateTime date);
         Task<int> ListPost(IEnumerable<DailyExpense> dto);
+        //void IsExpensesAlreadyInsertedOnThisDate(IEnumerable<ExpenseRateRequestDto> dto, DateTime date);
     }
 }
