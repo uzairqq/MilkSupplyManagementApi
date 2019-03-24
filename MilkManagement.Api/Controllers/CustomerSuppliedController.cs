@@ -53,6 +53,22 @@ namespace MilkManagement.Api.Controllers
             }
         }
 
+        [HttpGet("fastEntry/date/{date}")]
+        public async Task<IActionResult> Get([FromRoute] DateTime date)
+        {
+            try
+            {
+                var result = await _customerSuppliedService.GetFashEntryData(date);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+
         //[HttpGet("all")]
         //public async Task<IActionResult> Get()
         //{
@@ -172,6 +188,21 @@ namespace MilkManagement.Api.Controllers
             try
             {
                 var result = await _customerSuppliedService.GeCustomerSuppliedtDropDownValues(typeId,date);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+        [HttpPost("ListPost/date/{date}")]
+        public async Task<IActionResult> ListPost([FromBody] IEnumerable<CustomerSuppliedRequestDto> dto, [FromRoute] DateTime date)
+        {
+            try
+            {
+                if (!ModelState.IsValid) return BadRequest(ModelState);
+                var result = await _customerSuppliedService.ListPost(dto, date);
                 return Ok(result);
             }
             catch (Exception e)

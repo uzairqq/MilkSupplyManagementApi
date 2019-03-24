@@ -213,7 +213,7 @@ namespace MilkManagement.Domain.Repositories.Implementation
         {
             try
             {
-                _dbContext.DailyExpense.AddRange(dto);
+               await _dbContext.DailyExpense.AddRangeAsync(dto);
                return await _dbContext.SaveChangesAsync();
             }
             catch (Exception e)

@@ -23,6 +23,8 @@ namespace MilkManagement.Constants
         public const string ExpenseAlreadyHaveOnThisDate = "Expense Already Have On This Date";
         public const string ExpenseListSuccessfullyInserted = "Expense Lists Successfully Inserted";
         public const string ExpenseListInsertionFailed = "Expense Lists Insertion Failed";
+        public const string CustomerSuppliedListSuccessfullyInserted = "Customer Supplied Successfully Inserted";
+        public const string CustomerSuppliedListFailed = "Customer Supplied Failed";
 
 
 

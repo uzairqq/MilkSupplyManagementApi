@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -284,7 +285,78 @@ namespace MilkManagement.Services.Services.Implementation
             }
         }
 
+        public async Task<ResponseMessageDto> ListPost(IEnumerable<CustomerSuppliedRequestDto> customerSupplied, DateTime date)
+        {
+            try
+            {
+                var customerSuppliedRequestDtos = customerSupplied.ToList();
+                foreach (var dto in customerSuppliedRequestDtos)
+                {
+                    var customerCurrentRate = _customerRateRepository.GetCurrentRateByCustomerId(dto.CustomerId);
 
+                    var supply =
+                        CustomerSuppliedCalculation.GetMorningSupplyAndAfterNoonSupply(dto.MorningSupply,
+                            dto.AfternoonSupply, customerCurrentRate);
 
+                    var sumUp = Convert.ToDouble(supply.morningsupply) + Convert.ToDouble(supply.afternoonSupply);
+                    dto.Rate = customerCurrentRate;
+                    dto.Debit = 0;
+                    var credit = sumUp - dto.Debit;
+                    dto.Credit = Convert.ToInt32(credit);
+                    dto.Total = sumUp;
+                    dto.MorningAmount = Convert.ToDouble(supply.morningsupply);
+                    dto.AfternoonAmount = Convert.ToDouble(supply.afternoonSupply);
+                  
+                }
+                var model = customerSuppliedRequestDtos.Select(i => new CustomerSupplied()
+                {
+                    CustomerId = i.CustomerId,
+                    CustomerTypeId = i.CustomerTypeId,
+                    MorningSupply = i.MorningSupply,
+                    AfternoonSupply = i.AfternoonSupply,
+                    CreatedOn = date.Date,
+                    Rate = Convert.ToInt32(i.Rate),
+                    MorningAmount = i.MorningAmount,
+                    AfternoonAmount = i.AfternoonAmount,
+                    Credit = i.Credit,
+                    Debit = i.Debit,
+                    Total = i.Total
+                });
+
+                var result = await _customerSuppliedRepository.ListPost(model);
+                return new ResponseMessageDto()
+                {
+                    Id = result,
+                    SuccessMessage = ResponseMessages.CustomerSuppliedListSuccessfullyInserted,
+                    Success = true,
+                    Error = false
+                };
+            }
+            catch (Exception e)
+            {
+                return new ResponseMessageDto()
+                {
+                    Id = Convert.ToInt16(Enums.FailureId),
+                    FailureMessage = ResponseMessages.CustomerSuppliedListFailed,
+                    Success = false,
+                    Error = true,
+                    ExceptionMessage = e.InnerException != null ? e.InnerException.Message : e.Message
+                };
+            }
+        }
+
+        public async Task<IEnumerable<GetFastEntryResponseDto>> GetFashEntryData(DateTime date)
+        {
+            try
+            {
+                var result = await _customerSuppliedRepository.GetFashEntryData(date);
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

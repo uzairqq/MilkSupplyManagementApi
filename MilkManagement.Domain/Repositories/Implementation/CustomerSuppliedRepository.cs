@@ -21,7 +21,7 @@ namespace MilkManagement.Domain.Repositories.Implementation
             _dbContext = dbContext;
         }
 
-        public bool IsCustomerRecordAvailableOnParticularDate(int customerId,DateTime date)
+        public bool IsCustomerRecordAvailableOnParticularDate(int customerId, DateTime date)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace MilkManagement.Domain.Repositories.Implementation
             }
         }
 
-        public bool IsCustomerRecordAvailableOnParticularDate(int customerId, int customerSupplierId,DateTime date)
+        public bool IsCustomerRecordAvailableOnParticularDate(int customerId, int customerSupplierId, DateTime date)
         {
             try
             {
@@ -66,7 +66,7 @@ namespace MilkManagement.Domain.Repositories.Implementation
                                 .AsNoTracking()
                                 .Where(o => o.CreatedOn.Date == dateTime.Date && !o.IsDeleted)
                                 .Select(o => o.CustomerId)
-                                .Contains(i.CustomerId))    
+                                .Contains(i.CustomerId))
                     .Select(i => new GeCustomerSuppliedtDropDownValuesDto()
                     {
                         CustomerId = i.CustomerId,
@@ -80,6 +80,47 @@ namespace MilkManagement.Domain.Repositories.Implementation
                 throw;
             }
         }
+
+        public async Task<int> ListPost(IEnumerable<CustomerSupplied> entity)
+        {
+            try
+            {
+                await _dbContext.CustomerSupplied.AddRangeAsync(entity);
+                return await _dbContext.SaveChangesAsync();
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public async Task<IEnumerable<GetFastEntryResponseDto>> GetFashEntryData(DateTime date)
+        {
+            try
+            {
+                var result = await _dbContext.CustomerSupplied
+                    .AsNoTracking()
+                    .Where(i => !i.IsDeleted && i.CreatedOn.Date==date.Date)
+                    .Select(i => new GetFastEntryResponseDto()
+                    {
+                        CustomerId=i.CustomerId,
+                        CustomerTypeId = i.CustomerTypeId,
+                        CustomerType = i.CustomerType.Type,
+                        CustomerName = i.Customer.Name,
+                        MorningSupply = i.MorningSupply,
+                        AfternoonSupply = i.AfternoonSupply
+                    }).ToListAsync();
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
         public async Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByDate(DateTime date)
         {
             try

@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MilkManagement.Constants;
 using MilkManagement.Domain.Dto.ResponseDto;
+using MilkManagement.Domain.Entities.Customer;
 
 namespace MilkManagement.Domain.Repositories.Interfaces
 {
@@ -19,5 +20,7 @@ namespace MilkManagement.Domain.Repositories.Interfaces
         // Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByCustomerIdStartDateAndEndDate(
         //int customerId, DateTime startDate, DateTime endDate);
         Task<IEnumerable<GeCustomerSuppliedtDropDownValuesDto>> GeCustomerSuppliedtDropDownValues(int typeId,DateTime dateTime);
+        Task<int> ListPost(IEnumerable<CustomerSupplied> entity);
+        Task<IEnumerable<GetFastEntryResponseDto>> GetFashEntryData(DateTime date);
     }
 }

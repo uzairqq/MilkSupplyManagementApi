@@ -24,5 +24,7 @@ namespace MilkManagement.Services.Services.Interfaces
         //    int customerId, DateTime startDate, DateTime endDate);
         Task<ResponseMessageDto> Delete(CustomerSuppliedRequestDto dto);
         Task<IEnumerable<GeCustomerSuppliedtDropDownValuesDto>> GeCustomerSuppliedtDropDownValues(int typeId,DateTime dateTime);
+       Task<ResponseMessageDto> ListPost(IEnumerable<CustomerSuppliedRequestDto> dto, DateTime date);
+       Task<IEnumerable<GetFastEntryResponseDto>> GetFashEntryData(DateTime date);
    }
 }
