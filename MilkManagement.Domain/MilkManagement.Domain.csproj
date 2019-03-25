@@ -5,33 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20180929113939_AddedCustomerTypeRelationToCustomer2.cs" />
-    <Compile Remove="Migrations\20180929120047_AddedCustomerTypeIntoCustomer.cs" />
-    <Compile Remove="Migrations\20180929120208_AddedCustomerTypeIntoCustomer.cs" />
-    <Compile Remove="Migrations\20180929120236_AddedCustomerTypeIntoCustomer.cs" />
-    <Compile Remove="Migrations\20181025063722_AddedCustomerTypeKeyInCustomerSupplied.cs" />
-    <Compile Remove="Migrations\20181025071003_RemovedCustomerTypeIdfromCustmerSupplied.cs" />
-    <Compile Remove="Migrations\20181026080408_Misc.cs" />
-    <Compile Remove="Migrations\20190117003352_AddedExpenseEntity.cs" />
-    <Compile Remove="Migrations\20190117004918_removed.cs" />
-    <Compile Remove="Migrations\20190117005709_adad.cs" />
-    <Compile Remove="Migrations\20190203111159_AddedCustomeSupplied.cs" />
-    <Compile Remove="Migrations\20190303181659_AddedCustomerTypeId.cs" />
-    <Compile Remove="Migrations\20190303185155_AddedCustomerIdByCustomerRatesIdInCustmerSupplied.cs" />
-    <Compile Remove="Migrations\20190303185444_RemovedCutomeRAes.cs" />
-    <Compile Remove="Migrations\20190303185634_a.cs" />
-    <Compile Remove="Migrations\20190303185952_a.cs" />
-    <Compile Remove="Migrations\20190303190606_a.cs" />
-    <Compile Remove="Migrations\20190303190828_AddedCustmerCustomrSupplied.cs" />
-    <Compile Remove="Migrations\20190303191533_a.cs" />
-    <Compile Remove="Migrations\20190303191637_s.cs" />
-    <Compile Remove="Migrations\20190303191936_a.cs" />
-    <Compile Remove="Migrations\20190303192735_a.cs" />
-    <Compile Remove="Migrations\20190303193356_a.cs" />
-    <Compile Remove="Migrations\20190303193848_a.cs" />
-    <Compile Remove="Migrations\20190303194105_a.cs" />
-    <Compile Remove="Migrations\20190303195609_a.cs" />
-    <Compile Remove="Migrations\20190303200512_a.cs" />
+    <Compile Remove="Migrations\**" />
+    <EmbeddedResource Remove="Migrations\**" />
+    <None Remove="Migrations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="Migrations\20190325151717_Add.cs" />
+    <Compile Include="Migrations\20190325151717_Add.Designer.cs" />
+    <Compile Include="Migrations\MilkManagementDbContextModelSnapshot.cs" />
   </ItemGroup>
 
   <ItemGroup>
