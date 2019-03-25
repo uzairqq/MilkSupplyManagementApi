@@ -13,7 +13,7 @@ namespace MilkManagement.Services.Services.Interfaces
         Task<ResponseMessageDto> Post(CustomerSuppliedRequestDto dto);
         Task<ResponseMessageDto> Put(CustomerSuppliedRequestDto dto);
         //Task<IEnumerable<CustomerSuppliedResponseDto>> Get();
-        Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByDate(DateTime date);
+        Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByDate(DateTime date,int customerTypeId);
         //Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByCustomerId(int customerId);
         //Task<CustomerSuppliedResponseDto> GetCustomerSuppliedByCustomerSuppliedId(int customerSuppliedId);
 

@@ -82,13 +82,13 @@ namespace MilkManagement.Api.Controllers
         //        throw;
         //    }
         //}
-        [HttpGet("all/selectedDate/{selectedDate}")]
-        public async Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByDate([FromRoute] DateTime selectedDate)
+        [HttpGet("all/selectedDate/{selectedDate}/customerTypeId/{customerTypeId}")]
+        public async Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByDate([FromRoute] DateTime selectedDate,int customerTypeId)
         
         {
             try
             {
-                var customerSupplied = await _customerSuppliedService.GetCustomerSuppliedByDate(selectedDate);
+                var customerSupplied = await _customerSuppliedService.GetCustomerSuppliedByDate(selectedDate, customerTypeId);
                 return customerSupplied;
             }
             catch (Exception e)

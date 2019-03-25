@@ -166,11 +166,11 @@ namespace MilkManagement.Services.Services.Implementation
         //    }
         //}
 
-        public async Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByDate(DateTime date)
+        public async Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByDate(DateTime date,int typeId)
         {
             try
             {
-                var customerSupplied = await _customerSuppliedRepository.GetCustomerSuppliedByDate(date);
+                var customerSupplied = await _customerSuppliedRepository.GetCustomerSuppliedByDate(date, typeId);
                 return customerSupplied;
             }
             catch (Exception e)

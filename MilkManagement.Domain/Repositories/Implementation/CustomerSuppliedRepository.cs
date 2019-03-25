@@ -121,13 +121,13 @@ namespace MilkManagement.Domain.Repositories.Implementation
             }
         }
 
-        public async Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByDate(DateTime date)
+        public async Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByDate(DateTime date,int typeId)
         {
             try
             {
                 var customerSupplied = _dbContext.CustomerSupplied
                     .AsNoTracking()
-                    .Where(i => i.CreatedOn.Date == date.Date && !i.IsDeleted)
+                    .Where(i => i.CreatedOn.Date == date.Date && !i.IsDeleted && i.CustomerTypeId==typeId)
                     .Select(i => new CustomerSuppliedResponseDto()
                     {
                         Id = i.Id,

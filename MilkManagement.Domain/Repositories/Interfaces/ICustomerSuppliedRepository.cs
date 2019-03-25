@@ -12,7 +12,7 @@ namespace MilkManagement.Domain.Repositories.Interfaces
     {
        bool IsCustomerRecordAvailableOnParticularDate(int customerId,DateTime date);
        bool IsCustomerRecordAvailableOnParticularDate(int customerId,int customerSupplierId,DateTime date);
-        Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByDate(DateTime date);
+        Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByDate(DateTime date,int typeId);
         //Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByCustomerId(int customerId);
         // Task<IEnumerable<CustomerSuppliedResponseDto>> GetCustomerSuppliedByStartAndEndDate(DateTime startDate,
         //  DateTime endDate);
