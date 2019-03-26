@@ -39,6 +39,26 @@ namespace MilkManagement.Api.Controllers
                 throw;
             }
         }
+        /// <summary>
+        /// To Update Customer
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] MarketSupplierRequestDto dto)
+        {
+            try
+            {
+                if (!ModelState.IsValid) return BadRequest(ModelState);
+                return Ok(await _marketSupplierService.Put(dto));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
 
     }
 }

@@ -29,5 +29,20 @@ namespace MilkManagement.Domain.Repositories.Implementation
                 throw;
             }
         }
+        public async Task<bool> IsMarketSupplierNameAvailable(int id, string name)
+        {
+            try
+            {
+                return await _dbContext.MarketSupplier
+                                        .AsNoTracking()
+                                        .AnyAsync(i => i.Id != id &&
+                                             i.MarketSupplierName.Equals(name, StringComparison.OrdinalIgnoreCase) && !i.IsDeleted);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

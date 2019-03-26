@@ -10,5 +10,6 @@ namespace MilkManagement.Services.Services.Interfaces
    public interface IMarketSupplierService
     {
         Task<ResponseMessageDto> Post(MarketSupplierRequestDto dto);
+        Task<ResponseMessageDto> Put(MarketSupplierRequestDto dto);
     }
 }
