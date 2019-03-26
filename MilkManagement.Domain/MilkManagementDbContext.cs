@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using MilkManagement.Core.Validator;
 using MilkManagement.Domain.Entities.Customer;
 using MilkManagement.Domain.Entities.Expense;
+using MilkManagement.Domain.Entities.Market;
 using MilkManagement.Domain.Entities.Supplier;
 
 namespace MilkManagement.Domain
@@ -25,6 +26,7 @@ namespace MilkManagement.Domain
         public DbSet<SupplierRate> SupplierRates { get; set; }
         public DbSet<SupplierSupplied> SupplierSupplied { get; set; }
         public DbSet<DailyExpense> DailyExpense{ get; set; }
+        public DbSet<MarketSupplier> MarketSupplier { get; set; }
 
         public Task<int> SaveChangesAsync()
         {

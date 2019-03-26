@@ -13,6 +13,8 @@
   <ItemGroup>
     <Compile Include="Migrations\20190325151717_Add.cs" />
     <Compile Include="Migrations\20190325151717_Add.Designer.cs" />
+    <Compile Include="Migrations\20190326151519_AddedMArketSupplier.cs" />
+    <Compile Include="Migrations\20190326151519_AddedMArketSupplier.Designer.cs" />
     <Compile Include="Migrations\MilkManagementDbContextModelSnapshot.cs" />
   </ItemGroup>
 
