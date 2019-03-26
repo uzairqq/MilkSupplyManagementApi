@@ -4,6 +4,7 @@ using MilkManagement.Domain.Dto.RequestDto;
 using MilkManagement.Domain.Dto.ResponseDto;
 using MilkManagement.Domain.Entities.Customer;
 using MilkManagement.Domain.Entities.Expense;
+using MilkManagement.Domain.Entities.Market;
 using MilkManagement.Domain.Entities.Supplier;
 
 namespace MilkManagement.Domain.Mappings
@@ -23,6 +24,11 @@ namespace MilkManagement.Domain.Mappings
             CreateMap<SupplierSupplied, SupplierSuppliedResponseDto>().ReverseMap();
             CreateMap<DailyExpense, ExpenseRateRequestDto>().ReverseMap();
             CreateMap<DailyExpense, ExpenseRateResponseDto>().ReverseMap();
+            CreateMap<MarketSupplier, MarketSupplierRequestDto>().ReverseMap();
+            CreateMap<MarketSupplier, MarketSupplierResponseDto>().ReverseMap();
+
+
+
 
 
             CreateMap<Expense, ExpenseRequestDto>().ReverseMap();

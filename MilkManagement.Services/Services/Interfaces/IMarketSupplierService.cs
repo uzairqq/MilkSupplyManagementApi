@@ -1,5 +1,6 @@
 ﻿using MilkManagement.Constants;
 using MilkManagement.Domain.Dto.RequestDto;
+using MilkManagement.Domain.Dto.ResponseDto;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -11,5 +12,7 @@ namespace MilkManagement.Services.Services.Interfaces
     {
         Task<ResponseMessageDto> Post(MarketSupplierRequestDto dto);
         Task<ResponseMessageDto> Put(MarketSupplierRequestDto dto);
+        Task<ResponseMessageDto> Delete(MarketSupplierRequestDto dto);
+        Task<IEnumerable<MarketSupplierResponseDto>> GetAll();
     }
 }

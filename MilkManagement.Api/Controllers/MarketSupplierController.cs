@@ -58,6 +58,44 @@ namespace MilkManagement.Api.Controllers
                 throw;
             }
         }
+        /// <summary>
+        /// Delete Customer
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns></returns>
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromBody] MarketSupplierRequestDto dto)
+        {
+            try
+            {
+                return Ok(await _marketSupplierService.Delete(dto));
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Market Supplier
+        /// Get ALL Market Suppliers
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet("all")]
+        public async Task<IActionResult> Get()
+        {
+            try
+            {
+                return Ok(await _marketSupplierService.GetAll());
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
 
 
     }

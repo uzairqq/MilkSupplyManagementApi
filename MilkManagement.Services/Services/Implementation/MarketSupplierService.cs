@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using MilkManagement.Constants;
 using MilkManagement.Domain.Dto.RequestDto;
+using MilkManagement.Domain.Dto.ResponseDto;
 using MilkManagement.Domain.Entities.Market;
 using MilkManagement.Domain.Repositories.Interfaces;
 using MilkManagement.Services.Services.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace MilkManagement.Services.Services.Implementation
@@ -94,6 +96,47 @@ namespace MilkManagement.Services.Services.Implementation
                     Error = true,
                     ExceptionMessage = e.InnerException != null ? e.InnerException.Message : e.Message
                 };
+            }
+        }
+
+        public async Task<ResponseMessageDto> Delete(MarketSupplierRequestDto dto)
+        {
+            try
+            {
+                await _asyncRepository.DeleteAsync(_mapper.Map<MarketSupplier>(dto));
+                return new ResponseMessageDto()
+                {
+                    Id = dto.Id,
+                    SuccessMessage = ResponseMessages.DeleteSuccessMessage,
+                    Success = true,
+                    Error = false
+                };
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return new ResponseMessageDto()
+                {
+                    Id = Convert.ToInt16(Enums.FailureId),
+                    FailureMessage = ResponseMessages.DeleteFailureMessage,
+                    Success = false,
+                    Error = true,
+                    ExceptionMessage = e.InnerException != null ? e.InnerException.Message : e.Message
+                };
+            }
+        }
+
+        public async Task<IEnumerable<MarketSupplierResponseDto>> GetAll()
+        {
+            try
+            {
+                var marketSupplier = await _asyncRepository.ListAllAsync<MarketSupplierResponseDto>();
+                return marketSupplier;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
             }
         }
     }

@@ -18,6 +18,7 @@ namespace MilkManagement.Services
             service.AddScoped<ISupplierRateServices, SupplierRatesServices>();
             service.AddScoped<ISupplierSuppliedServices, SupplierSuppliedServices>();
             service.AddScoped<IDailyExpenseService, DailyExpenseService>();
+            service.AddScoped<IMarketSupplierService, MarketSupplierService>();
         }
     }
 }
