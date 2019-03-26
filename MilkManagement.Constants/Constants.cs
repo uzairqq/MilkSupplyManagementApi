@@ -25,6 +25,7 @@ namespace MilkManagement.Constants
         public const string ExpenseListInsertionFailed = "Expense Lists Insertion Failed";
         public const string CustomerSuppliedListSuccessfullyInserted = "Customer Supplied Successfully Inserted";
         public const string CustomerSuppliedListFailed = "Customer Supplied Failed";
+        public const string MarketSupplierNameNotAvailable = "Market Supplier Name Not Available";
 
 
 
