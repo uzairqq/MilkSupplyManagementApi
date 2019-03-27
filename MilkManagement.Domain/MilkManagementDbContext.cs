@@ -27,6 +27,7 @@ namespace MilkManagement.Domain
         public DbSet<SupplierSupplied> SupplierSupplied { get; set; }
         public DbSet<DailyExpense> DailyExpense{ get; set; }
         public DbSet<MarketSupplier> MarketSupplier { get; set; }
+        public DbSet<MarketPurchase> MarketPurchase { get; set; }
 
         public Task<int> SaveChangesAsync()
         {
