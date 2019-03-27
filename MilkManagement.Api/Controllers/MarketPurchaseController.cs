@@ -65,6 +65,21 @@ namespace MilkManagement.Api.Controllers
                 throw e;
             }
         }
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] MarketPurchaseRequestDto dto)
+        {
+            try
+            {
+                var result = await _marketPurchase.Put(dto);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
 
     }
 }

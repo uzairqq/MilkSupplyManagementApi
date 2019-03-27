@@ -18,7 +18,10 @@ namespace MilkManagement.Services.Services.Implementation
         private readonly IAsyncRepository<MarketPurchase> _asyncRepository;
         private readonly IMapper _mapper;
         private readonly IMarketPurchaseRepository _marketPurchaseRepository;
-        public MarketPurchaseService(IAsyncRepository<MarketPurchase> asyncRepository, IMapper mapper, IMarketPurchaseRepository marketPurchaseRepository)
+        public MarketPurchaseService(
+            IAsyncRepository<MarketPurchase> asyncRepository,
+            IMapper mapper,
+            IMarketPurchaseRepository marketPurchaseRepository)
         {
             _asyncRepository = asyncRepository;
             _mapper = mapper;
@@ -48,7 +51,7 @@ namespace MilkManagement.Services.Services.Implementation
             }
             catch (Exception e)
             {
-
+                Console.WriteLine(e);
                 throw e;
             }
         }
@@ -60,38 +63,17 @@ namespace MilkManagement.Services.Services.Implementation
                 //if (!await _supplierSuppliedRepository.IsMarketSupplierInsertedOnCurrentDate(dto.MarketSupplierId))
                 //{
 
-                var supply =
+                var (morningsupply, afternoonSupply) =
                     MarketPurchaseCalculation.GetMorningSupplyAndAfterNoonSupply(dto.MorningPurchase,
                         dto.AfternoonPurchase, Convert.ToInt32(dto.MorningRate), Convert.ToInt32(dto.AfternoonRate));
-                var sumUp = Convert.ToDouble(supply.morningsupply) +
-                            Convert.ToDouble(supply.afternoonSupply);
-                //int addAllComissionValues = SupplierComissionCalulate(dto);
+                var sumUp = Convert.ToDouble(morningsupply) +
+                            Convert.ToDouble(afternoonSupply);
                 string grandMilkTotal = TotalMilkCalculate.TotalMilkCalulate(dto.MorningPurchase, dto.AfternoonPurchase);
-                dto.MorningAmount = supply.morningsupply;
-                dto.AfternoonAmount = supply.afternoonSupply;
-                dto.TotalAmount =Convert.ToInt32(sumUp);
+                dto.MorningAmount = morningsupply;
+                dto.AfternoonAmount = afternoonSupply;
+                dto.TotalAmount = Convert.ToInt32(sumUp);
                 dto.TotalMilk = grandMilkTotal;
                 var marketPucrchase = await _asyncRepository.AddAsync(_mapper.Map<MarketPurchase>(dto));
-                //var market = await _supplierSuppliedRepository.AddMarketSupplierSupplied(
-                //        new MarketSupplierSupplied()
-                //        {
-                //            FkMarketSupplierId = dto.MarketSupplierId,
-                //            Morning = dto.Morning,
-                //            MorningMilkRate = dto.MorningMilkRate,
-                //            Afternoon = dto.Afternoon,
-                //            AfternoonMilkRate = dto.AfternoonMilkRate,
-                //            MorningAmount = supply.morningsupply,
-                //            AfternoonAmount = supply.afternoonSupply,
-                //            TotalMilk = grandMilkTotal,
-                //            ComissionRate = dto.ComissionRate,
-                //            TotalComission = addAllComissionValues,
-                //            Debit = dto.Debit,
-                //            Credit = Convert.ToString(credit),
-                //            Total = Convert.ToString(sumUp, CultureInfo.InvariantCulture),
-                //            CreatedOn = dto.CreatedOn.date
-
-                //            CreatedById = dto.CreatedById
-                //        });
 
                 return new ResponseMessageDto()
                 {
@@ -116,6 +98,54 @@ namespace MilkManagement.Services.Services.Implementation
                 {
                     Id = Convert.ToInt16(Enums.FailureId),
                     FailureMessage = ResponseMessages.InsertionFailureMessage,
+                    Success = false,
+                    Error = true,
+                    ExceptionMessage = e.InnerException != null ? e.InnerException.Message : e.Message
+                };
+            }
+        }
+
+        public async Task<ResponseMessageDto> Put(MarketPurchaseRequestDto dto)
+        {
+            try
+            {
+                var (morningsupply, afternoonSupply) =
+                   MarketPurchaseCalculation.GetMorningSupplyAndAfterNoonSupply(dto.MorningPurchase,
+                       dto.AfternoonPurchase, Convert.ToInt32(dto.MorningRate), Convert.ToInt32(dto.AfternoonRate));
+                var sumUp = Convert.ToDouble(morningsupply) +
+                            Convert.ToDouble(afternoonSupply);
+                string grandMilkTotal = TotalMilkCalculate.TotalMilkCalulate(dto.MorningPurchase, dto.AfternoonPurchase);
+                dto.MorningAmount = morningsupply;
+                dto.AfternoonAmount = afternoonSupply;
+                dto.TotalAmount = Convert.ToInt32(sumUp);
+                dto.TotalMilk = grandMilkTotal;
+                await _asyncRepository.PartialUpdate(dto, m => ///yahan woh values aengi jo ke update karni hongi 
+                {
+                    m.MarketSupplierId = dto.MarketSupplierId;
+                    m.MorningPurchase = dto.MorningPurchase;
+                    m.MorningRate = dto.MorningRate;
+                    m.MorningAmount = dto.MorningAmount;
+                    m.AfternoonPurchase = dto.AfternoonPurchase;
+                    m.AfternoonAmount = dto.AfternoonAmount;
+                    m.AfternoonRate = dto.AfternoonRate;
+                    m.TotalAmount = dto.TotalAmount;
+                    m.TotalMilk = dto.TotalMilk;
+                });
+                return new ResponseMessageDto()
+                {
+                    Id = dto.Id,
+                    SuccessMessage = ResponseMessages.UpdateSuccessMessage,
+                    Success = true,
+                    Error = false
+                };
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return new ResponseMessageDto()
+                {
+                    Id = Convert.ToInt16(Enums.FailureId),
+                    FailureMessage = ResponseMessages.UpdateFailureMessage,
                     Success = false,
                     Error = true,
                     ExceptionMessage = e.InnerException != null ? e.InnerException.Message : e.Message

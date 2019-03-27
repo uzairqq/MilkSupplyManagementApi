@@ -13,5 +13,6 @@ namespace MilkManagement.Services.Services.Interfaces
         Task<ResponseMessageDto> Post(MarketPurchaseRequestDto dto);
         Task<IEnumerable<MarketSupplierDropDownResponseDto>> GeCustomerSuppliedtDropDownValues(DateTime date);
         Task<IEnumerable<MarketPurchaseResponseDto>> GetGrid(DateTime date);
+        Task<ResponseMessageDto> Put(MarketPurchaseRequestDto dto);
     }
 }
