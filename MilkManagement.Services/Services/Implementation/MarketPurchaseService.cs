@@ -28,6 +28,33 @@ namespace MilkManagement.Services.Services.Implementation
             _marketPurchaseRepository = marketPurchaseRepository;
         }
 
+        public async Task<ResponseMessageDto> Delete(MarketPurchaseRequestDto dto)
+        {
+            try
+            {
+                await _asyncRepository.DeleteAsync(_mapper.Map<MarketPurchase>(dto));
+                return new ResponseMessageDto()
+                {
+                    Id = dto.Id,
+                    SuccessMessage = ResponseMessages.DeleteSuccessMessage,
+                    Success = true,
+                    Error = false
+                };
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return new ResponseMessageDto()
+                {
+                    Id = Convert.ToInt16(Enums.FailureId),
+                    FailureMessage = ResponseMessages.DeleteFailureMessage,
+                    Success = false,
+                    Error = true,
+                    ExceptionMessage = e.InnerException != null ? e.InnerException.Message : e.Message
+                };
+            }
+        }
+
         public async Task<IEnumerable<MarketSupplierDropDownResponseDto>> GeCustomerSuppliedtDropDownValues(DateTime date)
         {
             try

@@ -79,6 +79,22 @@ namespace MilkManagement.Api.Controllers
                 throw;
             }
         }
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromBody] MarketPurchaseRequestDto dto)
+        {
+            try
+            {
+                var result = await _marketPurchase.Delete(dto);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw e;
+            }
+        }
+
+
 
 
     }
