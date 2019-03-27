@@ -17,6 +17,37 @@ namespace MilkManagement.Domain.Repositories.Implementation
         {
             _dbContext = dbContext;
         }
+
+        public async Task<IEnumerable<MarketPurchaseResponseDto>> GetGrid(DateTime date)
+        {
+            try
+            {
+                var result = await _dbContext.MarketPurchase
+                    .AsNoTracking()
+                    .Where(i => i.CreatedOn.Date == date && !i.IsDeleted)
+                    .Select(i => new MarketPurchaseResponseDto()
+                    {
+                        Id=i.Id,
+                        MarketSupplierId=i.MarketSupplierId,
+                        MarketSupplierName=i.MarketSupplier.MarketSupplierName,
+                        MorningPurchase=i.MorningPurchase,
+                        MorningRate=i.MorningRate,
+                        MorningAmount=i.MorningAmount,
+                        AfternoonPurchase=i.AfternoonPurchase,
+                        AfternoonAmount=i.AfternoonAmount,
+                        AfternoonRate=i.AfternoonRate,
+                        TotalMilk=i.TotalMilk,
+                        TotalAmount=i.TotalAmount
+                    }).ToListAsync();
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw e;
+            }
+        }
+
         public async Task<IEnumerable<MarketSupplierDropDownResponseDto>> GetMarketPurchasetDropDownValues(DateTime dateTime)
         {
             try

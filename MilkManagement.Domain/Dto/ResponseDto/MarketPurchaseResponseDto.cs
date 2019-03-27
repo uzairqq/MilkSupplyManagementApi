@@ -7,6 +7,7 @@ namespace MilkManagement.Domain.Dto.ResponseDto
 {
    public class MarketPurchaseResponseDto:BaseEntity
     {
+        public string MarketSupplierName { get; set; }
         public int MarketSupplierId { get; set; }
         public string MorningPurchase { get; set; }
         public int MorningRate { get; set; }
@@ -14,7 +15,8 @@ namespace MilkManagement.Domain.Dto.ResponseDto
         public string AfternoonPurchase { get; set; }
         public int AfternoonRate { get; set; }
         public string AfternoonAmount { get; set; }
-        public int Total { get; set; }
+        public string TotalMilk { get; set; }
+        public int TotalAmount   { get; set; }
 
     }
 

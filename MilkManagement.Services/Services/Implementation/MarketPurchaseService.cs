@@ -39,6 +39,20 @@ namespace MilkManagement.Services.Services.Implementation
             }
         }
 
+        public async Task<IEnumerable<MarketPurchaseResponseDto>> GetGrid(DateTime date)
+        {
+            try
+            {
+                var result = await _marketPurchaseRepository.GetGrid(date);
+                return result;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+
         public async Task<ResponseMessageDto> Post(MarketPurchaseRequestDto dto)
         {
             try

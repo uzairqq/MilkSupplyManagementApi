@@ -9,5 +9,6 @@ namespace MilkManagement.Domain.Repositories.Interfaces
     public interface IMarketPurchaseRepository
     {
         Task<IEnumerable<MarketSupplierDropDownResponseDto>> GetMarketPurchasetDropDownValues(DateTime dateTime);
+        Task<IEnumerable<MarketPurchaseResponseDto>> GetGrid(DateTime date);
     }
 }
