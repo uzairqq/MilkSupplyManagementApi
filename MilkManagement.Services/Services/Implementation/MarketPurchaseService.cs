@@ -2,6 +2,7 @@
 using MilkManagement.CommonLibrary.Functions;
 using MilkManagement.Constants;
 using MilkManagement.Domain.Dto.RequestDto;
+using MilkManagement.Domain.Dto.ResponseDto;
 using MilkManagement.Domain.Entities.Market;
 using MilkManagement.Domain.Repositories.Interfaces;
 using MilkManagement.Services.Services.Interfaces;
@@ -16,11 +17,28 @@ namespace MilkManagement.Services.Services.Implementation
     {
         private readonly IAsyncRepository<MarketPurchase> _asyncRepository;
         private readonly IMapper _mapper;
-        public MarketPurchaseService(IAsyncRepository<MarketPurchase> asyncRepository, IMapper mapper)
+        private readonly IMarketPurchaseRepository _marketPurchaseRepository;
+        public MarketPurchaseService(IAsyncRepository<MarketPurchase> asyncRepository, IMapper mapper, IMarketPurchaseRepository marketPurchaseRepository)
         {
             _asyncRepository = asyncRepository;
             _mapper = mapper;
+            _marketPurchaseRepository = marketPurchaseRepository;
         }
+
+        public async Task<IEnumerable<MarketSupplierDropDownResponseDto>> GeCustomerSuppliedtDropDownValues(DateTime date)
+        {
+            try
+            {
+                var result = await _marketPurchaseRepository.GetMarketPurchasetDropDownValues(date);
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw e;
+            }
+        }
+
         public async Task<ResponseMessageDto> Post(MarketPurchaseRequestDto dto)
         {
             try

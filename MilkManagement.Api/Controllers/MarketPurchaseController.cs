@@ -35,5 +35,12 @@ namespace MilkManagement.Api.Controllers
             }
         }
 
+        [HttpGet("drpDownAll/date/{date}")]
+        public async Task<IActionResult> Get([FromRoute] DateTime date)
+        {
+            var result = await _marketPurchase.GeCustomerSuppliedtDropDownValues(date);
+            return Ok(result);
+        }
+
     }
 }
