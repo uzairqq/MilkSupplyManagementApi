@@ -1,10 +1,11 @@
-﻿using System;
+﻿using MilkManagement.Domain.Entities;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace MilkManagement.Domain.Entities.Market
+namespace MilkManagement.Domain.Dto.RequestDto
 {
-   public class MarketPurchase:BaseEntity
+   public class MarketPurchaseRequestDto:BaseEntity
     {
         public int MarketSupplierId { get; set; }
         public string MorningPurchase { get; set; }
@@ -14,9 +15,7 @@ namespace MilkManagement.Domain.Entities.Market
         public int AfternoonRate { get; set; }
         public string AfternoonAmount { get; set; }
         public int TotalAmount { get; set; }
-        public string TotalMilk { get; set; }
+        public string TotalMilk  { get; set; }
 
-
-        public MarketSupplier MarketSupplier { get; set; }
     }
 }

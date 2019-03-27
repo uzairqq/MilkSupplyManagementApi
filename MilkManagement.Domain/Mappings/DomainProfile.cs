@@ -26,7 +26,8 @@ namespace MilkManagement.Domain.Mappings
             CreateMap<DailyExpense, ExpenseRateResponseDto>().ReverseMap();
             CreateMap<MarketSupplier, MarketSupplierRequestDto>().ReverseMap();
             CreateMap<MarketSupplier, MarketSupplierResponseDto>().ReverseMap();
-
+            CreateMap<MarketPurchase, MarketPurchaseRequestDto>().ReverseMap();
+            CreateMap<MarketPurchaseResponseDto, MarketPurchaseResponseDto>().ReverseMap();
 
 
 

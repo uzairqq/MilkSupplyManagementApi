@@ -17,6 +17,8 @@
     <Compile Include="Migrations\20190326151519_AddedMArketSupplier.Designer.cs" />
     <Compile Include="Migrations\20190327093123_AddedMarketPurchase.cs" />
     <Compile Include="Migrations\20190327093123_AddedMarketPurchase.Designer.cs" />
+    <Compile Include="Migrations\20190327115251_AddedTwoPropsInMarketPurchase.cs" />
+    <Compile Include="Migrations\20190327115251_AddedTwoPropsInMarketPurchase.Designer.cs" />
     <Compile Include="Migrations\MilkManagementDbContextModelSnapshot.cs" />
   </ItemGroup>
 
