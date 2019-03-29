@@ -28,6 +28,8 @@ namespace MilkManagement.Domain.Mappings
             CreateMap<MarketSupplier, MarketSupplierResponseDto>().ReverseMap();
             CreateMap<MarketPurchase, MarketPurchaseRequestDto>().ReverseMap();
             CreateMap<MarketPurchaseResponseDto, MarketPurchaseResponseDto>().ReverseMap();
+            CreateMap<MarketSell, MarketSellRequestDto>().ReverseMap();
+            CreateMap<MarketSell, MarketSellResponseDto>().ReverseMap();
 
 
 
