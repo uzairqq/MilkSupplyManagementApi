@@ -19,6 +19,8 @@
     <Compile Include="Migrations\20190327093123_AddedMarketPurchase.Designer.cs" />
     <Compile Include="Migrations\20190327115251_AddedTwoPropsInMarketPurchase.cs" />
     <Compile Include="Migrations\20190327115251_AddedTwoPropsInMarketPurchase.Designer.cs" />
+    <Compile Include="Migrations\20190329214825_AddedMarketSell.cs" />
+    <Compile Include="Migrations\20190329214825_AddedMarketSell.Designer.cs" />
     <Compile Include="Migrations\MilkManagementDbContextModelSnapshot.cs" />
   </ItemGroup>
 
@@ -32,6 +34,12 @@
     <ProjectReference Include="..\MilkManagement.Constants\MilkManagement.Constants.csproj" />
     <ProjectReference Include="..\MilkManagement.Core\MilkManagement.Core.csproj" />
     <ProjectReference Include="..\MilkManagement.Utils\MilkManagement.CommonLibrary.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\newtonsoft.json\11.0.2\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
