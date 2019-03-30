@@ -18,5 +18,6 @@ namespace MilkManagement.Domain.Dto.ResponseDto
         public int ComissionRate { get; set; }
         public int? TotalComission { get; set; }
         public string TotalMilk { get; set; }
+        public string MarketSupplierName { get;  set; }
     }
 }

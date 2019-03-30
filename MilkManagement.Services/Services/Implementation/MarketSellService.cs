@@ -17,10 +17,12 @@ namespace MilkManagement.Services.Services.Implementation
     {
         private readonly IAsyncRepository<MarketSell> _asyncRepository;
         private readonly IMapper _mapper;
-        public MarketSellService(IAsyncRepository<MarketSell> asyncRepository, IMapper mapper)
+        private readonly IMarketSellRepository _marketSell;
+        public MarketSellService(IAsyncRepository<MarketSell> asyncRepository, IMapper mapper, IMarketSellRepository marketSell)
         {
             _asyncRepository = asyncRepository;
             _mapper = mapper;
+            _marketSell = marketSell;
         }
 
         public async Task<ResponseMessageDto> Post(MarketSellRequestDto dto)
@@ -44,27 +46,6 @@ namespace MilkManagement.Services.Services.Implementation
                 dto.TotalMilk = grandMilkTotal;
                 dto.CreatedOn = dto.CreatedOn;
                 var marketSell = await _asyncRepository.AddAsync(_mapper.Map<MarketSell>(dto));
-
-                //var market = await _asyncRepository.AddMarketSupplierSupplied(
-                //        new MarketSupplierSupplied()
-                //        {
-                //            FkMarketSupplierId = dto.MarketSupplierId,
-                //            Morning = dto.Morning,
-                //            MorningMilkRate = dto.MorningMilkRate,
-                //            Afternoon = dto.Afternoon,
-                //            AfternoonMilkRate = dto.AfternoonMilkRate,
-                //            MorningAmount = supply.morningsupply,
-                //            AfternoonAmount = supply.afternoonSupply,
-                //            TotalMilk = grandMilkTotal,
-                //            ComissionRate = dto.ComissionRate,
-                //            TotalComission = addAllComissionValues,
-                //            Debit = dto.Debit,
-                //            Credit = Convert.ToString(credit),
-                //            Total = Convert.ToString(sumUp, CultureInfo.InvariantCulture),
-                //            CreatedOn = dto.date,
-                //            CreatedById = dto.CreatedById
-                //        });
-
                 return new ResponseMessageDto()
                 {
                     Id = marketSell.Id,
@@ -100,9 +81,18 @@ namespace MilkManagement.Services.Services.Implementation
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<MarketSellResponseDto>> GetGridData(DateTime date)
+        public async Task<IEnumerable<MarketSellResponseDto>> GetGridData(DateTime date)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var result = await _marketSell.GetGrid(date);
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw e;
+            }
         }
 
 
