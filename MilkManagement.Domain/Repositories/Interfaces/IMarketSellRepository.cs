@@ -9,5 +9,7 @@ namespace MilkManagement.Domain.Repositories.Interfaces
     public interface IMarketSellRepository
     {
         Task<IEnumerable<MarketSellResponseDto>> GetGrid(DateTime date);
+        Task<bool> IsMarketSupplierInsertedOnCurrentDate(int marketSupplierId);
+        Task<bool> IsMarketSupplierInsertedOnCurrentDate(int marketSupplierId, int marketsellId);
     }
 }

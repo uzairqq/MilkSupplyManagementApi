@@ -51,5 +51,40 @@ namespace MilkManagement.Domain.Repositories.Implementation
                 throw e;
             }
         }
+        public async Task<bool> IsMarketSupplierInsertedOnCurrentDate(int marketSupplierId)
+        {
+            try
+            {
+
+                var market = await _dbContext.MarketSell
+                    .AsNoTracking()
+                    .AnyAsync(i => i.MarketSupplierId == marketSupplierId && i.CreatedOn.Date == DateTime.Now.Date &&
+                              !i.IsDeleted);
+                return  market;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public async Task<bool> IsMarketSupplierInsertedOnCurrentDate(int marketSupplierId, int marketSellId)
+        {
+            try
+            {
+                var market = await _dbContext.MarketSell
+                    .AsNoTracking()
+                    .AnyAsync(i => i.MarketSupplierId == marketSupplierId &&
+                              i.Id != marketSellId &&
+                              i.CreatedOn.Date == DateTime.Now.Date && !i.IsDeleted);
+                return  market;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }
