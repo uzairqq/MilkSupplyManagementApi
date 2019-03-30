@@ -39,7 +39,9 @@ namespace MilkManagement.Domain.Repositories.Implementation
                         AfternoonAmount = i.AfternoonAmount,
                         AfternoonRate = i.AfternoonRate,
                         TotalMilk = i.TotalMilk,
-                        TotalAmount = i.Total
+                        TotalAmount = i.Total,
+                        ComissionRate=i.ComissionRate,
+                        TotalComission=i.TotalComission
                     }).ToListAsync();
                 return result;
             }
