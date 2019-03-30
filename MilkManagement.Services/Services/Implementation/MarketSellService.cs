@@ -35,24 +35,24 @@ namespace MilkManagement.Services.Services.Implementation
                     var (morningsupply, afternoonSupply) =
                     MarketSellCalculate.GetMorningSupplyAndAfterNoonSupply(dto.MorningSell,
                             dto.AfternoonSell, Convert.ToInt32(dto.MorningRate), Convert.ToInt32(dto.AfternoonRate));
-                var sumUp = Convert.ToDouble(morningsupply) +
-                            Convert.ToDouble(afternoonSupply);
-                int addAllComissionValues = SupplierCommissionCalculate.SupplierComissionCalulate(dto.MorningSell, dto.AfternoonSell, dto.ComissionRate);
-                string grandMilkTotal = TotalMilkCalculate.TotalMilkCalulate(dto.MorningSell, dto.AfternoonSell);
-                dto.MorningAmount = morningsupply;
-                dto.AfternoonAmount = afternoonSupply;
-                dto.TotalComission = addAllComissionValues;
-                dto.Total = sumUp.ToString();
-                dto.TotalMilk = grandMilkTotal;
-                dto.CreatedOn = dto.CreatedOn;
-                var marketSell = await _asyncRepository.AddAsync(_mapper.Map<MarketSell>(dto));
-                return new ResponseMessageDto()
-                {
-                    Id = marketSell.Id,
-                    SuccessMessage = ResponseMessages.InsertionSuccessMessage,
-                    Success = true,
-                    Error = false
-                };
+                    var sumUp = Convert.ToDouble(morningsupply) +
+                                Convert.ToDouble(afternoonSupply);
+                    int addAllComissionValues = SupplierCommissionCalculate.SupplierComissionCalulate(dto.MorningSell, dto.AfternoonSell, dto.ComissionRate);
+                    string grandMilkTotal = TotalMilkCalculate.TotalMilkCalulate(dto.MorningSell, dto.AfternoonSell);
+                    dto.MorningAmount = morningsupply;
+                    dto.AfternoonAmount = afternoonSupply;
+                    dto.TotalComission = addAllComissionValues;
+                    dto.Total = sumUp.ToString();
+                    dto.TotalMilk = grandMilkTotal;
+                    dto.CreatedOn = dto.CreatedOn;
+                    var marketSell = await _asyncRepository.AddAsync(_mapper.Map<MarketSell>(dto));
+                    return new ResponseMessageDto()
+                    {
+                        Id = marketSell.Id,
+                        SuccessMessage = ResponseMessages.InsertionSuccessMessage,
+                        Success = true,
+                        Error = false
+                    };
                 }
                 return new ResponseMessageDto()
                 {
@@ -81,7 +81,7 @@ namespace MilkManagement.Services.Services.Implementation
         {
             try
             {
-                 await _asyncRepository.DeleteAsync(_mapper.Map<MarketSell>(dto));
+                await _asyncRepository.DeleteAsync(_mapper.Map<MarketSell>(dto));
                 return new ResponseMessageDto()
                 {
                     Id = dto.Id,
@@ -130,38 +130,38 @@ namespace MilkManagement.Services.Services.Implementation
                     var (morningsupply, afternoonSupply) =
                    MarketSellCalculate.GetMorningSupplyAndAfterNoonSupply(dto.MorningSell,
                            dto.AfternoonSell, Convert.ToInt32(dto.MorningRate), Convert.ToInt32(dto.AfternoonRate));
-                var sumUp = Convert.ToDouble(morningsupply) +
-                            Convert.ToDouble(afternoonSupply);
-                int addAllComissionValues = SupplierCommissionCalculate.SupplierComissionCalulate(dto.MorningSell, dto.AfternoonSell, dto.ComissionRate);
-                string grandMilkTotal = TotalMilkCalculate.TotalMilkCalulate(dto.MorningSell, dto.AfternoonSell);
-                dto.MorningAmount = morningsupply;
-                dto.AfternoonAmount = afternoonSupply;
-                dto.TotalComission = addAllComissionValues;
-                dto.Total = sumUp.ToString();
-                dto.TotalMilk = grandMilkTotal;
+                    var sumUp = Convert.ToDouble(morningsupply) +
+                                Convert.ToDouble(afternoonSupply);
+                    int addAllComissionValues = SupplierCommissionCalculate.SupplierComissionCalulate(dto.MorningSell, dto.AfternoonSell, dto.ComissionRate);
+                    string grandMilkTotal = TotalMilkCalculate.TotalMilkCalulate(dto.MorningSell, dto.AfternoonSell);
+                    dto.MorningAmount = morningsupply;
+                    dto.AfternoonAmount = afternoonSupply;
+                    dto.TotalComission = addAllComissionValues;
+                    dto.Total = sumUp.ToString();
+                    dto.TotalMilk = grandMilkTotal;
 
-                await _asyncRepository.PartialUpdate(dto, m => ///yahan woh values aengi jo ke update karni hongi 
-                {
-                    m.MarketSupplierId = dto.MarketSupplierId;
-                    m.MorningSell = dto.MorningSell;
-                    m.MorningRate = dto.MorningRate;
-                    m.MorningAmount = dto.MorningAmount;
-                    m.AfternoonSell = dto.AfternoonSell;
-                    m.AfternoonAmount = dto.AfternoonAmount;
-                    m.AfternoonRate = dto.AfternoonRate;
-                    m.ComissionRate = dto.ComissionRate;
-                    m.TotalComission = dto.TotalComission;
-                    m.Total = dto.Total;
-                    m.TotalMilk = dto.TotalMilk;
-                });
-               
-                return new ResponseMessageDto()
-                {
-                    Id = dto.Id,
-                    SuccessMessage = ResponseMessages.UpdateSuccessMessage,
-                    Success = true,
-                    Error = false
-                };
+                    await _asyncRepository.PartialUpdate(dto, m => ///yahan woh values aengi jo ke update karni hongi 
+                    {
+                        m.MarketSupplierId = dto.MarketSupplierId;
+                        m.MorningSell = dto.MorningSell;
+                        m.MorningRate = dto.MorningRate;
+                        m.MorningAmount = dto.MorningAmount;
+                        m.AfternoonSell = dto.AfternoonSell;
+                        m.AfternoonAmount = dto.AfternoonAmount;
+                        m.AfternoonRate = dto.AfternoonRate;
+                        m.ComissionRate = dto.ComissionRate;
+                        m.TotalComission = dto.TotalComission;
+                        m.Total = dto.Total;
+                        m.TotalMilk = dto.TotalMilk;
+                    });
+
+                    return new ResponseMessageDto()
+                    {
+                        Id = dto.Id,
+                        SuccessMessage = ResponseMessages.UpdateSuccessMessage,
+                        Success = true,
+                        Error = false
+                    };
                 }
                 return new ResponseMessageDto()
                 {

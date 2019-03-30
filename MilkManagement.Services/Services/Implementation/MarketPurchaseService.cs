@@ -87,10 +87,10 @@ namespace MilkManagement.Services.Services.Implementation
         {
             try
             {
-                //if (!await _supplierSuppliedRepository.IsMarketSupplierInsertedOnCurrentDate(dto.MarketSupplierId))
-                //{
+                if (!await _marketPurchaseRepository.IsMarketSupplierInsertedOnCurrentDate(dto.MarketSupplierId))
+                {
 
-                var (morningsupply, afternoonSupply) =
+                    var (morningsupply, afternoonSupply) =
                     MarketPurchaseCalculation.GetMorningSupplyAndAfterNoonSupply(dto.MorningPurchase,
                         dto.AfternoonPurchase, Convert.ToInt32(dto.MorningRate), Convert.ToInt32(dto.AfternoonRate));
                 var sumUp = Convert.ToDouble(morningsupply) +
@@ -109,13 +109,14 @@ namespace MilkManagement.Services.Services.Implementation
                     Success = true,
                     Error = false
                 };
-                //}
-                //return new ReponseMessagesDto()
-                //{
-                //    Success = false,
-                //    FailureMessage = "You Have Already Added This Market Supplier In This Date",
-                //    Error = true
-                //};
+                }
+                return new ResponseMessageDto()
+                {
+                    Id = Convert.ToInt16(Enums.FailureId),
+                    FailureMessage = ResponseMessages.SupplierAlreadyInsertedInThisDate,
+                    Success = false,
+                    Error = true
+                };
 
             }
             catch (Exception e)

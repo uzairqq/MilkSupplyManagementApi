@@ -10,5 +10,7 @@ namespace MilkManagement.Domain.Repositories.Interfaces
     {
         Task<IEnumerable<MarketSupplierDropDownResponseDto>> GetMarketPurchasetDropDownValues(DateTime dateTime);
         Task<IEnumerable<MarketPurchaseResponseDto>> GetGrid(DateTime date);
+        Task<bool> IsMarketSupplierInsertedOnCurrentDate(int marketSupplierId);
+        Task<bool> IsMarketSupplierInsertedOnCurrentDate(int marketSupplierId, int marketSupplierSupplied);
     }
 }

@@ -27,17 +27,17 @@ namespace MilkManagement.Domain.Repositories.Implementation
                     .Where(i => i.CreatedOn.Date == date && !i.IsDeleted)
                     .Select(i => new MarketPurchaseResponseDto()
                     {
-                        Id=i.Id,
-                        MarketSupplierId=i.MarketSupplierId,
-                        MarketSupplierName=i.MarketSupplier.MarketSupplierName,
-                        MorningPurchase=i.MorningPurchase,
-                        MorningRate=i.MorningRate,
-                        MorningAmount=i.MorningAmount,
-                        AfternoonPurchase=i.AfternoonPurchase,
-                        AfternoonAmount=i.AfternoonAmount,
-                        AfternoonRate=i.AfternoonRate,
-                        TotalMilk=i.TotalMilk,
-                        TotalAmount=i.TotalAmount
+                        Id = i.Id,
+                        MarketSupplierId = i.MarketSupplierId,
+                        MarketSupplierName = i.MarketSupplier.MarketSupplierName,
+                        MorningPurchase = i.MorningPurchase,
+                        MorningRate = i.MorningRate,
+                        MorningAmount = i.MorningAmount,
+                        AfternoonPurchase = i.AfternoonPurchase,
+                        AfternoonAmount = i.AfternoonAmount,
+                        AfternoonRate = i.AfternoonRate,
+                        TotalMilk = i.TotalMilk,
+                        TotalAmount = i.TotalAmount
                     }).ToListAsync();
                 return result;
             }
@@ -47,6 +47,41 @@ namespace MilkManagement.Domain.Repositories.Implementation
                 throw e;
             }
         }
+        public async Task<bool> IsMarketSupplierInsertedOnCurrentDate(int marketSupplierId)
+        {
+            try
+            {
+
+                var market = await _dbContext.MarketPurchase
+                    .AsNoTracking()
+                    .AnyAsync(i => i.MarketSupplierId == marketSupplierId && i.CreatedOn.Date == DateTime.Now.Date &&
+                              !i.IsDeleted);
+                return market;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+        public async Task<bool> IsMarketSupplierInsertedOnCurrentDate(int marketSupplierId, int marketSupplierSupplied)
+        {
+            try
+            {
+                var market = await _dbContext.MarketPurchase
+                    .AsNoTracking()
+                    .AnyAsync(i => i.MarketSupplierId == marketSupplierId &&
+                              i.Id != marketSupplierSupplied &&
+                              i.CreatedOn.Date == DateTime.Now.Date && !i.IsDeleted);
+                return market;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
 
         public async Task<IEnumerable<MarketSupplierDropDownResponseDto>> GetMarketPurchasetDropDownValues(DateTime dateTime)
         {
@@ -54,7 +89,7 @@ namespace MilkManagement.Domain.Repositories.Implementation
             {
                 var result = await _dbContext.MarketSupplier
                     .AsNoTracking()
-                    .Where(i=>!i.IsDeleted)
+                    .Where(i => !i.IsDeleted)
                     .Select(i => new MarketSupplierDropDownResponseDto()
                     {
                         MarketSupplierId = i.Id,
