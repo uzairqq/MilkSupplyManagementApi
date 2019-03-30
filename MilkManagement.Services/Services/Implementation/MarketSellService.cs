@@ -76,9 +76,31 @@ namespace MilkManagement.Services.Services.Implementation
             }
         }
 
-        public Task<ResponseMessageDto> Delete(MarketSellRequestDto dto)
+        public async Task<ResponseMessageDto> Delete(MarketSellRequestDto dto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                 await _asyncRepository.DeleteAsync(_mapper.Map<MarketSell>(dto));
+                return new ResponseMessageDto()
+                {
+                    Id = dto.Id,
+                    SuccessMessage = ResponseMessages.DeleteSuccessMessage,
+                    Success = true,
+                    Error = false
+                };
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return new ResponseMessageDto()
+                {
+                    Id = Convert.ToInt16(Enums.FailureId),
+                    FailureMessage = ResponseMessages.DeleteFailureMessage,
+                    Success = false,
+                    Error = true,
+                    ExceptionMessage = e.InnerException != null ? e.InnerException.Message : e.Message
+                };
+            }
         }
 
         public async Task<IEnumerable<MarketSellResponseDto>> GetGridData(DateTime date)
