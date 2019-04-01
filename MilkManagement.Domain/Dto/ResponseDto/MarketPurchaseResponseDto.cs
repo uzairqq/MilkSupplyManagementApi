@@ -17,6 +17,7 @@ namespace MilkManagement.Domain.Dto.ResponseDto
         public string AfternoonAmount { get; set; }
         public string TotalMilk { get; set; }
         public int TotalAmount   { get; set; }
+        public string Date { get; set; }
 
     }
 

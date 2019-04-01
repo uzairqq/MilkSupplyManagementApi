@@ -86,22 +86,25 @@ namespace MilkManagement.Domain.Repositories.Implementation
         {
             try
             {
-                return await _dbContext.MarketPurchase
+                var result= await _dbContext.MarketPurchase
                     .AsNoTracking()
                     .Where(i => i.MarketSupplierId == marketSupplierId && i.CreatedOn.Date >= fromDate.Date && i.CreatedOn.Date <= toDate.Date && !i.IsDeleted)
                     .Select(i => new MarketPurchaseResponseDto()
                     {
                         Id = i.Id,
-                        CreatedOn = i.CreatedOn.Date,
+                        Date = i.CreatedOn.ToString("dd/MM/yyyy"),
                         MarketSupplierId = i.MarketSupplierId,
                         MarketSupplierName = i.MarketSupplier.MarketSupplierName,
                         MorningPurchase = i.MorningPurchase,
+                        MorningRate=i.MorningRate,
+                        AfternoonRate=i.AfternoonRate,
                         AfternoonPurchase = i.AfternoonPurchase,
                         MorningAmount = i.MorningAmount,
                         AfternoonAmount = i.AfternoonAmount,
                         TotalAmount=i.TotalAmount,
                         TotalMilk=i.TotalMilk
                     }).ToListAsync();
+                return result;
             }
             catch (Exception e)
             {

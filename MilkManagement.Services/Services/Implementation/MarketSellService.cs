@@ -118,6 +118,19 @@ namespace MilkManagement.Services.Services.Implementation
             }
         }
 
+        public async Task<IEnumerable<MarketSellResponseDto>> GetMarketSupplierByParticularDate(int marketSupplierId, DateTime fromDate, DateTime toDate)
+        {
+            try
+            {
+                return await _marketSell.GetMarketSupplierByParticularDate(marketSupplierId, fromDate, toDate);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
 
 
         public async Task<ResponseMessageDto> Put(MarketSellRequestDto dto)

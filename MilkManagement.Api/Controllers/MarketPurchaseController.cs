@@ -56,8 +56,9 @@ namespace MilkManagement.Api.Controllers
         {
             try
             {
-                return Ok(await _marketPurchase.GetMarketSupplierByParticularDate(marketSupplierId,
-                    fromDate, toDate));
+                var result=await _marketPurchase.GetMarketSupplierByParticularDate(marketSupplierId,
+                    fromDate, toDate);
+                return Ok(result);
             }
             catch (Exception e)
             {

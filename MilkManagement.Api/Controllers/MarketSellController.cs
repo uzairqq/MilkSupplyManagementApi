@@ -84,6 +84,22 @@ namespace MilkManagement.Api.Controllers
                 throw;
             }
         }
+        [HttpGet("marketSupplierId/{marketSupplierId}/fromDate/{fromDate}/toDate/{toDate}")]
+        public async Task<IActionResult> GetMarketSupplierByParticularDate([FromRoute] int marketSupplierId, [FromRoute] DateTime fromDate,
+         [FromRoute] DateTime toDate)
+        {
+            try
+            {
+                var result=await _marketSellService.GetMarketSupplierByParticularDate(marketSupplierId,
+                    fromDate, toDate);
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
 
 
     }

@@ -8,6 +8,7 @@ namespace MilkManagement.Domain.Dto.ResponseDto
    public class MarketSellResponseDto:BaseEntity
     {
         public int MarketSupplierId { get; set; }
+        public string Date { get; set; }
         public string MorningSell { get; set; }
         public string MorningAmount { get; set; }
         public string MorningRate { get; set; }

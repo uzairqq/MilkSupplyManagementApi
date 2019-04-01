@@ -58,7 +58,8 @@ namespace MilkManagement.Services.Services.Implementation
         {
             try
             {
-                return await _marketPurchaseRepository.GetMarketSupplierByParticularDate(marketSupplierId, fromDate, toDate);
+                var result= await _marketPurchaseRepository.GetMarketSupplierByParticularDate(marketSupplierId, fromDate, toDate);
+                return result;
             }
             catch (Exception e)
             {
