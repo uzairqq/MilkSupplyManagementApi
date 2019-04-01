@@ -82,6 +82,33 @@ namespace MilkManagement.Domain.Repositories.Implementation
                 throw;
             }
         }
+        public async Task<IEnumerable<MarketPurchaseResponseDto>> GetMarketSupplierByParticularDate(int marketSupplierId, DateTime fromDate, DateTime toDate)
+        {
+            try
+            {
+                return await _dbContext.MarketPurchase
+                    .AsNoTracking()
+                    .Where(i => i.MarketSupplierId == marketSupplierId && i.CreatedOn.Date >= fromDate.Date && i.CreatedOn.Date <= toDate.Date && !i.IsDeleted)
+                    .Select(i => new MarketPurchaseResponseDto()
+                    {
+                        Id = i.Id,
+                        CreatedOn = i.CreatedOn.Date,
+                        MarketSupplierId = i.MarketSupplierId,
+                        MarketSupplierName = i.MarketSupplier.MarketSupplierName,
+                        MorningPurchase = i.MorningPurchase,
+                        AfternoonPurchase = i.AfternoonPurchase,
+                        MorningAmount = i.MorningAmount,
+                        AfternoonAmount = i.AfternoonAmount,
+                        TotalAmount=i.TotalAmount,
+                        TotalMilk=i.TotalMilk
+                    }).ToListAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
 
         public async Task<IEnumerable<MarketSupplierDropDownResponseDto>> GetMarketPurchasetDropDownValues(DateTime dateTime)
         {

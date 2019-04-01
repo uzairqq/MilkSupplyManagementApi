@@ -54,6 +54,18 @@ namespace MilkManagement.Services.Services.Implementation
                 };
             }
         }
+        public async Task<IEnumerable<MarketPurchaseResponseDto>> GetMarketSupplierByParticularDate(int marketSupplierId, DateTime fromDate, DateTime toDate)
+        {
+            try
+            {
+                return await _marketPurchaseRepository.GetMarketSupplierByParticularDate(marketSupplierId, fromDate, toDate);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
 
         public async Task<IEnumerable<MarketSupplierDropDownResponseDto>> GeCustomerSuppliedtDropDownValues(DateTime date)
         {

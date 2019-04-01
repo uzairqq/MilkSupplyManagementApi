@@ -12,5 +12,6 @@ namespace MilkManagement.Domain.Repositories.Interfaces
         Task<IEnumerable<MarketPurchaseResponseDto>> GetGrid(DateTime date);
         Task<bool> IsMarketSupplierInsertedOnCurrentDate(int marketSupplierId);
         Task<bool> IsMarketSupplierInsertedOnCurrentDate(int marketSupplierId, int marketSupplierSupplied);
+        Task<IEnumerable<MarketPurchaseResponseDto>> GetMarketSupplierByParticularDate(int marketSupplierId, DateTime fromDate, DateTime toDate);
     }
 }

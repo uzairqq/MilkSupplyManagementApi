@@ -50,6 +50,22 @@ namespace MilkManagement.Api.Controllers
             }
         }
 
+        [HttpGet("marketSupplierId/{marketSupplierId}/fromDate/{fromDate}/toDate/{toDate}")]
+        public async Task<IActionResult> GetMarketSupplierByParticularDate([FromRoute] int marketSupplierId, [FromRoute] DateTime fromDate,
+         [FromRoute] DateTime toDate)
+        {
+            try
+            {
+                return Ok(await _marketPurchase.GetMarketSupplierByParticularDate(marketSupplierId,
+                    fromDate, toDate));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
         [HttpGet("grid/date/{date}")]
         public async Task<IActionResult> GetGrid([FromRoute] DateTime date)
         {

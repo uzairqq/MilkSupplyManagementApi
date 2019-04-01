@@ -15,5 +15,7 @@ namespace MilkManagement.Services.Services.Interfaces
         Task<IEnumerable<MarketPurchaseResponseDto>> GetGrid(DateTime date);
         Task<ResponseMessageDto> Put(MarketPurchaseRequestDto dto);
         Task<ResponseMessageDto> Delete(MarketPurchaseRequestDto dto);
+        Task<IEnumerable<MarketPurchaseResponseDto>> GetMarketSupplierByParticularDate(int marketSupplierId,
+            DateTime fromDate, DateTime toDate);
     }
 }
