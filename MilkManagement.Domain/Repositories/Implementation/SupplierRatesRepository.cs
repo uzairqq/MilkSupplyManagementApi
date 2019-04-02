@@ -85,6 +85,26 @@ namespace MilkManagement.Domain.Repositories.Implementation
                 throw;
             }
         }
+        public async Task<IEnumerable<GetSupplierRatesDropdownDto>> GetDropDownSuppliersAllWithOutRateAssigned()
+        {
+            try
+            {
+                var result = await _context.Supplier
+                    .AsNoTracking()
+                    .Where(i=>!i.IsDeleted)
+                    .Select(i => new GetSupplierRatesDropdownDto()
+                    {
+                        SupplierId = i.Id,
+                        SupplierName = i.SupplierName
+                    }).ToListAsync();
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
 
         public void SetIsSupplierRateAssigned(int supplierId, bool isRateAssignedOrNot)
         {

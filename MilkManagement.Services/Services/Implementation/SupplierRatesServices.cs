@@ -205,5 +205,17 @@ namespace MilkManagement.Services.Services.Implementation
                 throw;
             }
         }
+        public async Task<IEnumerable<GetSupplierRatesDropdownDto>> GetDropDownSuppliersAllWithOutRateAssigned()
+        {
+            try
+            {
+                return await _supplierRateRepository.GetDropDownSuppliersAllWithOutRateAssigned();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }

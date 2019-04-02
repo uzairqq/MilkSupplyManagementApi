@@ -12,6 +12,7 @@ namespace MilkManagement.Domain.Repositories.Interfaces
         Task<bool> IsRatesAssignedToSupplier(int supplierRatesId, int supplierId);
         Task<int> GetCurrentRateBySupplierIdDropDown(int suppId);
         Task<IEnumerable<GetSupplierRatesDropdownDto>> GetAllSupplierForDropdown();
+        Task<IEnumerable<GetSupplierRatesDropdownDto>> GetDropDownSuppliersAllWithOutRateAssigned();
         void SetIsSupplierRateAssigned(int supplierId, bool isRateAssignedOrNot);
         Task<IEnumerable<GetSupplierRateResponseDto>> GetAll();
 

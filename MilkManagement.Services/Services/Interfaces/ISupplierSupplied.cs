@@ -8,14 +8,16 @@ using MilkManagement.Domain.Dto.ResponseDto;
 
 namespace MilkManagement.Services.Services.Interfaces
 {
-   public interface ISupplierSuppliedServices
-   {
-       Task<IEnumerable<GetSuppliersForDrpDownDto>> GetDropDown(DateTime date);
-       Task<ResponseMessageDto> Post(SupplierSuppliedRequestDto dto);
-       Task<ResponseMessageDto> Put(SupplierSuppliedRequestDto dto);
-       Task<IEnumerable<SupplierSuppliedResponseDto>> GetGrid(DateTime date);
-       Task<ResponseMessageDto> Delete(SupplierSuppliedRequestDto dto);
+    public interface ISupplierSuppliedServices
+    {
+        Task<IEnumerable<GetSuppliersForDrpDownDto>> GetDropDown(DateTime date);
+        Task<ResponseMessageDto> Post(SupplierSuppliedRequestDto dto);
+        Task<ResponseMessageDto> Put(SupplierSuppliedRequestDto dto);
+        Task<IEnumerable<SupplierSuppliedResponseDto>> GetGrid(DateTime date);
+        Task<ResponseMessageDto> Delete(SupplierSuppliedRequestDto dto);
+        Task<IEnumerable<GetSuppliersForDrpDownDto>> GetDropDownForSearch();
+        Task<IEnumerable<SupplierSuppliedResponseDto>> GetSuppliersDataToAndFromDate(int supplierId, DateTime fromDate, DateTime toDate);
 
 
-   }
+    }
 }

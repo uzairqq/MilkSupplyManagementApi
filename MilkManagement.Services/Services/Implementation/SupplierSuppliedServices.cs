@@ -41,6 +41,19 @@ namespace MilkManagement.Services.Services.Implementation
                 throw;
             }
         }
+        public async Task<IEnumerable<GetSuppliersForDrpDownDto>> GetDropDownForSearch()
+        {
+            try
+            {
+                var result = await _supplierSuppliedRepository.GetDropDownForSearch();
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
 
         public async Task<ResponseMessageDto> Post(SupplierSuppliedRequestDto dto)
         {
@@ -189,6 +202,20 @@ namespace MilkManagement.Services.Services.Implementation
                     Error = true,
                     ExceptionMessage = e.InnerException != null ? e.InnerException.Message : e.Message
                 };
+            }
+        }
+
+
+        public async Task<IEnumerable<SupplierSuppliedResponseDto>> GetSuppliersDataToAndFromDate(int supplierId, DateTime fromDate, DateTime toDate)
+        {
+            try
+            {
+                return await _supplierSuppliedRepository.GetSuppliersDataToAndFromDate(supplierId, fromDate, toDate);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
             }
         }
     }

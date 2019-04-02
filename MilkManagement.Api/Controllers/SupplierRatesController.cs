@@ -174,6 +174,20 @@ namespace MilkManagement.Api.Controllers
                 throw;
             }
         }
+        [HttpGet("GetDropDownSuppliersAllWithOutRateAssigned")]
+        public async Task<IActionResult> GetDropDownSuppliersAllWithOutRateAssigned ()
+        {
+            try
+            {
+                var result = await _supplierRateServices.GetDropDownSuppliersAllWithOutRateAssigned();
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
 
 
 

@@ -79,6 +79,20 @@ namespace MilkManagement.Api.Controllers
                 throw;
             }
         }
+        [HttpGet("GetDropDownForSearch")]
+        public async Task<IActionResult> GetDropDownForSearch()
+        {
+            try
+            {
+                var result = await _supplierSuppliedServices.GetDropDownForSearch();
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
 
         [HttpDelete]
         public async Task<IActionResult> Delete([FromBody] SupplierSuppliedRequestDto dto)
@@ -94,6 +108,27 @@ namespace MilkManagement.Api.Controllers
             }
         }
 
-        
+        /// <summary>
+        /// Get By Supplier Id With From And To date
+        /// </summary>
+        /// <param name="supplierId"></param>
+        /// <param name="fromDate"></param>
+        /// <param name="toDate"></param>
+        /// <returns></returns>
+        [HttpGet("supplierId/{supplierId}/fromDate/{fromDate}/toDate/{toDate}")]
+        public async Task<IActionResult> Get([FromRoute] int supplierId, [FromRoute] DateTime fromDate, DateTime toDate)
+        {
+            try
+            {
+                return Ok(await _supplierSuppliedServices.GetSuppliersDataToAndFromDate(supplierId, fromDate, toDate));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
+
+
     }
 }

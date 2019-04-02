@@ -12,5 +12,7 @@ namespace MilkManagement.Domain.Repositories.Interfaces
         Task<IEnumerable<SupplierSuppliedResponseDto>> GetGrid(DateTime date);
         Task<bool> IsSupplierAvailableOnCurrentDate(int supplierId, DateTime date);
         Task<bool> IsSupplierAvailableOnCurrentDate(int supplierId, int supplierSuppliedId);
+        Task<IEnumerable<GetSuppliersForDrpDownDto>> GetDropDownForSearch();
+        Task<IEnumerable<SupplierSuppliedResponseDto>> GetSuppliersDataToAndFromDate(int supplierId, DateTime fromDate, DateTime toDate);
     }
 }
