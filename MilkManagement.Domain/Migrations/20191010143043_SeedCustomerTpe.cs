@@ -4,7 +4,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace MilkManagement.Domain.Migrations
 {
-    public partial class Add : Migration
+    public partial class SeedCustomerTpe : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -42,6 +42,26 @@ namespace MilkManagement.Domain.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Expense", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MarketSupplier",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedById = table.Column<int>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    LastUpdatedById = table.Column<int>(nullable: false),
+                    LastUpdatedOn = table.Column<DateTime>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    MarketSupplierName = table.Column<string>(maxLength: 100, nullable: false),
+                    MarketSupplierAddress = table.Column<string>(maxLength: 150, nullable: false),
+                    MarketSupplierContact = table.Column<string>(maxLength: 150, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MarketSupplier", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -114,6 +134,72 @@ namespace MilkManagement.Domain.Migrations
                         name: "FK_DailyExpense_Expense_ExpenseId",
                         column: x => x.ExpenseId,
                         principalTable: "Expense",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MarketPurchase",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedById = table.Column<int>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    LastUpdatedById = table.Column<int>(nullable: false),
+                    LastUpdatedOn = table.Column<DateTime>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    MarketSupplierId = table.Column<int>(nullable: false),
+                    MorningPurchase = table.Column<string>(nullable: true),
+                    MorningRate = table.Column<int>(nullable: false),
+                    MorningAmount = table.Column<string>(nullable: true),
+                    AfternoonPurchase = table.Column<string>(nullable: true),
+                    AfternoonRate = table.Column<int>(nullable: false),
+                    AfternoonAmount = table.Column<string>(nullable: true),
+                    TotalAmount = table.Column<int>(nullable: false),
+                    TotalMilk = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MarketPurchase", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MarketPurchase_MarketSupplier_MarketSupplierId",
+                        column: x => x.MarketSupplierId,
+                        principalTable: "MarketSupplier",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MarketSell",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn),
+                    CreatedById = table.Column<int>(nullable: false),
+                    CreatedOn = table.Column<DateTime>(nullable: false),
+                    LastUpdatedById = table.Column<int>(nullable: false),
+                    LastUpdatedOn = table.Column<DateTime>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    MarketSupplierId = table.Column<int>(nullable: false),
+                    MorningSell = table.Column<string>(nullable: true),
+                    MorningAmount = table.Column<string>(nullable: true),
+                    MorningRate = table.Column<string>(nullable: true),
+                    AfternoonSell = table.Column<string>(nullable: true),
+                    AfternoonAmount = table.Column<string>(nullable: true),
+                    AfternoonRate = table.Column<string>(nullable: true),
+                    Total = table.Column<string>(nullable: true),
+                    ComissionRate = table.Column<int>(nullable: false),
+                    TotalComission = table.Column<int>(nullable: true),
+                    TotalMilk = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MarketSell", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_MarketSell_MarketSupplier_MarketSupplierId",
+                        column: x => x.MarketSupplierId,
+                        principalTable: "MarketSupplier",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -239,6 +325,16 @@ namespace MilkManagement.Domain.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "CustomerTypes",
+                columns: new[] { "Id", "CreatedById", "CreatedOn", "IsDeleted", "LastUpdatedById", "LastUpdatedOn", "Type" },
+                values: new object[] { 1, 1, new DateTime(2019, 10, 10, 0, 0, 0, 0, DateTimeKind.Local), false, 1, new DateTime(2019, 10, 10, 0, 0, 0, 0, DateTimeKind.Local), "Daily" });
+
+            migrationBuilder.InsertData(
+                table: "CustomerTypes",
+                columns: new[] { "Id", "CreatedById", "CreatedOn", "IsDeleted", "LastUpdatedById", "LastUpdatedOn", "Type" },
+                values: new object[] { 2, 1, new DateTime(2019, 10, 10, 0, 0, 0, 0, DateTimeKind.Local), false, 1, new DateTime(2019, 10, 10, 0, 0, 0, 0, DateTimeKind.Local), "Weekly" });
+
             migrationBuilder.CreateIndex(
                 name: "IX_CustomerRates_CustomerId",
                 table: "CustomerRates",
@@ -265,6 +361,16 @@ namespace MilkManagement.Domain.Migrations
                 column: "ExpenseId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_MarketPurchase_MarketSupplierId",
+                table: "MarketPurchase",
+                column: "MarketSupplierId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MarketSell_MarketSupplierId",
+                table: "MarketSell",
+                column: "MarketSupplierId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_SupplierRates_SupplierId",
                 table: "SupplierRates",
                 column: "SupplierId");
@@ -287,6 +393,12 @@ namespace MilkManagement.Domain.Migrations
                 name: "DailyExpense");
 
             migrationBuilder.DropTable(
+                name: "MarketPurchase");
+
+            migrationBuilder.DropTable(
+                name: "MarketSell");
+
+            migrationBuilder.DropTable(
                 name: "SupplierRates");
 
             migrationBuilder.DropTable(
@@ -297,6 +409,9 @@ namespace MilkManagement.Domain.Migrations
 
             migrationBuilder.DropTable(
                 name: "Expense");
+
+            migrationBuilder.DropTable(
+                name: "MarketSupplier");
 
             migrationBuilder.DropTable(
                 name: "Supplier");

@@ -16,7 +16,7 @@ namespace MilkManagement.Domain.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("MilkManagement.Domain.Entities.Customer.Customer", b =>
@@ -148,6 +148,11 @@ namespace MilkManagement.Domain.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CustomerTypes");
+
+                    b.HasData(
+                        new { Id = 1, CreatedById = 1, CreatedOn = new DateTime(2019, 10, 10, 0, 0, 0, 0, DateTimeKind.Local), IsDeleted = false, LastUpdatedById = 1, LastUpdatedOn = new DateTime(2019, 10, 10, 0, 0, 0, 0, DateTimeKind.Local), Type = "Daily" },
+                        new { Id = 2, CreatedById = 1, CreatedOn = new DateTime(2019, 10, 10, 0, 0, 0, 0, DateTimeKind.Local), IsDeleted = false, LastUpdatedById = 1, LastUpdatedOn = new DateTime(2019, 10, 10, 0, 0, 0, 0, DateTimeKind.Local), Type = "Weekly" }
+                    );
                 });
 
             modelBuilder.Entity("MilkManagement.Domain.Entities.Expense.DailyExpense", b =>

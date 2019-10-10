@@ -10,15 +10,15 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MilkManagement.Domain.Migrations
 {
     [DbContext(typeof(MilkManagementDbContext))]
-    [Migration("20190312235147_Added Supplier Rates")]
-    partial class AddedSupplierRates
+    [Migration("20191010143043_SeedCustomerTpe")]
+    partial class SeedCustomerTpe
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.11-servicing-32099")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             modelBuilder.Entity("MilkManagement.Domain.Entities.Customer.Customer", b =>
@@ -150,9 +150,212 @@ namespace MilkManagement.Domain.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CustomerTypes");
+
+                    b.HasData(
+                        new { Id = 1, CreatedById = 1, CreatedOn = new DateTime(2019, 10, 10, 0, 0, 0, 0, DateTimeKind.Local), IsDeleted = false, LastUpdatedById = 1, LastUpdatedOn = new DateTime(2019, 10, 10, 0, 0, 0, 0, DateTimeKind.Local), Type = "Daily" },
+                        new { Id = 2, CreatedById = 1, CreatedOn = new DateTime(2019, 10, 10, 0, 0, 0, 0, DateTimeKind.Local), IsDeleted = false, LastUpdatedById = 1, LastUpdatedOn = new DateTime(2019, 10, 10, 0, 0, 0, 0, DateTimeKind.Local), Type = "Weekly" }
+                    );
                 });
 
-            modelBuilder.Entity("MilkManagement.Domain.Entities.Customer.SupplierRate", b =>
+            modelBuilder.Entity("MilkManagement.Domain.Entities.Expense.DailyExpense", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CreatedById");
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<int>("ExpenseId");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<int>("LastUpdatedById");
+
+                    b.Property<DateTime>("LastUpdatedOn");
+
+                    b.Property<string>("Rate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExpenseId");
+
+                    b.ToTable("DailyExpense");
+                });
+
+            modelBuilder.Entity("MilkManagement.Domain.Entities.Expense.Expense", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CreatedById");
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<string>("ExpenseName")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<int>("LastUpdatedById");
+
+                    b.Property<DateTime>("LastUpdatedOn");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Expense");
+                });
+
+            modelBuilder.Entity("MilkManagement.Domain.Entities.Market.MarketPurchase", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AfternoonAmount");
+
+                    b.Property<string>("AfternoonPurchase");
+
+                    b.Property<int>("AfternoonRate");
+
+                    b.Property<int>("CreatedById");
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<int>("LastUpdatedById");
+
+                    b.Property<DateTime>("LastUpdatedOn");
+
+                    b.Property<int>("MarketSupplierId");
+
+                    b.Property<string>("MorningAmount");
+
+                    b.Property<string>("MorningPurchase");
+
+                    b.Property<int>("MorningRate");
+
+                    b.Property<int>("TotalAmount");
+
+                    b.Property<string>("TotalMilk");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MarketSupplierId");
+
+                    b.ToTable("MarketPurchase");
+                });
+
+            modelBuilder.Entity("MilkManagement.Domain.Entities.Market.MarketSell", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AfternoonAmount");
+
+                    b.Property<string>("AfternoonRate");
+
+                    b.Property<string>("AfternoonSell");
+
+                    b.Property<int>("ComissionRate");
+
+                    b.Property<int>("CreatedById");
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<int>("LastUpdatedById");
+
+                    b.Property<DateTime>("LastUpdatedOn");
+
+                    b.Property<int>("MarketSupplierId");
+
+                    b.Property<string>("MorningAmount");
+
+                    b.Property<string>("MorningRate");
+
+                    b.Property<string>("MorningSell");
+
+                    b.Property<string>("Total");
+
+                    b.Property<int?>("TotalComission");
+
+                    b.Property<string>("TotalMilk");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MarketSupplierId");
+
+                    b.ToTable("MarketSell");
+                });
+
+            modelBuilder.Entity("MilkManagement.Domain.Entities.Market.MarketSupplier", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CreatedById");
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<int>("LastUpdatedById");
+
+                    b.Property<DateTime>("LastUpdatedOn");
+
+                    b.Property<string>("MarketSupplierAddress")
+                        .IsRequired()
+                        .HasMaxLength(150);
+
+                    b.Property<string>("MarketSupplierContact")
+                        .IsRequired()
+                        .HasMaxLength(150);
+
+                    b.Property<string>("MarketSupplierName")
+                        .IsRequired()
+                        .HasMaxLength(100);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("MarketSupplier");
+                });
+
+            modelBuilder.Entity("MilkManagement.Domain.Entities.Supplier.Supplier", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("CreatedById");
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<bool>("IsRateAssignedToSupplier");
+
+                    b.Property<int>("LastUpdatedById");
+
+                    b.Property<DateTime>("LastUpdatedOn");
+
+                    b.Property<string>("SupplierAddress")
+                        .HasMaxLength(20);
+
+                    b.Property<string>("SupplierContact")
+                        .HasMaxLength(1025);
+
+                    b.Property<string>("SupplierName")
+                        .IsRequired()
+                        .HasMaxLength(255);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Supplier");
+                });
+
+            modelBuilder.Entity("MilkManagement.Domain.Entities.Supplier.SupplierRate", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -180,34 +383,14 @@ namespace MilkManagement.Domain.Migrations
                     b.ToTable("SupplierRates");
                 });
 
-            modelBuilder.Entity("MilkManagement.Domain.Entities.Expense.Expense", b =>
+            modelBuilder.Entity("MilkManagement.Domain.Entities.Supplier.SupplierSupplied", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("CreatedById");
+                    b.Property<string>("AfternoonAmount");
 
-                    b.Property<DateTime>("CreatedOn");
-
-                    b.Property<string>("ExpenseName")
-                        .IsRequired()
-                        .HasMaxLength(255);
-
-                    b.Property<bool>("IsDeleted");
-
-                    b.Property<int>("LastUpdatedById");
-
-                    b.Property<DateTime>("LastUpdatedOn");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Expense");
-                });
-
-            modelBuilder.Entity("MilkManagement.Domain.Entities.Supplier.Supplier", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<string>("AfternoonPurchase");
 
                     b.Property<int>("CreatedById");
 
@@ -219,19 +402,21 @@ namespace MilkManagement.Domain.Migrations
 
                     b.Property<DateTime>("LastUpdatedOn");
 
-                    b.Property<string>("SupplierAddress")
-                        .HasMaxLength(20);
+                    b.Property<string>("MorningAmount");
 
-                    b.Property<string>("SupplierContact")
-                        .HasMaxLength(1025);
+                    b.Property<string>("MorningPurchase");
 
-                    b.Property<string>("SupplierName")
-                        .IsRequired()
-                        .HasMaxLength(255);
+                    b.Property<int>("Rate");
+
+                    b.Property<int>("SupplierId");
+
+                    b.Property<string>("Total");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Supplier");
+                    b.HasIndex("SupplierId");
+
+                    b.ToTable("SupplierSupplied");
                 });
 
             modelBuilder.Entity("MilkManagement.Domain.Entities.Customer.Customer", b =>
@@ -263,7 +448,39 @@ namespace MilkManagement.Domain.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("MilkManagement.Domain.Entities.Customer.SupplierRate", b =>
+            modelBuilder.Entity("MilkManagement.Domain.Entities.Expense.DailyExpense", b =>
+                {
+                    b.HasOne("MilkManagement.Domain.Entities.Expense.Expense", "Expense")
+                        .WithMany()
+                        .HasForeignKey("ExpenseId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MilkManagement.Domain.Entities.Market.MarketPurchase", b =>
+                {
+                    b.HasOne("MilkManagement.Domain.Entities.Market.MarketSupplier", "MarketSupplier")
+                        .WithMany()
+                        .HasForeignKey("MarketSupplierId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MilkManagement.Domain.Entities.Market.MarketSell", b =>
+                {
+                    b.HasOne("MilkManagement.Domain.Entities.Market.MarketSupplier", "MarketSupplier")
+                        .WithMany()
+                        .HasForeignKey("MarketSupplierId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MilkManagement.Domain.Entities.Supplier.SupplierRate", b =>
+                {
+                    b.HasOne("MilkManagement.Domain.Entities.Supplier.Supplier", "Supplier")
+                        .WithMany()
+                        .HasForeignKey("SupplierId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("MilkManagement.Domain.Entities.Supplier.SupplierSupplied", b =>
                 {
                     b.HasOne("MilkManagement.Domain.Entities.Supplier.Supplier", "Supplier")
                         .WithMany()
