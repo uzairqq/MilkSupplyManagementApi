@@ -6,11 +6,11 @@ using MilkManagement.Core.Validator;
 
 namespace MilkManagement.Domain.Entities.Expense
 {
-   public class Expense : BaseEntity, ISoftDeletable
+    public class Expense : BaseEntity, ISoftDeletable
     {
         [StringLength(255)]
         [Required]
         public string ExpenseName { get; set; }
-        public bool IsDeleted { get; set; }
+        public new bool IsDeleted { get; set; }
     }
 }

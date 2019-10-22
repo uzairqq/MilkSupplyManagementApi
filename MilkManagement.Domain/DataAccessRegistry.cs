@@ -7,7 +7,7 @@ using MilkManagement.Domain.Repositories.Interfaces;
 
 namespace MilkManagement.Domain
 {
-   public static class DataAccessRegistry
+    public static class DataAccessRegistry
     {
         public static void RegisterRepository(IServiceCollection services)
         {
@@ -23,6 +23,7 @@ namespace MilkManagement.Domain
             services.AddScoped(typeof(IMarketSupplierRepository), typeof(MarketSupplierRepository));
             services.AddScoped(typeof(IMarketPurchaseRepository), typeof(MarketPurchaseRepository));
             services.AddScoped(typeof(IMarketSellRepository), typeof(MarketSellRepository));
+            services.AddScoped(typeof(ILedgerRepository), typeof(LedgerRepository));
 
         }
     }
