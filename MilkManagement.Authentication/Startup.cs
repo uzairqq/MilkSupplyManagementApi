@@ -21,9 +21,11 @@ namespace MilkManagement.Authentication
             // uncomment, if you want to add an MVC-based UI
             //services.AddControllersWithViews();
 
+            // configure identity server with in-memory stores, keys, clients and scopes
             var builder = services.AddIdentityServer()
                 .AddInMemoryApiResources(Confiq.GetApis())
-                .AddInMemoryClients(Confiq.GetClients());
+                .AddInMemoryClients(Confiq.GetClients())
+                .AddTestUsers(Confiq.GetUsers());
 
             builder.AddDeveloperSigningCredential();
 
