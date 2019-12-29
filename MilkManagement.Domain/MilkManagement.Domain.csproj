@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MilkManagexment.Constants\MilkManagement.Constants.csproj" />
+    <ProjectReference Include="..\MilkManagement.Constants\MilkManagement.Constants.csproj" />
     <ProjectReference Include="..\MilkManagement.Core\MilkManagement.Core.csproj" />
     <ProjectReference Include="..\MilkManagement.Utils\MilkManagement.CommonLibrary.csproj" />
   </ItemGroup>
