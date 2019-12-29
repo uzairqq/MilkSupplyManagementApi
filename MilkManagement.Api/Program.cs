@@ -16,7 +16,6 @@ namespace MilkManagement.Api
     {
         public static int Main(string[] args)
         {
-
             //    Log.Logger = new LoggerConfiguration()
             //        .MinimumLevel.Debug()
             //        .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
@@ -50,22 +49,7 @@ namespace MilkManagement.Api
             //        .Build();
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            Console.Title = "API";
 
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
@@ -90,7 +74,6 @@ namespace MilkManagement.Api
             {
                 Log.CloseAndFlush();
             }
-
         }
 
 
@@ -98,6 +81,5 @@ namespace MilkManagement.Api
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
                 .UseSerilog();
-
     }
-    }
+}

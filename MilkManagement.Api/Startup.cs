@@ -56,12 +56,15 @@ namespace MilkManagement.Api
                     License = new License { Name = "Under The Terms And Agreements Of IQBAL DAIRY FARM" }
                 });
             });
+            
+            
             services.AddAuthentication("Bearer")
-                .AddIdentityServerAuthentication(options =>
+                .AddJwtBearer("Bearer", options =>
                 {
+                    options.Authority = "http://localhost:4000";
                     options.RequireHttpsMetadata = false;
-                    options.Authority = "http://localhost:5003/";
-                    options.ApiName = "milkmanagement";
+
+                    options.Audience = "milkManagement";
                 });
 
             services.AddAutoMapper();
