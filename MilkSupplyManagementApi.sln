@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MilkManagement.Domain", "Mi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MilkManagement.Authentication", "MilkManagement.Authentication\MilkManagement.Authentication.csproj", "{4DB177CB-E790-4371-BEF9-2CE8755571DC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MilkManagement.Client", "MilkManagement.Client\MilkManagement.Client.csproj", "{4FEBB955-7D97-44CF-9DC3-F39E054EA3F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -76,6 +78,10 @@ Global
 		{4DB177CB-E790-4371-BEF9-2CE8755571DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4DB177CB-E790-4371-BEF9-2CE8755571DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4DB177CB-E790-4371-BEF9-2CE8755571DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FEBB955-7D97-44CF-9DC3-F39E054EA3F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FEBB955-7D97-44CF-9DC3-F39E054EA3F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FEBB955-7D97-44CF-9DC3-F39E054EA3F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FEBB955-7D97-44CF-9DC3-F39E054EA3F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,6 +97,7 @@ Global
 		{CE6C4D86-4A22-4803-8C93-01DEB34E62A2} = {743D9E5C-40B8-4E7C-B5A5-7D0EA36D6C5B}
 		{8DEBDAB9-8167-4443-9D82-C35CBCE0B5C6} = {7EC0321B-31E1-492C-8C38-6063F2EA9410}
 		{4DB177CB-E790-4371-BEF9-2CE8755571DC} = {7EC0321B-31E1-492C-8C38-6063F2EA9410}
+		{4FEBB955-7D97-44CF-9DC3-F39E054EA3F3} = {7EC0321B-31E1-492C-8C38-6063F2EA9410}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E77EB315-F790-44DE-BE7E-75A636554200}
